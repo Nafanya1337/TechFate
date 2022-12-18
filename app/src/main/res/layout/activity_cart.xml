@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cart"
+    android:background="@color/white">
+
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cart_grey"
+                android:orientation="vertical"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_title">
+
+                <TextView
+                    android:id="@+id/order_names"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:text="Итоговая цена : "
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/order_costs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="0 ₽"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:foregroundGravity="center"
+                android:gravity="top"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tableRow1">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Товаров на сумму : "
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/sum_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="0 ₽"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/header_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Корзина"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/header_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Оформление заказа"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tableRow" />
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_title2">
+
+                <EditText
+                    android:id="@+id/Phone"
+                    android:layout_width="142dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:autofillHints="phone"
+                    android:backgroundTint="@color/black"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:hint="Номер телефона*"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/light_grey"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/Email"
+                    android:layout_width="142dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints="username"
+                    android:backgroundTint="@color/black"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:hint="E-mail"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/light_grey"
+                    android:textSize="20dp" />
+
+            </TableRow>
+
+            <EditText
+                android:id="@+id/Name"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:backgroundTint="@color/black"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="ФИО*"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_grey"
+                android:textSize="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tableRow3" />
+
+            <TextView
+                android:id="@+id/header_title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Выберите способ доставки заказа"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Name"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/header_title3">
+
+                <RadioGroup
+                    android:id="@+id/delivery_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <RadioButton
+                        android:id="@+id/rus_post"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:allowClickWhenDisabled="true"
+                        android:text="Почта России"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:onClick="ChooseDelivery"/>
+
+                    <RadioButton
+                        android:id="@+id/sdek"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@android:drawable/btn_star_big_on"
+                        android:text="СДЭК"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:onClick="ChooseDelivery"/>
+
+                    <RadioButton
+                        android:id="@+id/courier"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@android:drawable/btn_star_big_on"
+                        android:text="Курьером"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:onClick="ChooseDelivery"/>
+
+                    <RadioButton
+                        android:id="@+id/postmat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@android:drawable/btn_star_big_on"
+                        android:text="Постмат"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:onClick="ChooseDelivery"/>
+
+                </RadioGroup>
+            </TableRow>
+
+            <TextView
+                android:id="@+id/adress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Укажите адрес доставки"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tableRow4"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/Adress"
+                android:layout_width="301dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:ems="15"
+                android:textColor="@color/black"
+                android:hint="Адрес*"
+                android:textColorHint="@color/light_grey"
+                android:backgroundTint="@color/black"
+                android:textSize="20dp"
+                android:inputType="textPostalAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/adress" />
+
+            <TextView
+                android:id="@+id/courier_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Укажите дату доставки курьером"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Adress" />
+
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="401dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@color/black"
+                android:backgroundTint="#909090"
+                android:calendarViewShown="false"
+                android:focusedMonthDateColor="#000000"
+                android:outlineSpotShadowColor="@color/black"
+                android:selectedWeekBackgroundColor="#058D05"
+                android:unfocusedMonthDateColor="#A51A1A"
+                android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:weekNumberColor="#000000"
+                android:weekSeparatorLineColor="#E50606"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/courier_date" />
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/red"
+                android:onClick="Back"
+                android:text="Назад"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itogo" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/green"
+                android:text="Перейти к оплате"
+                android:textColor="@color/white"
+                android:onClick="Payment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itogo" />
+
+            <TableRow
+                android:id="@+id/itogo"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteY="41dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calendar"
+                android:background="@color/cart_grey"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="244dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Итоговая цена :"
+                    android:textColor="@color/black"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/calendar" />
+
+                    <TextView
+                        android:id="@+id/summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="0"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="22dp"
+                        android:layout_weight="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/calendar" />
+            </TableRow>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

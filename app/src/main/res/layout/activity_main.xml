@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/white">
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="750dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:context=".MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apple iPhone"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/light_grey"/>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/name1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:text="Apple iPhone 14 256 ГБ"
+                    android:textColor="@color/black"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/cost1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="80.500 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <TextView
+                    android:id="@+id/amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/add1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="2"
+                    android:text="Apple iPhone 14 128 ГБ"
+                    android:textColor="@color/black"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/cost2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="70.000 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/amount2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <Button
+                    android:id="@+id/add2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="2"
+                    android:text="Apple iPhone 14 64 ГБ"
+                    android:textColor="@color/black"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/cost3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="60.000 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/amount3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <Button
+                    android:id="@+id/add3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/light_grey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="HUAWEI"
+                android:textColor="@color/black"
+                android:textSize="25dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/name4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:text="HUAWEI Mate 50 256 Гб"
+                    android:textColor="@color/black"
+                    android:textSize="21dp" />
+
+                <TextView
+                    android:id="@+id/cost4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="55.500 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <TextView
+                    android:id="@+id/amount4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/add4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/name5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="2"
+                    android:text="HUAWEI Mate 50 128 Гб"
+                    android:textColor="@color/black"
+                    android:textSize="21dp" />
+
+                <TextView
+                    android:id="@+id/cost5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="45.000 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/amount5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <Button
+                    android:id="@+id/add5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/name6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="2"
+                    android:text="HUAWEI Mate 50 64 Гб"
+                    android:textColor="@color/black"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/cost6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="30.000 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/amount6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <Button
+                    android:id="@+id/add6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/light_grey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Xiaomi"
+                android:textColor="@color/black"
+                android:textSize="25dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/name7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:text="Xiaomi 12T 256 ГБ"
+                    android:textColor="@color/black"
+                    android:textSize="21dp" />
+
+                <TextView
+                    android:id="@+id/cost7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="40.500 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <TextView
+                    android:id="@+id/amount7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/add7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/name8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="2"
+                    android:text="Xiaomi Redmi 9C 32 ГБ"
+                    android:textColor="@color/black"
+                    android:textSize="21dp" />
+
+                <TextView
+                    android:id="@+id/cost8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="9.000 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/amount8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <Button
+                    android:id="@+id/add8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/name9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="2"
+                    android:text="Xiaomi 12 Lite 128 ГБ"
+                    android:textColor="@color/black"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/cost9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:text="35.000 ₽"
+                    android:textAlignment="center"
+
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="15dp">
+
+
+                <Button
+                    android:id="@+id/sub9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Sub"
+                    android:text="-"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/amount9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buy9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="Buy"
+                    android:text="Добавить в корзину" />
+
+                <Button
+                    android:id="@+id/add9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:onClick="Add"
+                    android:text="+"
+                    android:visibility="gone" />
+            </TableRow>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/cart"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/green"
+        android:clickable="true"
+        android:onClick="OpenCart"
+        android:text="Перейти к оформлению"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <TextView
+        android:id="@+id/sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="0 ₽"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

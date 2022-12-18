@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Payment"
+    android:background="@color/white">
+
+    <RadioGroup
+        android:id="@+id/delivery_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+        <RadioButton
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:allowClickWhenDisabled="true"
+            android:onClick="ChoosePayment"
+            android:text="Онлайн оплата картой"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/qiwi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ChoosePayment"
+            android:text="Оплата онлайн-кошельком QIWI"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/umoney"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ChoosePayment"
+            android:text="Оплата онлайн-кошельком Юмани"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Онлайн оплата"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:text="Выберите способ оплаты"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_payment"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delivery_method">
+
+
+        <EditText
+            android:id="@+id/card_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_grey"
+            android:ems="15"
+            android:gravity="center"
+            android:hint="Номер карты"
+            android:inputType="numberDecimal"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_grey"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:text="Оплатить"
+            android:textColor="@color/white"
+            android:onClick="Pay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableRow2" />
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_num">
+
+            <EditText
+                android:id="@+id/cvc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:ems="2"
+                android:backgroundTint="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:hint="CVC"
+                android:maxLength="3"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:inputType="numberPassword" />
+
+            <EditText
+                android:id="@+id/dd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:backgroundTint="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:ems="2"
+                android:hint="ДД."
+                android:maxLength="2"
+                android:textColor="@color/black"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="/"
+                android:textColor="@color/black"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/mm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="2"
+                android:hint="ММ."
+                android:maxLength="2"
+                android:backgroundTint="@color/light_grey"
+                android:textColorHint="@color/light_grey"
+                android:inputType="number"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="/"
+                android:textColor="@color/black"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/gg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:hint="ГГ."
+                android:maxLength="2"
+                android:backgroundTint="@color/light_grey"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_grey" />
+
+        </TableRow>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delivery_method"
+        android:id="@+id/payment_qiwi_u">
+
+        <EditText
+            android:id="@+id/nomer_qiwi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:maxLength="10"
+            android:hint="Номер кошелька"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/light_grey"
+            android:textColorHint="@color/light_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/payment2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:text="Оплатить"
+            android:onClick="Pay"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomer_qiwi" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/light_grey"
+        android:text="К оплате :"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/to_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
