@@ -28,6 +28,7 @@ public class Payment extends AppCompatActivity {
     public int sum, del;
     public String adress, delivery_days, name;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

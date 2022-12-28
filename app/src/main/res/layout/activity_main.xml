@@ -30,14 +30,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Apple iPhone"
-                android:textColor="@color/black"
-                android:textSize="25dp"
-                android:gravity="center"
-                android:padding="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/light_grey"/>
+                android:background="@color/light_grey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Apple iPhone"
+                android:textColor="@color/black"
+                android:textSize="25dp" />
 
             <TableRow
                 android:layout_width="match_parent"
@@ -275,10 +275,10 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/light_grey"
                 android:gravity="center"
@@ -524,10 +524,10 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/light_grey"
                 android:gravity="center"
@@ -772,32 +772,41 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/cart"
-        android:layout_width="wrap_content"
-        android:layout_height="54dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:backgroundTint="@color/green"
-        android:clickable="true"
-        android:onClick="OpenCart"
-        android:text="Перейти к оформлению"
-        android:textColor="@color/white"
-        android:textSize="13dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="413dp"
+        android:layout_height="62dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/sum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="0 ₽"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        <Button
+            android:id="@+id/cart"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_marginRight="25dp"
+            android:backgroundTint="@color/green"
+            android:clickable="true"
+            android:layout_marginTop="5dp"
+            android:onClick="OpenCart"
+            android:text="Перейти к оформлению"
+            android:textColor="@color/white"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="0 ₽"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:textSize="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
