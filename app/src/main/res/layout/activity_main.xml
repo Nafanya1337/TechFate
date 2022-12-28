@@ -781,14 +781,12 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/cart"
+            android:id="@+id/cart_open"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
             android:layout_marginRight="25dp"
             android:backgroundTint="@color/green"
-            android:clickable="true"
             android:layout_marginTop="5dp"
-            android:onClick="OpenCart"
             android:text="Перейти к оформлению"
             android:textColor="@color/white"
             android:textSize="13dp"

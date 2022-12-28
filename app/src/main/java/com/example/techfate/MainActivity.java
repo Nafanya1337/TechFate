@@ -1,14 +1,7 @@
 package com.example.techfate;
 
-
-import static androidx.core.app.NotificationCompat.PRIORITY_DEFAULT;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -17,21 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import java.util.ArrayList;
-
 
 public class MainActivity extends AppCompatActivity {
     Button cart;
     public ArrayList<Product> list;
     TextView sum;
-    private NotificationManager notificationManager;
-    private static final int NOTIFY_ID = 10;
-    private static final String CHANNEL_ID = "CHANNEL_ID";
-
-    public IBinder onBind(Intent arg0) {
-        return null;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,50 +24,36 @@ public class MainActivity extends AppCompatActivity {
         makeList();
         setContentView(R.layout.activity_main);
         sum = findViewById(R.id.sum);
-        cart = findViewById(R.id.cart);
+        cart = findViewById(R.id.cart_open);
         Bundle bundle = getIntent().getBundleExtra("bundle");
-        if (bundle == null) return;
-        ArrayList<String> names_of_products = bundle.getStringArrayList("names");
-        ArrayList<Integer> prices = bundle.getIntegerArrayList("prices");
-        for (int i = 0; i < names_of_products.size(); i++) {
-            list.get(i).setName(names_of_products.get(i));
-            list.get(i).setPrice(prices.get(i));
+        if (bundle != null) {
+            ArrayList<String> names_of_products = bundle.getStringArrayList("names");
+            ArrayList<Integer> prices = bundle.getIntegerArrayList("prices");
+            for (int i = 0; i < names_of_products.size(); i++) {
+                list.get(i).setName(names_of_products.get(i));
+                list.get(i).setPrice(prices.get(i));
+            }
         }
         sum.setText(Integer.toString(makeSum()) + " ₽");
-        notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-    }
 
-    public static void createChannelIfNeeded(NotificationManager manager) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_ID, NotificationManager.IMPORTANCE_DEFAULT);
-            manager.createNotificationChannel(notificationChannel);
-        }
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenCart(v);
+            }
+        });
     }
 
     public void OpenCart(View view){
         if (!sum.getText().toString().equals("0 ₽")) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                    .setAutoCancel(false)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setWhen(System.currentTimeMillis())
-                    .setContentIntent(pendingIntent)
-                    .setContentTitle("Бронирование покупки авто")
-                    .setContentText("Вы забронировали автомобиль Mazda RX-7")
-                    .setPriority(PRIORITY_DEFAULT);
-            createChannelIfNeeded(notificationManager);
-            notificationManager.notify(NOTIFY_ID, notificationBuilder.build());
-
             ArrayList<String> strings = makeNames();
             ArrayList<Integer> integers = makePrices();
-            /*Intent mIntent = new Intent(this, Cart.class);
+            Intent mIntent = new Intent(this, Cart.class);
             Bundle bundle = new Bundle();
             bundle.putStringArrayList("names", strings);
             bundle.putIntegerArrayList("prices", integers);
             mIntent.putExtra("bundle", bundle);
-            startActivity(mIntent);*/
+            startActivity(mIntent);
         }
         else{
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

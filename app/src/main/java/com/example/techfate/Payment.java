@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,7 +28,11 @@ public class Payment extends AppCompatActivity {
     public TextView summary;
     public int sum, del;
     public String adress, delivery_days, name;
+    public Button payment1, payment2;
 
+    private NotificationManager notificationManager;
+    private static final int NOTIFY_ID = 10;
+    private static final String CHANNEL_ID = "CHANNEL_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,58 @@ public class Payment extends AppCompatActivity {
         adress = getIntent().getStringExtra("adress");
         delivery_days = getIntent().getStringExtra("date");
         name = getIntent().getStringExtra("name");
+        notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        payment1=(findViewById(R.id.payment));
+        payment1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                        .setAutoCancel(false)
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setWhen(System.currentTimeMillis())
+                        .setContentIntent(pendingIntent)
+                        .setContentTitle("Бронирование покупки авто")
+                        .setContentText("Вы забронировали автомобиль Mazda RX-7")
+                        .setPriority(PRIORITY_DEFAULT);
+                createChannelIfNeeded(notificationManager);
+                notificationManager.notify(NOTIFY_ID, notificationBuilder.build());
+                Pay(v);
+            }
+        });
+        payment2=findViewById(R.id.payment2);
+        payment2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String temp = "Заказ на сумму: " + summary.getText().toString() + " \nПокупатель: " + name + "\nАдрес доставки: " + adress +"\nДоставка " + Delivery(del);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                        .setAutoCancel(false)
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setWhen(System.currentTimeMillis())
+                        .setContentIntent(pendingIntent)
+                        .setContentTitle("Заказ оплачен")
+                        .setContentText(temp)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(temp))
+                        .setPriority(PRIORITY_DEFAULT);
+                createChannelIfNeeded(notificationManager);
+                notificationManager.notify(NOTIFY_ID, notificationBuilder.build());
+                Pay(v);
+            }
+        });
     }
+
+    public static void createChannelIfNeeded(NotificationManager manager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_ID, NotificationManager.IMPORTANCE_DEFAULT);
+            manager.createNotificationChannel(notificationChannel);
+        }
+    }
+
 
     public void Pay(View view){
         String str = "";
@@ -99,6 +155,21 @@ public class Payment extends AppCompatActivity {
                 card.setVisibility(View.GONE);
                 break;
         }
+    }
 
+    public String Delivery(int t) {
+        switch (t) {
+            case 0:
+                return "Почтой России" + " через " + getIntent().getStringExtra("date") + " д.";
+            case 1:
+                return "в СДЭК" + " через " + getIntent().getStringExtra("date") + " д.";
+            case 2:
+                return "Курьером" + " " + getIntent().getStringExtra("date") + " д.";
+            case 3:
+                return "в Постмат" + " через " + getIntent().getStringExtra("date") + " д.";
+            default:
+                break;
+        }
+        return "";
     }
 }
