@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layout_height="70dp">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/ic_clock"
+        android:layout_gravity="center|left"/>
+
+    <TextView
+        android:id="@+id/history_search_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="35"
+        android:layout_gravity="center|left"
+        android:text="Текст"
+        android:textSize="15dp"
+        style="@style/regular_text"
+        android:layout_marginHorizontal="60dp"/>
+
+    <ImageView
+        android:id="@+id/close_search_item"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/ic_close"
+        android:layout_gravity="center|right" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/line"/>
+</FrameLayout>

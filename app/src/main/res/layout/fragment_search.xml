@@ -1,15 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".fragments.search.SearchFragment">
+    tools:context=".fragments.search.SearchFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="поиск" />
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center|top">
+
+        <EditText
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/searchbar_bg"
+            android:layout_marginTop="25dp"
+            android:padding="15dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:maxLength="30"
+            android:layout_gravity="center|top"
+            android:hint="Поиск"/>
+
+        <ImageButton
+            android:background="@null"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_search"
+            android:layout_gravity="right|center"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="30dp"/>
+
+    </FrameLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:src="@drawable/line" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ИСТОРИЯ ПОИСКА"
+        style="@style/hint_text"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"/>
+
+    <ListView
+        android:id="@+id/search_list"
+        android:divider="@null"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+</LinearLayout>

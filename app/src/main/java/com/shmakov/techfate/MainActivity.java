@@ -20,13 +20,14 @@ import com.shmakov.techfate.fragments.search.SearchFragment;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView menu;
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         menu = findViewById(R.id.nav_menu);
-        NavController navController = Navigation.findNavController(this, R.id.nav_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_fragment);
         NavigationUI.setupWithNavController(menu, navController);
     }
 }

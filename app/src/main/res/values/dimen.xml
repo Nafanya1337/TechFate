@@ -3,4 +3,6 @@
     <dimen name="regular_text_size">20dp</dimen>
     <dimen name="mini_text_size">12dp</dimen>
     <dimen name="tittle_text_size">32dp</dimen>
+    <dimen name="hint_text_size">16dp</dimen>
+    <dimen name="alpha_hint_text">0.4f</dimen>
 </resources>
