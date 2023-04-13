@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TechFate</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sample_text">All the things she said</string>
+    <string name="categories">Категории</string>
+    <string name="popular_products">Популярные товары</string>
+</resources>

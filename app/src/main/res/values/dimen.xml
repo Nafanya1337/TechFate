@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="regular_text_size">20dp</dimen>
+    <dimen name="mini_text_size">12dp</dimen>
+    <dimen name="tittle_text_size">32dp</dimen>
+</resources>

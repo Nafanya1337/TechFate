@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="5dp"
+    android:clickable="true">
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mini_item_bg"/>
+
+    <ImageView
+        android:id="@+id/mini_item_img"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-30dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/mini_item_name"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="2"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="35dp"
+        android:text="Samsung Gea..."
+        android:textSize="16dp"
+        android:maxLength="32"
+        android:inputType="textMultiLine"
+        style="@style/regular_text"/>
+
+    <TextView
+        android:id="@+id/mini_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="15dp"
+        android:text="10.000₽"
+        android:maxLength="15"
+        style="@style/mini_text"/>
+
+</FrameLayout>
