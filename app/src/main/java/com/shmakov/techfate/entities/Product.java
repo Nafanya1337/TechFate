@@ -3,20 +3,26 @@ package com.shmakov.techfate.entities;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Product extends Category {
-    private int cost;
-    private String name;
-    private String mark;
-    private String color;
-    private int img;
+public abstract class Product {
+    protected Category categoryProduct;
+    protected int cost;
+    protected String name;
+    protected String mark;
+    protected String color;
+    protected int img;
 
-    public Product(String category, String mark, String name, int cost, String color, int img){
-        super(category);
-        this.cost = cost;
-        this.name = name;
-        this.color = color;
+    public Product(String category, String mark, String name, int cost, String color, int img) {
+        categoryProduct = new Category(category);
         this.mark = mark;
+        this.name = name;
+        this.cost = cost;
+        this.color = color;
         this.img = img;
+        categoryProduct.addToArrayList(this);
+    }
+
+    public String getCategoryProduct() {
+        return categoryProduct.getCategory();
     }
 
     public void setImg(int img) {
@@ -59,7 +65,5 @@ public class Product extends Category {
         this.cost = cost;
     }
 
-    public String getMiniInfo() {
-        return this.getMark() + " " + this.getName() + this.getCost();
-    }
+    abstract public String getMiniInfo();
 }

@@ -2,7 +2,11 @@ package com.shmakov.techfate.entities;
 
 import com.shmakov.techfate.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
+    private final List<Product> productCategoryList = new ArrayList<>();
 
     private int Img_category;
     private String category;
@@ -16,6 +20,11 @@ public class Category {
         this.category = category;
         this.Img_category = img;
     }
+
+    public void addToArrayList(Product product) {
+        productCategoryList.add(product);
+    }
+
 
     public void setCategory(String category) {
         this.category = category;

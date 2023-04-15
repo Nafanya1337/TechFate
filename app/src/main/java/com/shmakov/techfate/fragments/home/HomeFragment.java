@@ -1,36 +1,21 @@
 package com.shmakov.techfate.fragments.home;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
-
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
-import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Category;
-import com.shmakov.techfate.entities.Product;
 
 public class HomeFragment extends Fragment {
-
-    private Category[] categories = {
-            new Category("Смартфоны"),
-            new Category("Наушники"),
-            new Category("Мониторы")
-    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,18 +46,18 @@ public class HomeFragment extends Fragment {
                 new Category("Мониторы", R.drawable.monitors_img)
         };
 
-        Product[] products = {
-                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
-                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img)
-        };
+//        Product[] products = {
+//                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 14 Pro Max", 100000, "white", R.drawable.smartphones_img),
+//                new Product("Смартфоны", "Apple", "iPhone 13 Pro Max", 80000, "white", R.drawable.smartphones_img)
+//        };
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), categories);
         LinearLayoutManager categories_layout = new LinearLayoutManager (getContext());
@@ -80,9 +65,9 @@ public class HomeFragment extends Fragment {
         listView.setLayoutManager(categories_layout);
         listView.setAdapter(categoryAdapter);
 
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
-        gridView.setAdapter(productAdapter);
-        gridView.setFriction(0.1f);
+        //ProductAdapter productAdapter = new ProductAdapter(getContext(), products);
+        //gridView.setAdapter(productAdapter);
+        //gridView.setFriction(0.1f);
     }
 
     private void chooseACategory(int position){
