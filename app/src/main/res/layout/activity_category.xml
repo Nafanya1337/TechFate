@@ -15,6 +15,53 @@
         android:layout_height="185dp"/>
 
     <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center|left"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/category_available"
+                    style="@style/regular_text"
+                    android:layout_width="74dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Досутпно: " />
+
+                <TextView
+                    android:id="@+id/category_amount"
+                    style="@style/regular_text"
+                    android:layout_width="83dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="left|center"
+                    android:maxLines="1"
+                    android:text="1000 товаров" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/ic_spinner_bg"
+                    android:gravity="center"
+                    android:paddingLeft="10dp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/category_items_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

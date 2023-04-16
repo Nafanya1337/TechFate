@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.shmakov.techfate.adapters.CategoryAdapter;
+import com.shmakov.techfate.entities.Headphones;
+import com.shmakov.techfate.entities.SmartPhone;
+import com.shmakov.techfate.entities.Watches;
 
 public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory {
 

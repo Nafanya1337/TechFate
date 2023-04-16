@@ -1,9 +1,9 @@
 package com.shmakov.techfate.entities;
 
-public class Wathes extends Product{
+public class Watches extends Product{
 
 
-    public Wathes(String mark, String name, int cost, String color, int img) {
+    public Watches(String mark, String name, int cost, String color, int img) {
         super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, color, img);
     }
 

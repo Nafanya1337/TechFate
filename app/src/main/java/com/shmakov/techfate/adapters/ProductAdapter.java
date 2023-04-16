@@ -19,7 +19,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
     private Product[] products;
     private TextView name, price;
-    private ImageView img;
+    private ImageView img, fire;
 
     public ProductAdapter(@NonNull Context context, Product[] products) {
         super(context, R.layout.item_mini, products);
@@ -50,6 +50,11 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         img.setImageResource(products[position].getImg());
         Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
         convertView.setAnimation(animation);
+
+        if (position <= 5) {
+            fire = convertView.findViewById(R.id.fire);
+            fire.setVisibility(View.VISIBLE);
+        }
         return convertView;
     }
 }

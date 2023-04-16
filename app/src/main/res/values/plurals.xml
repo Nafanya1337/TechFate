@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="products">
+        <item quantity="one">%d товар</item>
+        <item quantity="few">%d товара</item>
+        <item quantity="many">%d товаров</item>
+    </plurals>
+
+    <plurals name="avaliable">
+        <item quantity="one">Доступен: </item>
+        <item quantity="few">Досутпны: </item>
+        <item quantity="many">Досутпно: </item>
+    </plurals>
+</resources>

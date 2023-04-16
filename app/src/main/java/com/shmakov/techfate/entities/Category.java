@@ -2,6 +2,8 @@ package com.shmakov.techfate.entities;
 
 
 
+import android.util.Log;
+
 import com.shmakov.techfate.mytools.ImageManager;
 
 import java.util.ArrayList;
@@ -55,6 +57,7 @@ public class Category {
     public static ArrayList<Product> getAllProducts() {
         ArrayList<Product> all = new ArrayList<>();
         for (int i=0; i<Categories_names.length; i++) {
+            Log.d("mymy", String.valueOf(categories.get(Categories_names[i])));
             all.addAll(categories.get(Categories_names[i]));
         }
         return all;

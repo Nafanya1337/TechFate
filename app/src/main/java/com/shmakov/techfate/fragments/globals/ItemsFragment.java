@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,7 @@ import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Category;
 import com.shmakov.techfate.entities.Product;
-import com.shmakov.techfate.mytools.WatchesComparator;
+import com.shmakov.techfate.mytools.AmountOfWatchesComparator;
 import java.util.Arrays;
 
 
@@ -57,7 +59,8 @@ public class ItemsFragment extends Fragment {
 
     public void makePopularGridView() {
         Product[] all = Category.getAllProducts().toArray(new Product[0]);
-        Arrays.sort(all, new WatchesComparator());
+        Arrays.sort(all, new AmountOfWatchesComparator());
+        Log.d("mymy", String.valueOf(all));
         productAdapter = new ProductAdapter(getContext(), all);
     }
 

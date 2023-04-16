@@ -5,4 +5,9 @@
     <string name="sample_text">All the things she said</string>
     <string name="categories">Категории</string>
     <string name="popular_products">Популярные товары</string>
+
+    <string-array name="spinner_modes">
+        <item>По убыванию</item>
+        <item>По возсрастанию</item>
+    </string-array>
 </resources>

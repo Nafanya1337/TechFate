@@ -7,24 +7,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
-import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Category;
-import com.shmakov.techfate.entities.Product;
+import com.shmakov.techfate.entities.Headphones;
 import com.shmakov.techfate.entities.SmartPhone;
-import com.shmakov.techfate.entities.Wathes;
+import com.shmakov.techfate.entities.Watches;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class HomeFragment extends Fragment {
@@ -60,14 +54,25 @@ public class HomeFragment extends Fragment {
         popular_items_container = view.findViewById(R.id.popular_items_container);
 
         FragmentTransaction ft = fragmentManager.beginTransaction();
-
-        new SmartPhone("12","12",1);
-        new SmartPhone("12", "131", 1);
-        new Wathes("wa","dw",1, "white", 0);
-        Log.d("mymy", String.valueOf(Category.categories.get(Category.SMARTPHONE_NAME_CATEGORY)));
         ItemsFragment itemsFragment = new ItemsFragment(ItemsFragment.MAKE_POPULAR_ITEMS);
         ft.replace(popular_items_container.getId(), itemsFragment);
         ft.commit();
+        makeProducts();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        makeProducts();
+    }
+
+    public void makeProducts() {
+        new Headphones("Apple", "AirPods 2 Pro", 15000, "white", R.drawable.headphones_2);
+        new Headphones("Skullcandy", "Hesh 3", 10000, "blue", R.drawable.headphones_1);
+        new Headphones("Skullcandy", "Hesh 2", 8000, "blue", R.drawable.headphones_1);
+        new Headphones("Huawei", "P9", 5000, "white", R.drawable.headphones_3);
+        new SmartPhone("Apple", "iPhone 13 Pro Max", 60000, "blue", R.drawable.smartphones_img);
+        new Watches("Samsung", "Gear S3", 25000, "black", R.drawable.watches_img);
     }
 
 }

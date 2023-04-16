@@ -4,7 +4,7 @@ import com.shmakov.techfate.entities.Product;
 
 import java.util.Comparator;
 
-public class WatchesComparator implements Comparator<Product> {
+public class AmountOfWatchesComparator implements Comparator<Product> {
     @Override
     public int compare(Product o1, Product o2) {
         int amount1 = o1.getAmountOfWatches();
