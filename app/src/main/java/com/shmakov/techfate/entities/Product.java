@@ -2,6 +2,9 @@ package com.shmakov.techfate.entities;
 
 import static com.shmakov.techfate.entities.Category.categories;
 
+import java.util.Comparator;
+import java.util.Random;
+
 
 public abstract class Product {
     protected Category categoryProduct;
@@ -11,16 +14,17 @@ public abstract class Product {
     protected String color;
     protected int img;
 
+    protected int amountOfWatches;
+
     public Product(String category, String mark, String name, int cost, String color, int img) {
         this.mark = mark;
         this.name = name;
         this.cost = cost;
         this.color = color;
         this.img = img;
-        if (categories.containsKey(category))
-            Category.addToArrayList(category, this);
-        else
-            new Category(category);
+        Random random = new Random();
+        amountOfWatches = random.nextInt(100) + 10;
+        Category.addToArrayList(category, this);
     }
 
     public Product(String category, String mark, String name, int cost, String color) {
@@ -29,10 +33,9 @@ public abstract class Product {
         this.cost = cost;
         this.color = color;
         this.img = 0;
-        if (categories.containsKey(category))
-            Category.addToArrayList(category, this);
-        else
-            new Category(category);
+        Random random = new Random();
+        amountOfWatches = random.nextInt(100) + 10;
+        Category.addToArrayList(category, this);
     }
 
     public Product(String category, String mark, String name, int cost) {
@@ -41,7 +44,14 @@ public abstract class Product {
         this.cost = cost;
         this.color = "null";
         this.img = 0;
+        Random random = new Random();
+        amountOfWatches = random.nextInt(100) + 10;
         Category.addToArrayList(category, this);
+    }
+
+
+    public Integer getAmountOfWatches() {
+        return amountOfWatches;
     }
 
     public String getCategoryProduct() {

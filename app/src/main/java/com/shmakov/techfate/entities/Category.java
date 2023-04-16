@@ -20,6 +20,17 @@ public class Category {
     public static final String LAPTOPS_NAME_CATEGORY = "Ноутбуки";
     public static final String MONITORS_NAME_CATEGORY = "Мониторы";
 
+    private static final String[] Categories_names =
+            {
+                    SMARTPHONE_NAME_CATEGORY,
+                    WATCHES_NAME_CATEGORY,
+                    TABLETS_NAME_CATEGORY,
+                    HEADPHONES_NAME_CATEGORY,
+                    CONSOLES_NAME_CATEGORY,
+                    LAPTOPS_NAME_CATEGORY,
+                    MONITORS_NAME_CATEGORY
+            };
+
 
     private int category_mini_img, category_background_img;
     private String category;
@@ -40,6 +51,14 @@ public class Category {
         currentArray.add(product);
     }
 
+
+    public static ArrayList<Product> getAllProducts() {
+        ArrayList<Product> all = new ArrayList<>();
+        for (int i=0; i<Categories_names.length; i++) {
+            all.addAll(categories.get(Categories_names[i]));
+        }
+        return all;
+    }
 
     public static void init(){
         new Category(SMARTPHONE_NAME_CATEGORY);

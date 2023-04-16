@@ -6,19 +6,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Category;
 import com.shmakov.techfate.entities.Product;
-import com.shmakov.techfate.entities.SmartPhone;
-
+import com.shmakov.techfate.mytools.WatchesComparator;
 import java.util.Arrays;
 
 
@@ -60,13 +56,14 @@ public class ItemsFragment extends Fragment {
     }
 
     public void makePopularGridView() {
-        Product[] all = Category.categories.get("Смартфоны").toArray(new Product[0]);
+        Product[] all = Category.getAllProducts().toArray(new Product[0]);
+        Arrays.sort(all, new WatchesComparator());
         productAdapter = new ProductAdapter(getContext(), all);
     }
 
     private void makeCurrentItems(){
         if (Category.getCategoriesNamesAsArrayList().contains(type)) {
-            Product[] all = Category.categories.get("Смартфоны").toArray(new Product[0]);
+            Product[] all = Category.categories.get(type).toArray(new Product[0]);
             productAdapter = new ProductAdapter(getContext(), all);
         }
         else {
