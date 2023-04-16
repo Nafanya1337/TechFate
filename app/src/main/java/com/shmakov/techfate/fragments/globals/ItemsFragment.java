@@ -1,6 +1,5 @@
 package com.shmakov.techfate.fragments.globals;
 
-import static com.shmakov.techfate.entities.SmartPhone.mass;
 
 import android.os.Bundle;
 
@@ -8,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import android.widget.GridView;
 
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.ProductAdapter;
+import com.shmakov.techfate.entities.Category;
 import com.shmakov.techfate.entities.Product;
 import com.shmakov.techfate.entities.SmartPhone;
 
@@ -59,17 +60,17 @@ public class ItemsFragment extends Fragment {
     }
 
     public void makePopularGridView() {
-        SmartPhone.addSmartPhones(
-                Arrays.asList
-                (
-                        new SmartPhone("Huawei", "P 30 Pro", 19000),
-                        new SmartPhone("Apple", "iPhone 13 Pro Max", 90000),
-                        new SmartPhone("Xiaomi", "13 Lite Top Ultra Momo dlv,ofepv,mewslves", 90000)
-                )
-        );
-        Product[] all = mass.toArray(new SmartPhone[0]);
+        Product[] all = Category.categories.get("Смартфоны").toArray(new Product[0]);
         productAdapter = new ProductAdapter(getContext(), all);
     }
 
-    private void makeCurrentItems(){}
+    private void makeCurrentItems(){
+        if (Category.getCategoriesNamesAsArrayList().contains(type)) {
+            Product[] all = Category.categories.get("Смартфоны").toArray(new Product[0]);
+            productAdapter = new ProductAdapter(getContext(), all);
+        }
+        else {
+
+        }
+    }
 }

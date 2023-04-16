@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,15 @@ import android.widget.FrameLayout;
 
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
+import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Category;
+import com.shmakov.techfate.entities.Product;
+import com.shmakov.techfate.entities.SmartPhone;
+import com.shmakov.techfate.entities.Wathes;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class HomeFragment extends Fragment {
@@ -53,6 +61,10 @@ public class HomeFragment extends Fragment {
 
         FragmentTransaction ft = fragmentManager.beginTransaction();
 
+        new SmartPhone("12","12",1);
+        new SmartPhone("12", "131", 1);
+        new Wathes("wa","dw",1, "white", 0);
+        Log.d("mymy", String.valueOf(Category.categories.get(Category.SMARTPHONE_NAME_CATEGORY)));
         ItemsFragment itemsFragment = new ItemsFragment(ItemsFragment.MAKE_POPULAR_ITEMS);
         ft.replace(popular_items_container.getId(), itemsFragment);
         ft.commit();

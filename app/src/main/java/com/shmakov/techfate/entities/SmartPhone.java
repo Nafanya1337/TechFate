@@ -6,9 +6,6 @@ import java.util.List;
 
 public class SmartPhone extends Product{
 
-
-    public static ArrayList<SmartPhone> mass = new ArrayList<SmartPhone>();
-
     private int ram;
     private int ssd;
     private ArrayList<Integer> photos;
@@ -52,7 +49,7 @@ public class SmartPhone extends Product{
 
 
     public static void addSmartPhones(List<SmartPhone> phones){
-        mass.addAll(phones);
+        Category.categories.get(Category.SMARTPHONE_NAME_CATEGORY).addAll(phones);
     }
 
 }

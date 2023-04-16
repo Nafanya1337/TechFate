@@ -41,10 +41,7 @@ public abstract class Product {
         this.cost = cost;
         this.color = "null";
         this.img = 0;
-        if (categories.containsKey(category))
-            Category.addToArrayList(category, this);
-        else
-            new Category(category);
+        Category.addToArrayList(category, this);
     }
 
     public String getCategoryProduct() {

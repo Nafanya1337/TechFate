@@ -11,16 +11,18 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.shmakov.techfate.entities.Cart;
+import com.shmakov.techfate.fragments.globals.ItemsFragment;
 import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment;
 import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment.goBack;
 import com.shmakov.techfate.mytools.ImageManager;
 
 public class CategoryActivity extends AppCompatActivity implements goBack {
 
-    private FrameLayout container;
+    private FrameLayout container, product_container;
     private FragmentManager fragmentManager;
     private FragmentTransaction ft;
     private CategoryHeaderFragment header;
+    private ItemsFragment itemsFragment;
     private String tittle;
     private Cart cart = new Cart();
 
@@ -32,16 +34,23 @@ public class CategoryActivity extends AppCompatActivity implements goBack {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+        fragmentManager = getSupportFragmentManager();
+        ft = fragmentManager.beginTransaction();
 
         tittle = getIntent().getExtras().getString(CATEGORY_TAG);
 
         this.container = findViewById(R.id.header_container);
-        fragmentManager = getSupportFragmentManager();
-        ft = fragmentManager.beginTransaction();
         header = new CategoryHeaderFragment();
         header.setCategoryTittle(tittle);
         header.setCategoryBackgroundImage(ImageManager.findCategoryBackgroundIMG(tittle));
         ft.replace(container.getId(), header).commit();
+
+
+        ft = fragmentManager.beginTransaction();
+        product_container = findViewById(R.id.category_items_container);
+        itemsFragment = new ItemsFragment(tittle);
+        ft.replace(product_container.getId(), itemsFragment);
+        ft.commit();
     }
 
     @Override

@@ -12,12 +12,12 @@
     <FrameLayout
         android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="185dp"/>
 
     <FrameLayout
         android:id="@+id/category_items_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
