@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import com.shmakov.techfate.entities.Cart;
 import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment;
 import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment.goBack;
+import com.shmakov.techfate.mytools.ImageManager;
 
 public class CategoryActivity extends AppCompatActivity implements goBack {
 
@@ -39,20 +40,8 @@ public class CategoryActivity extends AppCompatActivity implements goBack {
         ft = fragmentManager.beginTransaction();
         header = new CategoryHeaderFragment();
         header.setCategoryTittle(tittle);
-        chooseAnImg();
+        header.setCategoryBackgroundImage(ImageManager.findCategoryBackgroundIMG(tittle));
         ft.replace(container.getId(), header).commit();
-    }
-
-
-    private void chooseAnImg() {
-        switch (tittle) {
-            case "Смартфоны":
-                header.setCategoryBackgroundImage(R.drawable.category_smartphones_back);
-                break;
-            case "Наушники":
-                header.setCategoryBackgroundImage(R.drawable.category_headphones_back);
-                break;
-        }
     }
 
     @Override

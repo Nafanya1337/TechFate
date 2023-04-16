@@ -11,12 +11,14 @@ public class SmartPhone extends Product{
 
     private int ram;
     private int ssd;
+    private ArrayList<Integer> photos;
 
 
-    public SmartPhone(String mark, String name, int cost, String color, int img, int ram, int ssd) {
+    public SmartPhone(String mark, String name, int cost, String color, int img, int ram, int ssd, ArrayList<Integer> photos) {
         super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img);
         this.ram = ram;
         this.ssd = ssd;
+        photos = new ArrayList<>(photos);
     }
 
     public SmartPhone(String mark, String name, int cost) {

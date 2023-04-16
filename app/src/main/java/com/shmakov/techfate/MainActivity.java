@@ -9,13 +9,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 
-
-public class MainActivity extends AppCompatActivity implements CategoryAdapter.OpenCategory {
+public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory {
 
     BottomNavigationView menu;
     NavController navController;
@@ -37,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.O
     }
 
     @Override
-    public void openCategory(View view, String name) {
-        String category = name;
+    public void openCategory(String category) {
         Intent intent = new Intent(this, CategoryActivity.class);
         intent.putExtra(CategoryActivity.CATEGORY_TAG, category);
         startActivity(intent);

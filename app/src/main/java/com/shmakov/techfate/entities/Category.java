@@ -1,11 +1,11 @@
 package com.shmakov.techfate.entities;
 
-import android.util.Log;
+
 
 import com.shmakov.techfate.mytools.ImageManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashMap;
 
 public class Category {

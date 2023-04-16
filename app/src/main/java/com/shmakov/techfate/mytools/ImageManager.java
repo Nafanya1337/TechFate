@@ -35,18 +35,18 @@ public class ImageManager {
         switch (name) {
             case SMARTPHONE_NAME_CATEGORY:
                 return R.drawable.category_smartphones_back;
-//            case WATCHES_NAME_CATEGORY:
-//                return R.drawable.watches_img;
-//            case TABLETS_NAME_CATEGORY:
-//                return R.drawable.tablets_img;
+            case WATCHES_NAME_CATEGORY:
+                return R.drawable.watches_img;
+            case TABLETS_NAME_CATEGORY:
+                return R.drawable.tablets_img;
             case HEADPHONES_NAME_CATEGORY:
                 return R.drawable.category_headphones_back;
-//            case CONSOLES_NAME_CATEGORY:
-//                return R.drawable.consoles_img;
-//            case LAPTOPS_NAME_CATEGORY:
-//                return R.drawable.laptop_img;
-//            case MONITORS_NAME_CATEGORY:
-//                return R.drawable.monitors_img;
+            case CONSOLES_NAME_CATEGORY:
+                return R.drawable.consoles_img;
+            case LAPTOPS_NAME_CATEGORY:
+                return R.drawable.laptop_img;
+            case MONITORS_NAME_CATEGORY:
+                return R.drawable.monitors_img;
         }
         return 0;
     }

@@ -8,18 +8,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.GridView;
+
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 import com.shmakov.techfate.entities.Category;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
 
-import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 

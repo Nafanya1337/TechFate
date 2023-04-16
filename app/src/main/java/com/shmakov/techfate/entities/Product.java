@@ -2,10 +2,6 @@ package com.shmakov.techfate.entities;
 
 import static com.shmakov.techfate.entities.Category.categories;
 
-import android.util.Log;
-
-import java.util.Calendar;
-import java.util.Locale;
 
 public abstract class Product {
     protected Category categoryProduct;
