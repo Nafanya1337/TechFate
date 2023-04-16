@@ -1,0 +1,53 @@
+package com.shmakov.techfate.mytools;
+
+import static com.shmakov.techfate.entities.Category.CONSOLES_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.Category.HEADPHONES_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.Category.LAPTOPS_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.Category.MONITORS_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.Category.SMARTPHONE_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.Category.TABLETS_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.Category.WATCHES_NAME_CATEGORY;
+
+import com.shmakov.techfate.R;
+
+public class ImageManager {
+    public static int findCategoryMiniIMG(String name) {
+        switch (name) {
+            case SMARTPHONE_NAME_CATEGORY:
+                return R.drawable.smartphones_img;
+            case WATCHES_NAME_CATEGORY:
+                return R.drawable.watches_img;
+            case TABLETS_NAME_CATEGORY:
+                return R.drawable.tablets_img;
+            case HEADPHONES_NAME_CATEGORY:
+                return R.drawable.headphones_img;
+            case CONSOLES_NAME_CATEGORY:
+                return R.drawable.consoles_img;
+            case LAPTOPS_NAME_CATEGORY:
+                return R.drawable.laptop_img;
+            case MONITORS_NAME_CATEGORY:
+                return R.drawable.monitors_img;
+        }
+        return 0;
+    }
+
+    public static int findCategoryBackgroundIMG(String name) {
+        switch (name) {
+            case SMARTPHONE_NAME_CATEGORY:
+                return R.drawable.category_smartphones_back;
+//            case WATCHES_NAME_CATEGORY:
+//                return R.drawable.watches_img;
+//            case TABLETS_NAME_CATEGORY:
+//                return R.drawable.tablets_img;
+            case HEADPHONES_NAME_CATEGORY:
+                return R.drawable.category_headphones_back;
+//            case CONSOLES_NAME_CATEGORY:
+//                return R.drawable.consoles_img;
+//            case LAPTOPS_NAME_CATEGORY:
+//                return R.drawable.laptop_img;
+//            case MONITORS_NAME_CATEGORY:
+//                return R.drawable.monitors_img;
+        }
+        return 0;
+    }
+}

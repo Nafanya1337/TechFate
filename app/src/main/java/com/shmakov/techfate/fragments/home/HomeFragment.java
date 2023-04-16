@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 import com.shmakov.techfate.entities.Category;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
+
+import java.util.ArrayList;
+
 public class HomeFragment extends Fragment {
 
     private CategoryAdapter categoryAdapter;
@@ -41,9 +45,9 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView categories_list = view.findViewById(R.id.categories_list);
 
-        Category.fillCategories();
+        Category.init();
 
-        categoryAdapter = new CategoryAdapter(getContext(), Category.categories);
+        categoryAdapter = new CategoryAdapter(getContext(), Category.getCategoriesNamesAsArrayList());
 
         categories_list.setAdapter(categoryAdapter);
 

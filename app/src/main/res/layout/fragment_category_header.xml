@@ -9,29 +9,26 @@
     <ImageView
         android:id="@+id/category_background"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="185dp"
         android:foreground="@drawable/shadow"
         android:scaleType="centerCrop"
-        android:src="@drawable/category_headphones_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/category_name"
         style="@style/tittle_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
-        android:layout_marginBottom="96dp"
+        android:gravity="center"
         android:text="Наушнки"
         app:layout_constraintBottom_toBottomOf="@+id/category_background"
-        app:layout_constraintEnd_toEndOf="@+id/category_background"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/category_background"
-        app:layout_constraintTop_toTopOf="@+id/category_background"
-        app:layout_constraintVertical_bias="1.0" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/category_background" />
 
     <ImageView
         android:id="@+id/category_back_button"

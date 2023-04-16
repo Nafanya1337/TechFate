@@ -1,5 +1,7 @@
 package com.shmakov.techfate.entities;
 
+import static com.shmakov.techfate.entities.Category.categories;
+
 import android.util.Log;
 
 import java.util.Calendar;
@@ -14,33 +16,39 @@ public abstract class Product {
     protected int img;
 
     public Product(String category, String mark, String name, int cost, String color, int img) {
-        categoryProduct = new Category(category);
         this.mark = mark;
         this.name = name;
         this.cost = cost;
         this.color = color;
         this.img = img;
-        categoryProduct.addToArrayList(this);
+        if (categories.containsKey(category))
+            Category.addToArrayList(category, this);
+        else
+            new Category(category);
     }
 
     public Product(String category, String mark, String name, int cost, String color) {
-        categoryProduct = new Category(category);
         this.mark = mark;
         this.name = name;
         this.cost = cost;
         this.color = color;
         this.img = 0;
-        categoryProduct.addToArrayList(this);
+        if (categories.containsKey(category))
+            Category.addToArrayList(category, this);
+        else
+            new Category(category);
     }
 
     public Product(String category, String mark, String name, int cost) {
-        categoryProduct = new Category(category);
         this.mark = mark;
         this.name = name;
         this.cost = cost;
         this.color = "null";
         this.img = 0;
-        categoryProduct.addToArrayList(this);
+        if (categories.containsKey(category))
+            Category.addToArrayList(category, this);
+        else
+            new Category(category);
     }
 
     public String getCategoryProduct() {

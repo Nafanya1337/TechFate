@@ -60,7 +60,8 @@ public class ItemsFragment extends Fragment {
 
     public void makePopularGridView() {
         SmartPhone.addSmartPhones(
-                Arrays.asList(
+                Arrays.asList
+                (
                         new SmartPhone("Huawei", "P 30 Pro", 19000),
                         new SmartPhone("Apple", "iPhone 13 Pro Max", 90000),
                         new SmartPhone("Xiaomi", "13 Lite Top Ultra Momo dlv,ofepv,mewslves", 90000)

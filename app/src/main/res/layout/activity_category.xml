@@ -9,15 +9,10 @@
     tools:context=".CategoryActivity">
 
 
-    <fragment
-        android:id="@+id/header_fragment"
+    <FrameLayout
+        android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:name="com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment"
-        tools:layout="@layout/fragment_category_header" />
+        android:layout_height="wrap_content"/>
 
     <FrameLayout
         android:id="@+id/category_items_container"

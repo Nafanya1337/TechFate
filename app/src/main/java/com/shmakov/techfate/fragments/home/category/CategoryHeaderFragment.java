@@ -7,10 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.shmakov.techfate.R;
 
@@ -18,13 +20,24 @@ import com.shmakov.techfate.R;
 
 public class CategoryHeaderFragment extends Fragment {
 
-    public ImageView goBackButton;
+    private ImageView goBackButton, categoryOptions, categoryBackground;
+    private TextView categoryTittle;
+    private String categoryTittleName;
+    private int categoryBackgroundImage = 0;
 
     public interface goBack{
         public void goBack(View view);
     }
 
     goBack goBack;
+
+    public void setCategoryTittle(String categoryTittle) {
+        this.categoryTittleName = categoryTittle;
+    }
+
+    public void setCategoryBackgroundImage(int categoryBackgroundImage) {
+        this.categoryBackgroundImage = categoryBackgroundImage;
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -35,19 +48,24 @@ public class CategoryHeaderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category_header, container, false);
+        View view = inflater.inflate(R.layout.fragment_category_header, container, false);
+        goBackButton = view.findViewById(R.id.category_back_button);
+        categoryOptions = view.findViewById(R.id.category_options);
+        categoryBackground = view.findViewById(R.id.category_background);
+        categoryTittle = view.findViewById(R.id.category_name);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        goBackButton = view.findViewById(R.id.category_back_button);
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goBack.goBack(view);
             }
         });
+        categoryTittle.setText(this.categoryTittleName);
+        categoryBackground.setImageResource(this.categoryBackgroundImage);
     }
 }

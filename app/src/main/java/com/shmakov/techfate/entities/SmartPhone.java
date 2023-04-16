@@ -14,13 +14,13 @@ public class SmartPhone extends Product{
 
 
     public SmartPhone(String mark, String name, int cost, String color, int img, int ram, int ssd) {
-        super("Смартфон", mark, name, cost, color, img);
+        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img);
         this.ram = ram;
         this.ssd = ssd;
     }
 
     public SmartPhone(String mark, String name, int cost) {
-        super("Смартфон", mark, name, cost);
+        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost);
     }
 
     @Override
