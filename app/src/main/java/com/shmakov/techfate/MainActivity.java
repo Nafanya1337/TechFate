@@ -7,12 +7,15 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.shmakov.techfate.adapters.CategoryAdapter;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CategoryAdapter.OpenCategory {
 
     BottomNavigationView menu;
     NavController navController;
@@ -31,5 +34,13 @@ public class MainActivity extends AppCompatActivity {
         menu = findViewById(R.id.nav_menu);
         navController = Navigation.findNavController(this, R.id.nav_fragment);
         NavigationUI.setupWithNavController(menu, navController);
+    }
+
+    @Override
+    public void openCategory(View view, String name) {
+        String category = name;
+        Intent intent = new Intent(this, CategoryActivity.class);
+        intent.putExtra(CategoryActivity.CATEGORY_TAG, category);
+        startActivity(intent);
     }
 }

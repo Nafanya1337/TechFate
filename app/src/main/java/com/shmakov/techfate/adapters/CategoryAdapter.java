@@ -31,9 +31,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     private final LayoutInflater inflater;
     private Context context;
 
+    public interface OpenCategory{
+        public void openCategory(View view, String name);
+    }
+
+    OpenCategory openCategory;
+
     public CategoryAdapter(Context context, ArrayList<Category> categories) {
         this.categories = categories;
         this.context = context;
+        this.openCategory = (OpenCategory) context;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -45,10 +52,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String category = holder.categoryName.getText().toString();
-                Intent intent = new Intent(context, CategoryActivity.class);
-                intent.putExtra(CategoryActivity.category_tag, category);
-                context.startActivity(intent);
+                openCategory.openCategory(v, holder.categoryName.getText().toString());
             }
         });
     }
