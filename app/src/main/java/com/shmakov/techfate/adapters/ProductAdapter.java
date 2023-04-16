@@ -22,7 +22,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private ImageView img;
 
     public ProductAdapter(@NonNull Context context, Product[] products) {
-        super(context, R.layout.mini_item, products);
+        super(context, R.layout.item_mini, products);
         this.context = context;
         this.products = products;
     }
@@ -31,7 +31,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null)
-            convertView = LayoutInflater.from(context).inflate(R.layout.mini_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_mini, parent, false);
         name = convertView.findViewById(R.id.mini_item_name);
         price = convertView.findViewById(R.id.mini_item_price);
         img = convertView.findViewById(R.id.mini_item_img);

@@ -5,35 +5,70 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import com.shmakov.techfate.R;
-import com.shmakov.techfate.adapters.SearchHistoryAdapter;
 
 public class SearchFragment extends Fragment {
+
+    private EditText search_bar;
+    private FrameLayout search_container;
+    private HistorySearchFragment historySearchFragment;
+    private CurrentSearchFragment currentSearchFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        historySearchFragment = new HistorySearchFragment();
+        currentSearchFragment = new CurrentSearchFragment();
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
-    private String[] search_history = {
-      "iPhone 13 Pro Max",
-            "Realme 9 Pro",
-            "Samsung Gear Sport"
-    };
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ListView search_list = view.findViewById(R.id.search_list);
-        SearchHistoryAdapter search_adapter = new SearchHistoryAdapter(getContext(), search_history);
-        search_list.setAdapter(search_adapter);
+        search_bar = view.findViewById(R.id.search_bar);
+        search_container = view.findViewById(R.id.search_container);
+        changeFragment("");
+        search_bar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                changeFragment(s.toString());
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        historySearchFragment = null;
+        currentSearchFragment = null;
+    }
+
+    private void changeFragment(String search_text) {
+        FragmentManager fm = getParentFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (search_text.equals("")) {
+            ft.replace(search_container.getId(), historySearchFragment).commit();
+        }
+        else {
+            ft.replace(search_container.getId(), currentSearchFragment).commit();
+        }
     }
 }

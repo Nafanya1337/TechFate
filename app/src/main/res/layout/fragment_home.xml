@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:fillViewport="true"
@@ -21,14 +22,16 @@
             style="@style/regular_text"
             android:text="@string/categories" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:onClick="chooseACategory"
-                android:id="@+id/categories_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="false" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categories_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="15dp"
+            android:animateLayoutChanges="false"
+            android:minHeight="48dp"
+            android:onClick="chooseACategory"
+            android:orientation="horizontal" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -46,16 +49,11 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 
-        <GridView
-            android:scrollingCache="false"
-            android:id="@+id/popular_products_grid"
+        <FrameLayout
+            android:id="@+id/popular_items_container"
+            android:layout_weight="2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:scrollbarSize="0dp"
-            android:layout_weight="1"
-            android:numColumns="2"
-            android:gravity="center"/>
+            android:layout_height="0dp" />
 
 
     </LinearLayout>

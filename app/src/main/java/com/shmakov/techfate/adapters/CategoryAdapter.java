@@ -1,68 +1,79 @@
 package com.shmakov.techfate.adapters;
 
+
+import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
+
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.shmakov.techfate.CategoryActivity;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.Category;
 
-public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+    private final ArrayList<Category> categories;
+    private final LayoutInflater inflater;
     private Context context;
-    private Category[] categories;
 
-
-    public CategoryAdapter(@NonNull Context context, Category[] categories) {
-        this.context = context;
+    public CategoryAdapter(Context context, ArrayList<Category> categories) {
         this.categories = categories;
+        this.context = context;
+        this.inflater = LayoutInflater.from(context);
     }
 
-
-    // Связываем карточку категории с родителем
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder viewHolder = new RecyclerView.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_category, parent, false)) {};
-        return viewHolder;
-    }
-
-
-    // Заполняем карточку
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        TextView name = holder.itemView.findViewById(R.id.category_name);
-        name.setText(categories[position].getCategory());
-        ImageView img = holder.itemView.findViewById(R.id.category_img);
-        img.setImageResource(categories[position].getImg());
-
-        img.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+    public void onBindViewHolder(@NonNull CategoryAdapter.MyViewHolder holder, int position) {
+        Category category = categories.get(position);
+        holder.img.setImageResource(category.getImg());
+        holder.categoryName.setText(category.getCategory());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onGlobalLayout() {
-                // Удаляем слушателя представлений, чтобы избежать многократных вызовов
-                img.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-                // Получаем размеры ImageView после того, как он был измерен и размещен на экране
-                int width = img.getWidth();
-                int height = img.getHeight();
-
-                if (width > 300)
-                    img.setScaleX((float)(width/300));
-                if (height > 300)
-                    img.setScaleY((float)(height/300));
+            public void onClick(View v) {
+                String category = holder.categoryName.getText().toString();
+                Intent intent = new Intent(context, CategoryActivity.class);
+                intent.putExtra(CategoryActivity.category_tag, category);
+                context.startActivity(intent);
             }
         });
     }
 
+    @NonNull
+    @Override
+    public CategoryAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.item_category, parent, false);
+        return new MyViewHolder(view);
+    }
+
     @Override
     public int getItemCount() {
-        return this.categories.length;
+        return categories.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        final ImageView img;
+        final TextView categoryName;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            img = itemView.findViewById(R.id.category_img);
+            categoryName = itemView.findViewById(R.id.category_name);
+        }
     }
 }

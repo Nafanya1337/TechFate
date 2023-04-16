@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.globals.ItemsFragment">
+
+    <GridView
+        android:scrollingCache="false"
+        android:id="@+id/products_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="0dp"
+        android:numColumns="2"
+        android:gravity="center"
+        android:horizontalSpacing="-25dp"/>
+
+</FrameLayout>

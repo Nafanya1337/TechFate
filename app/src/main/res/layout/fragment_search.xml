@@ -11,30 +11,31 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center|top">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
 
         <EditText
-            android:layout_width="380dp"
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="32"
             android:background="@drawable/searchbar_bg"
-            android:layout_marginTop="25dp"
-            android:padding="15dp"
-            android:inputType="text"
-            android:maxLines="1"
-            android:maxLength="30"
-            android:layout_gravity="center|top"
-            android:hint="Поиск"/>
+            android:hint="Поиск"
+            android:padding="10dp"
+            />
+
 
         <ImageButton
-            android:background="@null"
-            android:layout_width="37dp"
-            android:layout_height="37dp"
-            android:scaleType="centerCrop"
-            android:src="@android:drawable/ic_menu_search"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="right|center"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_search" />
 
     </FrameLayout>
 
@@ -52,12 +53,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"/>
 
-    <ListView
-        android:id="@+id/search_list"
-        android:divider="@null"
-        android:padding="10dp"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
+    <FrameLayout
+        android:id="@+id/search_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

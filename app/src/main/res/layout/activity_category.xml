@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".CategoryActivity">
+
+
+    <fragment
+        android:id="@+id/header_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:name="com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment"
+        tools:layout="@layout/fragment_category_header" />
+
+    <FrameLayout
+        android:id="@+id/category_items_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+
+</LinearLayout>
