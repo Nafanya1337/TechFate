@@ -56,10 +56,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
     @Override
     public void onClickProduct(View view, Product product) {
         Intent intent = new Intent(this, ItemCartActivity.class);
-        if (product instanceof Headphones)
-            intent.putExtra(Headphones.class.getSimpleName(), (Headphones) product);
-        else
-            intent.putExtra(Product.class.getSimpleName(), product);
+        intent.putExtra(Product.class.getSimpleName(), product);
         startActivity(intent);
     }
 }

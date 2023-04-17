@@ -1,5 +1,6 @@
 package com.shmakov.techfate.mytools;
 
+import com.shmakov.techfate.entities.Category;
 import com.shmakov.techfate.entities.Product;
 
 public class StringWorker {
@@ -22,5 +23,21 @@ public class StringWorker {
             mark_and_name.append("...");
         }
         return mark_and_name.toString();
+    }
+
+    public static String pluralMaker(String category) {
+        switch (category){
+            case Category.SMARTPHONE_NAME_CATEGORY:
+                return "Смартфон";
+            case Category.CONSOLES_NAME_CATEGORY:
+                return "Игровая приставка";
+            case Category.TABLETS_NAME_CATEGORY:
+                return"Планшет";
+            case Category.MONITORS_NAME_CATEGORY:
+                return "Монитор";
+            case Category.LAPTOPS_NAME_CATEGORY:
+                return "Ноутбук";
+        }
+        return category;
     }
 }

@@ -4,6 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <ImageView
+            android:onClick="closeItem"
+            android:id="@+id/close_product"
+            android:layout_width="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|left"
+            android:layout_marginStart="25dp"
+            android:src="@drawable/ic_arrow_left_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -12,22 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:onClick="closeItem"
-                android:id="@+id/close_product"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/ic_arrow_left_black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/product_images"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -125,12 +131,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/color_container" />
 
-            <FrameLayout
+            <TableLayout
                 android:id="@+id/specifications_container"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -153,7 +158,7 @@
                 android:id="@+id/stars_reviews_container"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -175,6 +180,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+    </LinearLayout>
 
     <Button
         android:onClick="addToCart"

@@ -1,36 +1,77 @@
 package com.shmakov.techfate.entities;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class SmartPhone extends Product{
+public class SmartPhone extends Product {
+
+    public static final int MAX_IMAGES = 7;
+
+    public static final String SMARTPHONES_DISPLAY_TAG = "Дисплей";
 
     private int ram;
     private int ssd;
-    private ArrayList<Integer> photos = new ArrayList<>();
+    private int[] images;
 
 
-    public SmartPhone(String mark, String name, int cost, String color, int img, int ram, int ssd, ArrayList<Integer> photos) {
-        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img);
+    public SmartPhone(String mark, String name, int cost, String color, int img, int[] photos, int ram, int ssd) {
+        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img, photos);
+        this.ram = ram;
+        this.ssd = ssd;
+    }
+
+    public SmartPhone(String mark, String name, int cost, String color, int img, HashMap<String, String> specifications) {
+        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img, specifications);
+    }
+
+    public SmartPhone(String mark, String name, int cost, String color, int img, int ram, int ssd) {
+        this(mark, name, cost, color, img);
         this.ram = ram;
         this.ssd = ssd;
     }
 
     public SmartPhone(String mark, String name, int cost, String color, int img) {
         super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img);
-        this.ram = ram;
-        this.ssd = ssd;
+        ram = 0;
+        ssd = 0;
     }
 
-    public SmartPhone(String mark, String name, int cost) {
-        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost);
+    protected SmartPhone(Parcel in) {
+        super(in);
+        ram = in.readInt();
+        ssd = in.readInt();
+        images = in.createIntArray();
     }
 
     @Override
-    public String getMiniInfo() {
-        return this.getMark() + this.getName() + Integer.toString(this.getCost());
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(ram);
+        dest.writeInt(ssd);
+        dest.writeIntArray(images);
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<SmartPhone> CREATOR = new Creator<SmartPhone>() {
+        @Override
+        public SmartPhone createFromParcel(Parcel in) {
+            return new SmartPhone(in);
+        }
+
+        @Override
+        public SmartPhone[] newArray(int size) {
+            return new SmartPhone[size];
+        }
+    };
 
     public int getRam() {
         return ram;
@@ -46,10 +87,6 @@ public class SmartPhone extends Product{
 
     public void setSsd(int ssd) {
         this.ssd = ssd;
-    }
-
-    public String getMaxInfo() {
-        return this.getMiniInfo() + " " + this.getColor() + " " + this.getRam() + " " + this.getSsd();
     }
 
 

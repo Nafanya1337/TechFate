@@ -8,10 +8,18 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Random;
 
 
-public abstract class Product implements Parcelable {
+public class Product implements Parcelable {
+    public static final int MAX_IMAGES = 7;
+
+    public static final String EXIST_TAG = "+";
+    public static final String NON_EXIST_TAG = "Отсутствует";
+
+    private HashMap<String, String> specifications = new HashMap<>();
+
     protected Category categoryProduct;
     protected int cost;
     protected String name;
@@ -19,9 +27,11 @@ public abstract class Product implements Parcelable {
     protected String color;
     protected int img;
     protected int amountOfWatches;
+    protected int[] images = new int[1];
 
-    Product(String category) {
-        categories.get(category).add(this);
+
+    public HashMap<String, String> getSpecifications() {
+        return specifications;
     }
 
     public Product(@NonNull Parcel in) {
@@ -32,6 +42,9 @@ public abstract class Product implements Parcelable {
         this.color = in.readString();
         this.img = in.readInt();
         this.amountOfWatches = in.readInt();
+        this.images = in.createIntArray();
+        specifications = new HashMap<>();
+        in.readMap(specifications, HashMap.class.getClassLoader());
     }
 
     @Override
@@ -43,6 +56,8 @@ public abstract class Product implements Parcelable {
         dest.writeString(this.color);
         dest.writeInt(this.img);
         dest.writeInt(this.amountOfWatches);
+        dest.writeIntArray(this.images);
+        dest.writeMap(this.specifications);
     }
 
     @Override
@@ -53,12 +68,7 @@ public abstract class Product implements Parcelable {
     public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
         public Product createFromParcel(Parcel in) {
-            return new Product(in) {
-                @Override
-                public String getMiniInfo() {
-                    return null;
-                }
-            };
+            return new Product(in);
         }
 
         @Override
@@ -68,31 +78,39 @@ public abstract class Product implements Parcelable {
     };
 
 
+    public Product(String category, String mark, String name, int cost, String color, int img, int[] imgs, HashMap<String, String> specifications) {
+        this(category, mark, name, cost, color, img, imgs);
+        this.specifications = specifications;
+    }
+
+    public Product(String category, String mark, String name, int cost, String color, int img, HashMap<String, String> specifications) {
+        this(category, mark, name, cost, color, img);
+        this.specifications = specifications;
+    }
+
+    public Product(String category, String mark, String name, int cost, String color, int img, int[] imgs) {
+        this(category, mark, name, cost, color, img);
+        this.images = imgs;
+    }
+
+    public int[] getImages() {
+        return images;
+    }
+
     public Product(String category, String mark, String name, int cost, String color, int img) {
-        this(category, mark, name, cost, color);
-        this.img = img;
-    }
-
-    public Product(String category, String mark, String name, int cost, String color) {
-        this(category, mark, name, cost);
-        this.color = color;
-        this.img = 0;
-    }
-
-    public Product(String category, String mark, String name, int cost) {
         this.mark = mark;
         this.name = name;
         this.cost = cost;
-        this.color = "null";
-        this.img = 0;
+        this.color = color;
         Random random = new Random();
         amountOfWatches = random.nextInt(100) + 10;
         if (mark.equals("Apple"))
             amountOfWatches = 200;
         Category.addToArrayList(category, this);
         this.categoryProduct = new Category(category);
+        this.img = img;
+        this.images[0] = img;
     }
-
 
     public Integer getAmountOfWatches() {
         return amountOfWatches;
@@ -102,20 +120,12 @@ public abstract class Product implements Parcelable {
         return categoryProduct.getCategory();
     }
 
-    public void setImg(int img) {
-        this.img = img;
-    }
-
     public int getImg() {
         return img;
     }
 
     public String getMark() {
         return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
     }
 
     public String getName() {
@@ -138,9 +148,4 @@ public abstract class Product implements Parcelable {
         this.color = color;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
-    abstract public String getMiniInfo();
 }

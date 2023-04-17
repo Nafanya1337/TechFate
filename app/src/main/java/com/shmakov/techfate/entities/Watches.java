@@ -1,14 +1,60 @@
 package com.shmakov.techfate.entities;
 
-public class Watches extends Product{
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import java.util.HashMap;
+
+public class Watches extends Product {
+
+    private String OS;
+
+    public static final String SMARTPHONES_DISPLAY_TAG = "Дисплей";
+
+    public Watches(String mark, String name, int cost, String color, int img, int[] imgs, String OS) {
+        super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, color, img, imgs);
+        this.OS = OS;
+    }
+
+    public Watches(String mark, String name, int cost, String color, int img, String OS) {
+        this(mark, name, cost, color, img);
+        this.OS = OS;
+    }
+
+    public Watches(String mark, String name, int cost, String color, int img, HashMap<String, String> specification) {
+        super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, color, img, specification);
+    }
 
     public Watches(String mark, String name, int cost, String color, int img) {
         super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, color, img);
+        OS = "Неизвестно";
+    }
+
+    protected Watches(Parcel in) {
+        super(in);
+        OS = in.readString();
     }
 
     @Override
-    public String getMiniInfo() {
-        return null;
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(OS);
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Watches> CREATOR = new Creator<Watches>() {
+        @Override
+        public Watches createFromParcel(Parcel in) {
+            return new Watches(in);
+        }
+
+        @Override
+        public Watches[] newArray(int size) {
+            return new Watches[size];
+        }
+    };
 }
