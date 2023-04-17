@@ -13,6 +13,20 @@
         android:theme="@style/Theme.TechFate"
         tools:targetApi="31">
         <activity
+            android:name=".FullScreenImageActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ItemCartActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CategoryActivity"
             android:exported="false">
             <meta-data

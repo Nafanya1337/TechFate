@@ -19,6 +19,7 @@ import com.shmakov.techfate.entities.SmartPhone;
 import com.shmakov.techfate.entities.Watches;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
 
+import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
@@ -69,10 +70,15 @@ public class HomeFragment extends Fragment {
     }
 
     public void makeProducts() {
-        new Headphones("Apple", "AirPods 2 Pro", 15000, "white", R.drawable.headphones_2);
-        new Headphones("Skullcandy", "Hesh 3", 10000, "blue", R.drawable.headphones_1);
-        new Headphones("Skullcandy", "Hesh 2", 8000, "blue", R.drawable.headphones_1);
-        new Headphones("Huawei", "P9", 5000, "white", R.drawable.headphones_3);
+        int[] imgs = {
+            R.drawable.apple_airpods_2_pro_img1,
+            R.drawable.apple_airpods_2_pro_img2,
+            R.drawable.apple_airpods_2_pro_img3
+        };
+        new Headphones("Apple", "AirPods 2 Pro", 15000, "white", R.drawable.headphones_2, true, imgs);
+        new Headphones("Skullcandy", "Hesh 3", 10000, "blue", R.drawable.headphones_1, true);
+        new Headphones("Skullcandy", "Hesh 2", 8000, "blue", R.drawable.headphones_1, false);
+        new Headphones("Huawei", "P9", 5000, "white", R.drawable.headphones_3, false);
         new SmartPhone("Apple", "iPhone 13 Pro Max", 60000, "blue", R.drawable.smartphones_img);
         new Watches("Samsung", "Gear S3", 25000, "black", R.drawable.watches_img);
     }

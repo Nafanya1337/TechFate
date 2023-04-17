@@ -1,19 +1,18 @@
 package com.shmakov.techfate;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Cart;
 import com.shmakov.techfate.entities.Category;
 import com.shmakov.techfate.entities.Product;
@@ -25,7 +24,7 @@ import com.shmakov.techfate.mytools.ImageManager;
 
 import java.util.ArrayList;
 
-public class CategoryActivity extends AppCompatActivity implements goBack {
+public class CategoryActivity extends AppCompatActivity implements goBack, ProductAdapter.onClickProduct {
 
     private FrameLayout container, product_container;
     private FragmentManager fragmentManager;
@@ -98,5 +97,12 @@ public class CategoryActivity extends AppCompatActivity implements goBack {
     @Override
     public void goBack(View view) {
         finish();
+    }
+
+    @Override
+    public void onClickProduct(View view, Product product) {
+        Intent intent = new Intent(this, ItemCartActivity.class);
+        intent.putExtra(Product.class.getSimpleName(), product);
+        startActivity(intent);
     }
 }

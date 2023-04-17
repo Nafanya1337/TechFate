@@ -45,7 +45,8 @@ public class Category {
         this.category = category;
         this.category_mini_img = ImageManager.findCategoryMiniIMG(category);
         this.category_background_img = ImageManager.findCategoryBackgroundIMG(category);
-        categories.put(category, new ArrayList<>());
+        if (categories.get(category) == null)
+            categories.put(category, new ArrayList<>());
     }
 
     public static void addToArrayList(String category, Product product) {
@@ -57,10 +58,13 @@ public class Category {
     public static ArrayList<Product> getAllProducts() {
         ArrayList<Product> all = new ArrayList<>();
         for (int i=0; i<Categories_names.length; i++) {
-            Log.d("mymy", String.valueOf(categories.get(Categories_names[i])));
             all.addAll(categories.get(Categories_names[i]));
         }
         return all;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public static void init(){
