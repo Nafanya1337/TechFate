@@ -11,26 +11,46 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Category;
 import com.shmakov.techfate.entities.Product;
-import com.shmakov.techfate.mytools.AmountOfWatchesComparator;
+import com.shmakov.techfate.mytools.MyComparator;
+
 import java.util.Arrays;
 
 
 public class ItemsFragment extends Fragment {
     public static final String MAKE_POPULAR_ITEMS = "Popular_items_grid";
-    public static final String MAKE_CURRENT_ITEMS = "Category_items_grid";
+
+    public static final int SORT_0_100 = 0;
+    public static final int SORT_100_0 = 1;
+    public static final int SORT_BY_WATCHES = 2;
 
 
     private GridView gridView;
     private String type;
     private ProductAdapter productAdapter;
+    private int sortType = 2;
+    private Product[] all;
+
+    public ProductAdapter getProductAdapter() {
+        return productAdapter;
+    }
+
+    public ItemsFragment() {
+        this.type = MAKE_POPULAR_ITEMS;
+    }
 
     public ItemsFragment(String type) {
         this.type = type;
+    }
+
+    public void setSortType(int sortType) {
+        this.sortType = sortType;
+        makeSort();
     }
 
     @Override
@@ -58,19 +78,31 @@ public class ItemsFragment extends Fragment {
     }
 
     public void makePopularGridView() {
-        Product[] all = Category.getAllProducts().toArray(new Product[0]);
-        Arrays.sort(all, new AmountOfWatchesComparator());
-        Log.d("mymy", String.valueOf(all));
+        all = Category.getAllProducts().toArray(new Product[0]);
+        makeSort();
         productAdapter = new ProductAdapter(getContext(), all);
     }
 
     private void makeCurrentItems(){
         if (Category.getCategoriesNamesAsArrayList().contains(type)) {
-            Product[] all = Category.categories.get(type).toArray(new Product[0]);
+            all = Category.categories.get(type).toArray(new Product[0]);
+            makeSort();
             productAdapter = new ProductAdapter(getContext(), all);
         }
-        else {
+    }
 
+    public void makeSort() {
+        switch (sortType){
+            case 0:
+                Arrays.sort(all, new MyComparator.CostMinToHigh());
+                break;
+            case 1:
+                Arrays.sort(all, new MyComparator.CostMaxToMin());
+                break;
+            default:
+                Arrays.sort(all, new MyComparator.AmountOfWatches());
+                break;
         }
     }
+
 }

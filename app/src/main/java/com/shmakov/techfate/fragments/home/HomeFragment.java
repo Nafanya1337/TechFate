@@ -63,7 +63,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        makeProducts();
+        fragmentManager = null;
+        categoryAdapter = null;
+        popular_items_container = null;
     }
 
     public void makeProducts() {

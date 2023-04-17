@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
@@ -19,6 +20,7 @@ import com.shmakov.techfate.entities.Product;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
 import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment;
 import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment.goBack;
+import com.shmakov.techfate.mytools.FragmentAdapterUpdater;
 import com.shmakov.techfate.mytools.ImageManager;
 
 import java.util.ArrayList;
@@ -34,9 +36,11 @@ public class CategoryActivity extends AppCompatActivity implements goBack {
     private Cart cart = new Cart();
     private Spinner spinner;
     private TextView category_amount, category_available;
+    private FragmentAdapterUpdater fragmentAdapterUpdater;
 
     public static final String CATEGORY_TAG = "CATEGORY_TAG";
     public static final String CATEGORY_IMG_TAG = "CATEGORY_IMG_TAG";
+
 
 
     @Override
@@ -63,7 +67,8 @@ public class CategoryActivity extends AppCompatActivity implements goBack {
 
         String[] array_modes = {
                 "По возрастанию",
-                "По убыванию"
+                "По убыванию",
+                "По популярности"
         };
 
         spinner = findViewById(R.id.spinner);
@@ -75,6 +80,9 @@ public class CategoryActivity extends AppCompatActivity implements goBack {
 
         adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
         spinner.setAdapter(adapter);
+
+        fragmentAdapterUpdater = new FragmentAdapterUpdater(itemsFragment, ft, product_container.getId());
+        spinner.setOnItemSelectedListener(fragmentAdapterUpdater);
 
         category_amount = findViewById(R.id.category_amount);
         ArrayList<Product> products = Category.categories.get(tittle);

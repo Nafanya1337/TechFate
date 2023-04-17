@@ -8,7 +8,7 @@
 
     <plurals name="avaliable">
         <item quantity="one">Доступен: </item>
-        <item quantity="few">Досутпны: </item>
-        <item quantity="many">Досутпно: </item>
+        <item quantity="few">Доступны: </item>
+        <item quantity="many">Доступно: </item>
     </plurals>
 </resources>

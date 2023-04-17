@@ -13,29 +13,17 @@ public abstract class Product {
     protected String mark;
     protected String color;
     protected int img;
-
     protected int amountOfWatches;
 
     public Product(String category, String mark, String name, int cost, String color, int img) {
-        this.mark = mark;
-        this.name = name;
-        this.cost = cost;
-        this.color = color;
+        this(category, mark, name, cost, color);
         this.img = img;
-        Random random = new Random();
-        amountOfWatches = random.nextInt(100) + 10;
-        Category.addToArrayList(category, this);
     }
 
     public Product(String category, String mark, String name, int cost, String color) {
-        this.mark = mark;
-        this.name = name;
-        this.cost = cost;
+        this(category, mark, name, cost);
         this.color = color;
         this.img = 0;
-        Random random = new Random();
-        amountOfWatches = random.nextInt(100) + 10;
-        Category.addToArrayList(category, this);
     }
 
     public Product(String category, String mark, String name, int cost) {
@@ -46,6 +34,8 @@ public abstract class Product {
         this.img = 0;
         Random random = new Random();
         amountOfWatches = random.nextInt(100) + 10;
+        if (mark.equals("Apple"))
+            amountOfWatches = 200;
         Category.addToArrayList(category, this);
     }
 
