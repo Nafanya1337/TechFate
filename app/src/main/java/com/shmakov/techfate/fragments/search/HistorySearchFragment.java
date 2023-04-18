@@ -15,17 +15,20 @@ import android.widget.ListView;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.SearchHistoryAdapter;
 
+import java.util.ArrayList;
+
 public class HistorySearchFragment extends Fragment {
-    private String[] search_history = {
-            "iPhone 13 Pro Max",
-            "Realme 9 Pro",
-            "Samsung Gear Sport"
-    };
+    private ArrayList<String> search_history = new ArrayList<>();
+
+    private SearchHistoryAdapter search_adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        search_history.add("iPhone 13 Pro Max");
+        search_history.add("Realme 9 Pro");
+        search_history.add("Samsung Gear Sport");
         return inflater.inflate(R.layout.fragment_history_search, container, false);
     }
 
@@ -33,7 +36,7 @@ public class HistorySearchFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView search_list = view.findViewById(R.id.search_list);
-        SearchHistoryAdapter search_adapter = new SearchHistoryAdapter(getContext(), search_history);
+        search_adapter = new SearchHistoryAdapter(getContext(), search_history);
         search_list.setAdapter(search_adapter);
     }
 }
