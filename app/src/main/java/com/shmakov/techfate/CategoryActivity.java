@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Cart;
-import com.shmakov.techfate.entities.Category;
-import com.shmakov.techfate.entities.Product;
+import com.shmakov.techfate.entities.inner.Category;
+import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
 import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment;
 import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment.goBack;

@@ -3,6 +3,7 @@ package com.shmakov.techfate.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,8 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         GradientDrawable bgShape = (GradientDrawable)holder.color_img.getBackground();
+        Log.d("mymy", "size " + colors.size());
+        Log.d("mymy", "color " + colors.get(position));
         bgShape.setColor(ColorManager.nameColorToInt(colors.get(position)));
     }
 

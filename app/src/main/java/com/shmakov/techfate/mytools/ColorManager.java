@@ -27,7 +27,8 @@ public class ColorManager {
                 return Color.BLUE;
             case "green":
                 return Color.GREEN;
+            default:
+                return Color.DKGRAY;
         }
-        return Color.LTGRAY;
     }
 }

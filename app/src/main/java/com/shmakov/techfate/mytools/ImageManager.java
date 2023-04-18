@@ -1,12 +1,12 @@
 package com.shmakov.techfate.mytools;
 
-import static com.shmakov.techfate.entities.Category.CONSOLES_NAME_CATEGORY;
-import static com.shmakov.techfate.entities.Category.HEADPHONES_NAME_CATEGORY;
-import static com.shmakov.techfate.entities.Category.LAPTOPS_NAME_CATEGORY;
-import static com.shmakov.techfate.entities.Category.MONITORS_NAME_CATEGORY;
-import static com.shmakov.techfate.entities.Category.SMARTPHONE_NAME_CATEGORY;
-import static com.shmakov.techfate.entities.Category.TABLETS_NAME_CATEGORY;
-import static com.shmakov.techfate.entities.Category.WATCHES_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.inner.Category.CONSOLES_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.inner.Category.HEADPHONES_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.inner.Category.LAPTOPS_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.inner.Category.MONITORS_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.inner.Category.SMARTPHONE_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.inner.Category.TABLETS_NAME_CATEGORY;
+import static com.shmakov.techfate.entities.inner.Category.WATCHES_NAME_CATEGORY;
 
 import com.shmakov.techfate.R;
 

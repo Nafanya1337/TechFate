@@ -7,16 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.ProductAdapter;
-import com.shmakov.techfate.entities.Category;
-import com.shmakov.techfate.entities.Product;
+import com.shmakov.techfate.entities.inner.Category;
+import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.mytools.MyComparator;
 
 import java.util.Arrays;

@@ -1,6 +1,8 @@
 package com.shmakov.techfate.entities;
 
 
+import com.shmakov.techfate.entities.inner.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 

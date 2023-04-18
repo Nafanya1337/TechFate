@@ -1,8 +1,5 @@
 package com.shmakov.techfate.fragments.home;
 
-import static com.shmakov.techfate.entities.Headphones.EXIST_TAG;
-import static com.shmakov.techfate.entities.Headphones.NON_EXIST_TAG;
-
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,12 +13,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
-import com.shmakov.techfate.entities.Category;
-import com.shmakov.techfate.entities.Headphones;
-import com.shmakov.techfate.entities.SmartPhone;
-import com.shmakov.techfate.entities.Watches;
+import com.shmakov.techfate.entities.inner.Category;
+import com.shmakov.techfate.entities.inner.Headphones;
+import com.shmakov.techfate.entities.inner.SmartPhone;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
-import java.util.HashMap;
+import com.shmakov.techfate.mytools.ColorManager;
 
 
 public class HomeFragment extends Fragment {
@@ -77,29 +73,8 @@ public class HomeFragment extends Fragment {
             R.drawable.apple_airpods_2_pro_img2,
             R.drawable.apple_airpods_2_pro_img3
         };
-        HashMap<String, String> t = new HashMap<>();
-        t.put(Headphones.HEADPHONES_BLUETOOTH_TAG, EXIST_TAG);
-        t.put(Headphones.HEADPHONES_MICRO_TAG, EXIST_TAG);
-        t.put(Headphones.HEADPHONES_WIRED_TAG, NON_EXIST_TAG);
-        new Headphones("Apple", "AirPods 2 Pro", 15000, new String[]{"white"}, R.drawable.headphones_2, imgs, t);
-        t = new HashMap<>();
-        t.put(Headphones.HEADPHONES_BLUETOOTH_TAG, EXIST_TAG);
-        t.put(Headphones.HEADPHONES_MICRO_TAG, EXIST_TAG);
-        t.put(Headphones.HEADPHONES_NOISECANCELLATION_TAG, NON_EXIST_TAG);
-        new Headphones("Skullcandy", "Hesh 3", 10000, new String[]{"blue"}, R.drawable.headphones_1, t);
-        new Headphones("Skullcandy", "Hesh 2", 8000, new String[]{"blue"}, R.drawable.headphones_1, t);
-        t = new HashMap<>();
-        t.put(Headphones.HEADPHONES_BLUETOOTH_TAG, NON_EXIST_TAG);
-        t.put(Headphones.HEADPHONES_MICRO_TAG, EXIST_TAG);
-        t.put(Headphones.HEADPHONES_NOISECANCELLATION_TAG, NON_EXIST_TAG);
-        t.put(Headphones.HEADPHONES_WIRED_TAG, EXIST_TAG);
-        new Headphones("Huawei", "P9", 5000, new String[]{"white"}, R.drawable.headphones_3, t);
-        t = new HashMap<>();
-        t.put(SmartPhone.SMARTPHONES_DISPLAY_TAG, "6.8\" SUPERAMOLED 1920x1080");
-        new SmartPhone("Apple", "iPhone 13 Pro Max", 60000, new String[]{"blue"}, R.drawable.smartphones_img, t);
-        t = new HashMap<>();
-        t.put(SmartPhone.SMARTPHONES_DISPLAY_TAG, "2.7\" SUPERAMOLED 450x480");
-        new Watches("Samsung", "Gear S3", 25000, new String[]{"black"}, R.drawable.watches_img, t);
+        Headphones headphones1 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.BLUE_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
+        Headphones headphones2 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.GREEN_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
     }
 
 }

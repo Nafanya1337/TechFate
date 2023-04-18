@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.shmakov.techfate.adapters.ColorAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ColorsFragment extends Fragment {
 
@@ -23,7 +24,7 @@ public class ColorsFragment extends Fragment {
 
     private RecyclerView colors_container;
     private ColorAdapter colorAdapter;
-    private ArrayList<String> colors;
+    private ArrayList<String> colors = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -34,14 +35,14 @@ public class ColorsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle array = getArguments();
-        colors = array.getStringArrayList(COLORS_ARRAY_TAG);
+        String[] temp = array.getStringArray(COLORS_ARRAY_TAG);
+        colors.addAll(Arrays.asList(temp));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_colors, container, false);
-        Log.d("mymy", colors.toString());
         colors_container = view.findViewById(R.id.colors_container);
         return view;
     }

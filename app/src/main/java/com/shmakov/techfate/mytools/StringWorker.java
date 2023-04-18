@@ -1,7 +1,6 @@
 package com.shmakov.techfate.mytools;
 
-import com.shmakov.techfate.entities.Category;
-import com.shmakov.techfate.entities.Product;
+import com.shmakov.techfate.entities.inner.Category;
 
 public class StringWorker {
 

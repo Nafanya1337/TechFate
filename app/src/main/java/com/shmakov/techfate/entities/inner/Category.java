@@ -1,8 +1,6 @@
-package com.shmakov.techfate.entities;
+package com.shmakov.techfate.entities.inner;
 
 
-
-import android.util.Log;
 
 import com.shmakov.techfate.mytools.ImageManager;
 

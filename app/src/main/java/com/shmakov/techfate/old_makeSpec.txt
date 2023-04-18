@@ -1,0 +1,40 @@
+public void makeSpec(Product product) {
+        TableRow name_spec;
+        TextView name, val;
+        ArrayList<Product> = product.getRelatives();
+        String[] specs_names = specs.keySet().toArray(new String[0]);
+        TableRow.LayoutParams params_name = new TableRow.LayoutParams(
+                300,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                1.0f);
+        params_name.setMargins(0, 20, 0, 20);
+        TableRow.LayoutParams params_specs = new TableRow.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                1.0f);
+        params_specs.setMargins(0, 20, 0, 20);
+        for (int i = 0; i < specs_names.length; i++) {
+            name_spec = new TableRow(this);
+            name = new TextView(this);
+            val = new TextView(this);
+            name.setText(specs_names[i] + "\t");
+            name.setTextSize(18);
+            name.setMaxLines(2);
+            name.setLayoutParams(params_name);
+            name.setTextColor(Color.BLACK);
+            name.setTypeface(null, Typeface.BOLD);
+            val.setText(specs.get(specs_names[i]));
+            val.setTextColor(Color.BLACK);
+            val.setTextSize(18);
+            val.setLayoutParams(params_specs);
+            val.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+            val.setMaxLines(1);
+            val.setGravity(Gravity.CENTER|Gravity.BOTTOM);
+            name.setGravity(Gravity.START);
+            val.setTypeface(null, Typeface.NORMAL);
+            name_spec.addView(name);
+            name_spec.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+            name_spec.addView(val);
+            specifications_container.addView(name_spec);
+        }
+    }

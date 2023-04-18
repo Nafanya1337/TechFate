@@ -14,8 +14,7 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 import com.shmakov.techfate.adapters.ProductAdapter;
-import com.shmakov.techfate.entities.Headphones;
-import com.shmakov.techfate.entities.Product;
+import com.shmakov.techfate.entities.inner.Product;
 
 public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct {
 

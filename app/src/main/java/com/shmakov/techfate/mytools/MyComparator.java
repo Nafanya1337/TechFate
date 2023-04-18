@@ -1,6 +1,6 @@
 package com.shmakov.techfate.mytools;
 
-import com.shmakov.techfate.entities.Product;
+import com.shmakov.techfate.entities.inner.Product;
 
 import java.util.Comparator;
 

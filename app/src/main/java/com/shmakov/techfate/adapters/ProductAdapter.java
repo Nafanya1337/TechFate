@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.shmakov.techfate.R;
-import com.shmakov.techfate.entities.Product;
+import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.mytools.StringWorker;
 
 
