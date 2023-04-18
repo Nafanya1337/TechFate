@@ -95,6 +95,7 @@ public class Product implements Parcelable {
         amountOfWatches = in.readInt();
         relatives = in.readArrayList(Product.class.getClassLoader());
         Log.d("mymy", "rel2 " + relatives);
+
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
