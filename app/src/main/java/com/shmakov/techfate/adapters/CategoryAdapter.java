@@ -20,7 +20,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     private final LayoutInflater inflater;
     private Context context;
 
-
     public interface openCategory {
         public void openCategory(String category);
     }

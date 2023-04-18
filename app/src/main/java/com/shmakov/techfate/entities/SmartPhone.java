@@ -19,24 +19,24 @@ public class SmartPhone extends Product {
     private int[] images;
 
 
-    public SmartPhone(String mark, String name, int cost, String color, int img, int[] photos, int ram, int ssd) {
-        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img, photos);
+    public SmartPhone(String mark, String name, int cost, String[] colors, int img, int[] photos, int ram, int ssd) {
+        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, colors, img, photos);
         this.ram = ram;
         this.ssd = ssd;
     }
 
-    public SmartPhone(String mark, String name, int cost, String color, int img, HashMap<String, String> specifications) {
-        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img, specifications);
+    public SmartPhone(String mark, String name, int cost, String[] colors, int img, HashMap<String, String> specifications) {
+        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, colors, img, specifications);
     }
 
-    public SmartPhone(String mark, String name, int cost, String color, int img, int ram, int ssd) {
-        this(mark, name, cost, color, img);
+    public SmartPhone(String mark, String name, int cost, String[] colors, int img, int ram, int ssd) {
+        this(mark, name, cost, colors, img);
         this.ram = ram;
         this.ssd = ssd;
     }
 
-    public SmartPhone(String mark, String name, int cost, String color, int img) {
-        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, color, img);
+    public SmartPhone(String mark, String name, int cost, String[] colors, int img) {
+        super(Category.SMARTPHONE_NAME_CATEGORY, mark, name, cost, colors, img);
         ram = 0;
         ssd = 0;
     }

@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,9 +109,11 @@
                 android:layout_marginLeft="25dp"/>
 
             <FrameLayout
-                android:id="@+id/color_container"
+                android:id="@+id/colors_item_container"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:name="com.shmakov.techfate.ColorsFragment"
+                tools:layout="@layout/fragment_colors"
                 app:layout_constraintTop_toBottomOf="@id/color_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +132,7 @@
                 android:text="Характеристики"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/color_container" />
+                app:layout_constraintTop_toBottomOf="@id/colors_item_container" />
 
             <TableLayout
                 android:id="@+id/specifications_container"

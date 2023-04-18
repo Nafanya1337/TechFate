@@ -81,25 +81,25 @@ public class HomeFragment extends Fragment {
         t.put(Headphones.HEADPHONES_BLUETOOTH_TAG, EXIST_TAG);
         t.put(Headphones.HEADPHONES_MICRO_TAG, EXIST_TAG);
         t.put(Headphones.HEADPHONES_WIRED_TAG, NON_EXIST_TAG);
-        new Headphones("Apple", "AirPods 2 Pro", 15000, "white", R.drawable.headphones_2, imgs, t);
+        new Headphones("Apple", "AirPods 2 Pro", 15000, new String[]{"white"}, R.drawable.headphones_2, imgs, t);
         t = new HashMap<>();
         t.put(Headphones.HEADPHONES_BLUETOOTH_TAG, EXIST_TAG);
         t.put(Headphones.HEADPHONES_MICRO_TAG, EXIST_TAG);
         t.put(Headphones.HEADPHONES_NOISECANCELLATION_TAG, NON_EXIST_TAG);
-        new Headphones("Skullcandy", "Hesh 3", 10000, "blue", R.drawable.headphones_1, t);
-        new Headphones("Skullcandy", "Hesh 2", 8000, "blue", R.drawable.headphones_1, t);
+        new Headphones("Skullcandy", "Hesh 3", 10000, new String[]{"blue"}, R.drawable.headphones_1, t);
+        new Headphones("Skullcandy", "Hesh 2", 8000, new String[]{"blue"}, R.drawable.headphones_1, t);
         t = new HashMap<>();
         t.put(Headphones.HEADPHONES_BLUETOOTH_TAG, NON_EXIST_TAG);
         t.put(Headphones.HEADPHONES_MICRO_TAG, EXIST_TAG);
         t.put(Headphones.HEADPHONES_NOISECANCELLATION_TAG, NON_EXIST_TAG);
         t.put(Headphones.HEADPHONES_WIRED_TAG, EXIST_TAG);
-        new Headphones("Huawei", "P9", 5000, "white", R.drawable.headphones_3, t);
+        new Headphones("Huawei", "P9", 5000, new String[]{"white"}, R.drawable.headphones_3, t);
         t = new HashMap<>();
         t.put(SmartPhone.SMARTPHONES_DISPLAY_TAG, "6.8\" SUPERAMOLED 1920x1080");
-        new SmartPhone("Apple", "iPhone 13 Pro Max", 60000, "blue", R.drawable.smartphones_img, t);
+        new SmartPhone("Apple", "iPhone 13 Pro Max", 60000, new String[]{"blue"}, R.drawable.smartphones_img, t);
         t = new HashMap<>();
         t.put(SmartPhone.SMARTPHONES_DISPLAY_TAG, "2.7\" SUPERAMOLED 450x480");
-        new Watches("Samsung", "Gear S3", 25000, "black", R.drawable.watches_img, t);
+        new Watches("Samsung", "Gear S3", 25000, new String[]{"black"}, R.drawable.watches_img, t);
     }
 
 }

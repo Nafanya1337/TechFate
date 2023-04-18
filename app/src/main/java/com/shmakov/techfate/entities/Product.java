@@ -7,6 +7,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Random;
@@ -24,7 +27,7 @@ public class Product implements Parcelable {
     protected int cost;
     protected String name;
     protected String mark;
-    protected String color;
+    protected ArrayList<String> colors;
     protected int img;
     protected int amountOfWatches;
     protected int[] images = new int[1];
@@ -39,7 +42,7 @@ public class Product implements Parcelable {
         this.mark = in.readString();
         this.name = in.readString();
         this.cost = in.readInt();
-        this.color = in.readString();
+        this.colors = in.readArrayList(ArrayList.class.getClassLoader());
         this.img = in.readInt();
         this.amountOfWatches = in.readInt();
         this.images = in.createIntArray();
@@ -53,7 +56,7 @@ public class Product implements Parcelable {
         dest.writeString(this.mark);
         dest.writeString(this.name);
         dest.writeInt(this.cost);
-        dest.writeString(this.color);
+        dest.writeList(this.colors);
         dest.writeInt(this.img);
         dest.writeInt(this.amountOfWatches);
         dest.writeIntArray(this.images);
@@ -78,18 +81,18 @@ public class Product implements Parcelable {
     };
 
 
-    public Product(String category, String mark, String name, int cost, String color, int img, int[] imgs, HashMap<String, String> specifications) {
-        this(category, mark, name, cost, color, img, imgs);
+    public Product(String category, String mark, String name, int cost, String[] colors, int img, int[] imgs, HashMap<String, String> specifications) {
+        this(category, mark, name, cost, colors, img, imgs);
         this.specifications = specifications;
     }
 
-    public Product(String category, String mark, String name, int cost, String color, int img, HashMap<String, String> specifications) {
-        this(category, mark, name, cost, color, img);
+    public Product(String category, String mark, String name, int cost, String[] colors, int img, HashMap<String, String> specifications) {
+        this(category, mark, name, cost, colors, img);
         this.specifications = specifications;
     }
 
-    public Product(String category, String mark, String name, int cost, String color, int img, int[] imgs) {
-        this(category, mark, name, cost, color, img);
+    public Product(String category, String mark, String name, int cost, String[] colors, int img, int[] imgs) {
+        this(category, mark, name, cost, colors, img);
         this.images = imgs;
     }
 
@@ -97,11 +100,11 @@ public class Product implements Parcelable {
         return images;
     }
 
-    public Product(String category, String mark, String name, int cost, String color, int img) {
+    public Product(String category, String mark, String name, int cost, String[] colors, int img) {
         this.mark = mark;
         this.name = name;
         this.cost = cost;
-        this.color = color;
+        this.colors = new ArrayList<String>(Arrays.asList(colors));
         Random random = new Random();
         amountOfWatches = random.nextInt(100) + 10;
         if (mark.equals("Apple"))
@@ -136,16 +139,16 @@ public class Product implements Parcelable {
         return cost;
     }
 
-    public String getColor() {
-        return color;
+    public ArrayList<String> getColors() {
+        return colors;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColor(ArrayList<String> color) {
+        this.colors = color;
     }
 
 }

@@ -11,22 +11,22 @@ public class Watches extends Product {
 
     public static final String SMARTPHONES_DISPLAY_TAG = "Дисплей";
 
-    public Watches(String mark, String name, int cost, String color, int img, int[] imgs, String OS) {
-        super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, color, img, imgs);
+    public Watches(String mark, String name, int cost, String[] colors, int img, int[] imgs, String OS) {
+        super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, colors, img, imgs);
         this.OS = OS;
     }
 
-    public Watches(String mark, String name, int cost, String color, int img, String OS) {
-        this(mark, name, cost, color, img);
+    public Watches(String mark, String name, int cost, String[] colors, int img, String OS) {
+        this(mark, name, cost, colors, img);
         this.OS = OS;
     }
 
-    public Watches(String mark, String name, int cost, String color, int img, HashMap<String, String> specification) {
-        super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, color, img, specification);
+    public Watches(String mark, String name, int cost, String[] colors, int img, HashMap<String, String> specification) {
+        super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, colors, img, specification);
     }
 
-    public Watches(String mark, String name, int cost, String color, int img) {
-        super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, color, img);
+    public Watches(String mark, String name, int cost, String[] colors, int img) {
+        super(Category.WATCHES_NAME_CATEGORY, mark, name, cost, colors, img);
         OS = "Неизвестно";
     }
 

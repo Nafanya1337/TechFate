@@ -16,20 +16,20 @@ public class Headphones extends Product{
     public static final String HEADPHONES_MICRO_TAG = "Встроенный микрофон";
 
 
-    public Headphones(String mark, String name, int cost, String color, int img, int[] images, HashMap<String, String> specifications) {
-        super(Category.HEADPHONES_NAME_CATEGORY, mark, name, cost, color, img, images, specifications);
+    public Headphones(String mark, String name, int cost, String[] colors, int img, int[] images, HashMap<String, String> specifications) {
+        super(Category.HEADPHONES_NAME_CATEGORY, mark, name, cost, colors, img, images, specifications);
     }
 
-    public Headphones(String mark, String name, int cost, String color, int img, HashMap<String, String> specifications) {
-        super(Category.HEADPHONES_NAME_CATEGORY, mark, name, cost, color, img, specifications);
+    public Headphones(String mark, String name, int cost, String[] colors, int img, HashMap<String, String> specifications) {
+        super(Category.HEADPHONES_NAME_CATEGORY, mark, name, cost, colors, img, specifications);
     }
 
-    public Headphones(String mark, String name, int cost, String color, int img, int[] images) {
-        super(Category.HEADPHONES_NAME_CATEGORY, mark, name, cost, color, img, images);
+    public Headphones(String mark, String name, int cost, String[] colors, int img, int[] images) {
+        super(Category.HEADPHONES_NAME_CATEGORY, mark, name, cost, colors, img, images);
     }
 
-    public Headphones(String mark, String name, int cost, String color, int img) {
-        super(Category.HEADPHONES_NAME_CATEGORY, mark, name, cost, color, img);
+    public Headphones(String mark, String name, int cost, String[] colors, int img) {
+        super(Category.HEADPHONES_NAME_CATEGORY, mark, name, cost, colors, img);
     }
 
     protected Headphones(Parcel in) {
