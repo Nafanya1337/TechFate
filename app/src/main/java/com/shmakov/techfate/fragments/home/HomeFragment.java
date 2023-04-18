@@ -75,6 +75,11 @@ public class HomeFragment extends Fragment {
         };
         Headphones headphones1 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.BLUE_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
         Headphones headphones2 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.GREEN_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
+        Headphones headphones3 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.BLACK_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
+        Headphones headphones4 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.YELLOW_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
+        Headphones headphones5 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.GRAY_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
+        Headphones headphones6 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.WHITE_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
+
     }
 
 }

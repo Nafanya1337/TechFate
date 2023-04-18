@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.shmakov.techfate.mytools.StringWorker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
@@ -92,7 +93,8 @@ public class Product implements Parcelable {
         img = in.readInt();
         images = in.createIntArray();
         amountOfWatches = in.readInt();
-        relatives = in.createTypedArrayList(Product.CREATOR);
+        relatives = in.readArrayList(Product.class.getClassLoader());
+        Log.d("mymy", "rel2 " + relatives);
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -186,6 +188,6 @@ public class Product implements Parcelable {
         dest.writeInt(img);
         dest.writeIntArray(images);
         dest.writeInt(amountOfWatches);
-        dest.writeTypedList(relatives);
+        dest.writeList(relatives);
     }
 }
