@@ -15,6 +15,7 @@ import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Headphones;
+import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.entities.inner.SmartPhone;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
 import com.shmakov.techfate.mytools.ColorManager;
@@ -73,12 +74,10 @@ public class HomeFragment extends Fragment {
             R.drawable.apple_airpods_2_pro_img2,
             R.drawable.apple_airpods_2_pro_img3
         };
-        Headphones headphones1 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.BLUE_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
-        Headphones headphones2 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.GREEN_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
-        Headphones headphones3 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.BLACK_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
-        Headphones headphones4 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.YELLOW_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
-        Headphones headphones5 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.GRAY_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
-        Headphones headphones6 = new Headphones("Apple", "AirPods Pro 2", 20000, ColorManager.WHITE_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, 30, 20, 20000, "Внутриканальные");
+
+        String[] specs = {"Внутриканальные"};
+
+        Product headphones1 = new Product(Category.HEADPHONES_NAME_CATEGORY, "Apple", "AirPods Pro 2", 20000, ColorManager.BLUE_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, specs, );
 
     }
 
