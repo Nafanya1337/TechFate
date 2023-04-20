@@ -110,6 +110,9 @@ public class Product implements Parcelable {
         return configuration_colors.keySet().toArray(new String[0]);
     }
 
+    public int[] getCurrentConfigurationAmount(String conf) {
+        return configuration_colors.get(conf);
+    }
 
     @Override
     public int describeContents() {

@@ -21,11 +21,11 @@ import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 public class ConfigurationFragment extends Fragment {
 
     public static final String CONF_KEY = "CONFIGURATIONS";
+    public static final String AMOUNT_KEY = "AMOUNT";
 
     private RecyclerView recyclerView;
     private String[] conf;
     private ConfigurationsAdapter configurationsAdapter;
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

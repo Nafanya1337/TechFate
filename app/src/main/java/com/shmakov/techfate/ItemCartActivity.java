@@ -1,6 +1,7 @@
 package com.shmakov.techfate;
 
 import static com.shmakov.techfate.fragments.globals.ColorsFragment.COLORS_ARRAY_TAG;
+import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.AMOUNT_KEY;
 import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.CONF_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,29 +10,35 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 import com.shmakov.techfate.adapters.ImageAdapter;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ColorsFragment;
 import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.mytools.StringWorker;
 
-public class ItemCartActivity extends AppCompatActivity {
+public class ItemCartActivity extends AppCompatActivity implements ConfigurationsAdapter.ChooseConf {
 
     public static final String PRODUCT_TAG = "PRODUCT";
 
     private Product current_product;
     private ViewPager imageSwitcher;
     private TextView category_product_name, item_name, product_cost;
+
+    ColorsFragment colorsFragment;
     private TableLayout specifications_container;
     private FrameLayout mini_reviews_container, stars_reviews_container, all_reviews_container, colors_item_container, configurations_item_container;
     private boolean headphones = false;
     private FragmentManager fragmentManager;
     private Bundle arr = new Bundle();
+
+    private String current_conf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,20 +59,11 @@ public class ItemCartActivity extends AppCompatActivity {
             makeInfoProduct();
         }
         colors_item_container = findViewById(R.id.colors_item_container);
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        String[] a = current_product.getColors();
-        arr.putStringArray(COLORS_ARRAY_TAG, a);
-        ColorsFragment colorsFragment = new ColorsFragment();
-        colorsFragment.setArguments(arr);
-        ft.replace(colors_item_container.getId(), colorsFragment).commit();
-
         configurations_item_container = findViewById(R.id.configurations_item_container);
-        a = current_product.getConfigurations();
-        arr.putStringArray(CONF_KEY, a);
-        ConfigurationFragment configurationFragment = new ConfigurationFragment();
-        configurationFragment.setArguments(arr);
-        ft = fragmentManager.beginTransaction();
-        ft.replace(configurations_item_container.getId(), configurationFragment).commit();
+
+        makeAllColors();
+        makeConfigurations();
+
     }
 
     public void closeItem(View view) {
@@ -90,5 +88,30 @@ public class ItemCartActivity extends AppCompatActivity {
     }
 
     public void makeSpec(Product product) {
+    }
+
+    public void makeAllColors(){
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        String[] a = current_product.getColors();
+        current_conf = a[0];
+        arr.putStringArray(COLORS_ARRAY_TAG, a);
+        colorsFragment = new ColorsFragment();
+        colorsFragment.setArguments(arr);
+        ft.replace(colors_item_container.getId(), colorsFragment).commit();
+    }
+
+    private void makeConfigurations() {
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ConfigurationFragment configurationFragment = new ConfigurationFragment();
+        String[] b = current_product.getConfigurations();
+        arr.putStringArray(CONF_KEY, b);
+        configurationFragment.setArguments(arr);
+        ft = fragmentManager.beginTransaction();
+        ft.replace(configurations_item_container.getId(), configurationFragment).commit();
+    }
+
+    @Override
+    public void updateColors(String conf_name) {
+        colorsFragment.updateColorsAvailable(current_product.getCurrentConfigurationAmount(conf_name));
     }
 }

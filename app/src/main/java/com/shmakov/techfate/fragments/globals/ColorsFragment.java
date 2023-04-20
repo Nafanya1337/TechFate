@@ -23,6 +23,7 @@ public class ColorsFragment extends Fragment {
 
     public static final String COLORS_ARRAY_TAG = "COLORS";
 
+    public int[] amount;
     private RecyclerView colors_container;
     private ColorAdapter colorAdapter;
     private ArrayList<String> colors = new ArrayList<>();
@@ -32,12 +33,25 @@ public class ColorsFragment extends Fragment {
         super.onAttach(context);
     }
 
+    public ColorsFragment(int[] amount){
+        this.amount = amount;
+    }
+
+    public ColorsFragment(){
+        this.amount = null;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle array = getArguments();
-        String[] temp = array.getStringArray(COLORS_ARRAY_TAG);
+        String[] temp = getArguments().getStringArray(COLORS_ARRAY_TAG);
         colors.addAll(Arrays.asList(temp));
+        if (amount == null) {
+            amount = new int[colors.size()];
+            for (int i = 0; i < amount.length; i++) {
+                amount[i] = 1;
+            }
+        }
     }
 
     @Override
@@ -51,7 +65,11 @@ public class ColorsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        colorAdapter = new ColorAdapter(getContext(), colors);
+        colorAdapter = new ColorAdapter(getContext(), colors, amount);
         colors_container.setAdapter(colorAdapter);
+    }
+
+    public void updateColorsAvailable(int[] available){
+        colorAdapter.updateAvailable(available);
     }
 }

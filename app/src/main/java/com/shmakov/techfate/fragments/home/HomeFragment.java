@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
 
         HashMap<String, int[]> specs_col = new HashMap<>();
         specs_col.put("8/128 Gb", new int[]{3, 2, 1, 9, 2});
-        specs_col.put("12/128 Gb", new int[]{3, 2, 1, 9, 2});
+        specs_col.put("12/128 Gb", new int[]{3, 0, 0, 9, 2});
 
         Product headphones1 = new Product(Category.HEADPHONES_NAME_CATEGORY, "Apple", "AirPods Pro 2", 20000, R.drawable.apple_airpods_2_pro_img1, imgs, colors, specs_col);
     }

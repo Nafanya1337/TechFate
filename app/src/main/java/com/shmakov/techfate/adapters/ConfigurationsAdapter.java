@@ -17,14 +17,21 @@ import java.util.logging.LogRecord;
 
 public class ConfigurationsAdapter extends RecyclerView.Adapter<ConfigurationsAdapter.MyViewHolder> {
 
-    private int selected = 0;
+    public int selected;
     protected String[] configurations;
+
     protected LayoutInflater inflater;
 
+    public interface ChooseConf {
+        public void updateColors(String conf_name);
+    }
+
+    private ChooseConf chooseConf;
 
     public ConfigurationsAdapter(Context context, String[] configurations) {
         inflater = LayoutInflater.from(context);
         this.configurations = configurations;
+        chooseConf = (ChooseConf) context;
     }
 
     @NonNull
@@ -45,6 +52,7 @@ public class ConfigurationsAdapter extends RecyclerView.Adapter<ConfigurationsAd
                     notifyItemChanged(selected);
                     notifyItemChanged(position);
                     selected = position;
+                    chooseConf.updateColors(configurations[position]);
                 }
             }
         });
