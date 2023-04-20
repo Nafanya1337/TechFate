@@ -111,10 +111,12 @@
             <FrameLayout
                 android:id="@+id/colors_item_container"
                 android:name="com.shmakov.techfate.ColorsFragment"
-                android:layout_width="170dp"
-                android:layout_height="45dp"
+                android:layout_width="match_parent"
                 android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/color_text"
                 tools:layout="@layout/fragment_colors" />
@@ -124,20 +126,23 @@
                 style="@style/hint_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="150dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Конфигурации"
                 android:textSize="15dp"
-                app:layout_constraintBottom_toBottomOf="@+id/color_text"
-                app:layout_constraintStart_toEndOf="@+id/color_text"
-                app:layout_constraintTop_toTopOf="@+id/color_text" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/colors_item_container" />
 
             <FrameLayout
                 android:id="@+id/configurations_item_container"
                 android:name="com.shmakov.techfate.ColorsFragment"
-                android:layout_width="170dp"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="@+id/configuration_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/configuration_text"
                 tools:layout="@layout/fragment_colors" />
 
@@ -146,12 +151,12 @@
                 style="@style/hint_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Характеристики"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/colors_item_container" />
+                app:layout_constraintTop_toBottomOf="@+id/configurations_item_container" />
 
             <TableLayout
                 android:id="@+id/specifications_container"
@@ -170,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:text="Отзывы покупателей"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +185,7 @@
                 android:id="@+id/stars_reviews_container"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="25dp"
                 app:layout_constraintEnd_toEndOf="parent"

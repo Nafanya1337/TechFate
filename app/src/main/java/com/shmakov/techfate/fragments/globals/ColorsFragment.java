@@ -37,10 +37,6 @@ public class ColorsFragment extends Fragment {
         this.amount = amount;
     }
 
-    public ColorsFragment(){
-        this.amount = null;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +65,9 @@ public class ColorsFragment extends Fragment {
         colors_container.setAdapter(colorAdapter);
     }
 
-    public void updateColorsAvailable(int[] available){
-        colorAdapter.updateAvailable(available);
+    public void updateColorsAvailable(int[] available,int position){
+        colorAdapter.updateAvailable(available, position);
     }
+
+    public int selectedColor(){return colorAdapter.getPicked();}
 }

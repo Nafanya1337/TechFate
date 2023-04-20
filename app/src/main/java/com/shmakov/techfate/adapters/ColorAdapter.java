@@ -1,17 +1,18 @@
 package com.shmakov.techfate.adapters;
 
+import static android.os.Looper.myLooper;
+
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,8 @@ import com.shmakov.techfate.R;
 import com.shmakov.techfate.mytools.ColorManager;
 
 import java.util.ArrayList;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder> {
 
@@ -36,49 +39,60 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
         this.amount = amount;
     }
 
-    public void updateAvailable(int[] available) {
-        amount = available;
-        picked = -1;
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_color, parent, false);
-        return new MyViewHolder(view);
+
+        MyViewHolder holder = new MyViewHolder(view);
+
+        holder.color_radiobutton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (picked != holder.position) {
+                        picked = holder.position;
+                        notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+
+        return holder;
+    }
+
+    public void updateAvailable(int[] available, int picked){
+        this.amount = available;
+        notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Log.d("ColorAdapter", "onBindViewHolder: position=" + position);
         GradientDrawable bgShape = (GradientDrawable)holder.color.getBackground();
         bgShape.setColor(ColorManager.nameColorToInt(colors.get(position)));
-        if (amount[position] <= 0) {
-            if (holder.color_img.isChecked())
-                holder.color_img.setChecked(false);
-            holder.color_img.setChecked(false);
-            holder.color_img.setClickable(false);
-            holder.color_img.setAlpha(0.3f);
+        holder.position = position;
+        if (this.amount[position]<=0) {
+            holder.color_radiobutton.setClickable(false);
+            holder.color_radiobutton.setAlpha(0.2f);
+            holder.color.setAlpha(0.4f);
         }
         else {
-            if (picked == -1) {
+            holder.color_radiobutton.setClickable(true);
+            holder.color_radiobutton.setAlpha(1f);
+            holder.color.setAlpha(1f);
+            if (picked == -1)
                 picked = position;
-            }
-            holder.color_img.setAlpha(1.0f);
-            //holder.color_img.setBackgroundColor(ColorManager.nameColorToInt(colors.get(position)));
-            holder.color_img.setClickable(true);
-            holder.color_img.setChecked(position == picked);
         }
-        holder.color_img.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    notifyItemChanged(picked);
-                    notifyItemChanged(position);
-                    picked = position;
-                }
-            }
-        });
+        holder.color_radiobutton.setChecked(picked != -1 && amount[picked] > 0 && position == picked);
+    }
+
+    public void setPicked(int picked) {
+        this.picked = picked;
+    }
+
+    public int getPicked() {
+        return picked;
     }
 
     @Override
@@ -87,12 +101,13 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private final RadioButton color_img;
+        private final RadioButton color_radiobutton;
         private final ImageView color;
+        private int position;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            color_img = itemView.findViewById(R.id.color_img);
+            color_radiobutton = itemView.findViewById(R.id.color_img);
             color = itemView.findViewById(R.id.color);
         }
     }

@@ -29,7 +29,7 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
 
     private Product current_product;
     private ViewPager imageSwitcher;
-    private TextView category_product_name, item_name, product_cost;
+    private TextView category_product_name, item_name, product_cost, configuration_text;
 
     ColorsFragment colorsFragment;
     private TableLayout specifications_container;
@@ -60,7 +60,7 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
         }
         colors_item_container = findViewById(R.id.colors_item_container);
         configurations_item_container = findViewById(R.id.configurations_item_container);
-
+        configuration_text = findViewById(R.id.configuration_text);
         makeAllColors();
         makeConfigurations();
 
@@ -95,23 +95,35 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
         String[] a = current_product.getColors();
         current_conf = a[0];
         arr.putStringArray(COLORS_ARRAY_TAG, a);
-        colorsFragment = new ColorsFragment();
+        String[] conf = current_product.getConfigurations();
+        int[] amount;
+        if (conf != null)
+            amount = current_product.getCurrentConfigurationAmount(conf[0]);
+        else
+            amount = current_product.getAmount();
+        colorsFragment = new ColorsFragment(amount);
         colorsFragment.setArguments(arr);
         ft.replace(colors_item_container.getId(), colorsFragment).commit();
     }
 
     private void makeConfigurations() {
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ConfigurationFragment configurationFragment = new ConfigurationFragment();
-        String[] b = current_product.getConfigurations();
-        arr.putStringArray(CONF_KEY, b);
-        configurationFragment.setArguments(arr);
-        ft = fragmentManager.beginTransaction();
-        ft.replace(configurations_item_container.getId(), configurationFragment).commit();
+        if (current_product.getConfigurations() != null) {
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ConfigurationFragment configurationFragment = new ConfigurationFragment();
+            String[] b = current_product.getConfigurations();
+            arr.putStringArray(CONF_KEY, b);
+            configurationFragment.setArguments(arr);
+            ft = fragmentManager.beginTransaction();
+            ft.replace(configurations_item_container.getId(), configurationFragment).commit();
+        }
+        else {
+            configuration_text.setVisibility(View.GONE);
+            configurations_item_container.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void updateColors(String conf_name) {
-        colorsFragment.updateColorsAvailable(current_product.getCurrentConfigurationAmount(conf_name));
+        colorsFragment.updateColorsAvailable(current_product.getCurrentConfigurationAmount(conf_name), colorsFragment.selectedColor());
     }
 }

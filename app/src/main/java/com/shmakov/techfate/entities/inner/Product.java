@@ -18,9 +18,9 @@ public class Product implements Parcelable {
     protected int cost;
     protected int img;
     protected int[] images = new int[1];
-
+    protected int[] amount = null;
     protected String[] colors;
-    protected HashMap<String, int[]> configuration_colors;
+    protected HashMap<String, int[]> configuration_colors = null;
     protected int amountOfWatches;
 
     public Product(String categoryProduct, String mark, String name, int cost,
@@ -43,6 +43,26 @@ public class Product implements Parcelable {
         global_id++;
     }
 
+    public Product(String categoryProduct, String mark, String name, int cost,
+                   int img, int[] imgs, String colors[], int[] amount) {
+        this.id = global_id;
+        this.categoryProduct = new Category(categoryProduct).getCategory();
+        this.mark = mark;
+        this.name = name;
+        this.cost = cost;
+        this.img = img;
+        if (imgs.length != 0)
+            this.images = imgs;
+        else
+            this.images[0] = img;
+        this.colors = colors;
+        this.amount = amount;
+        Random random = new Random();
+        this.amountOfWatches = random.nextInt(3000) + 1;
+        Category.addToArrayList(categoryProduct, this);
+        global_id++;
+    }
+
 
     protected Product(Parcel in) {
         id = in.readInt();
@@ -55,6 +75,7 @@ public class Product implements Parcelable {
         colors = in.createStringArray();
         amountOfWatches = in.readInt();
         configuration_colors = in.readHashMap(HashMap.class.getClassLoader());
+        amount = in.createIntArray();
         in.recycle();
     }
 
@@ -107,11 +128,17 @@ public class Product implements Parcelable {
     }
 
     public String[] getConfigurations() {
+        if (configuration_colors == null)
+            return null;
         return configuration_colors.keySet().toArray(new String[0]);
     }
 
     public int[] getCurrentConfigurationAmount(String conf) {
         return configuration_colors.get(conf);
+    }
+
+    public int[] getAmount() {
+        return amount;
     }
 
     @Override
@@ -131,5 +158,6 @@ public class Product implements Parcelable {
         dest.writeStringArray(colors);
         dest.writeInt(amountOfWatches);
         dest.writeMap(configuration_colors);
+        dest.writeIntArray(amount);
     }
 }
