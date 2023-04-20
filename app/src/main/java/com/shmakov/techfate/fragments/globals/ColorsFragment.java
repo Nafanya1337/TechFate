@@ -1,4 +1,4 @@
-package com.shmakov.techfate;
+package com.shmakov.techfate.fragments.globals;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.ColorAdapter;
 
 import java.util.ArrayList;

@@ -20,6 +20,8 @@ import com.shmakov.techfate.entities.inner.SmartPhone;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
 import com.shmakov.techfate.mytools.ColorManager;
 
+import java.util.HashMap;
+
 
 public class HomeFragment extends Fragment {
 
@@ -75,10 +77,15 @@ public class HomeFragment extends Fragment {
             R.drawable.apple_airpods_2_pro_img3
         };
 
-        String[] specs = {"Внутриканальные"};
+        String colors[] = {
+                "black", "white", "green", "blue", ColorManager.YELLOW_COLOR
+        };
 
-        Product headphones1 = new Product(Category.HEADPHONES_NAME_CATEGORY, "Apple", "AirPods Pro 2", 20000, ColorManager.BLUE_COLOR, R.drawable.apple_airpods_2_pro_img1, imgs, specs, );
+        HashMap<String, int[]> specs_col = new HashMap<>();
+        specs_col.put("8/128 Gb", new int[]{3, 2, 1, 9, 2});
+        specs_col.put("12/128 Gb", new int[]{3, 2, 1, 9, 2});
 
+        Product headphones1 = new Product(Category.HEADPHONES_NAME_CATEGORY, "Apple", "AirPods Pro 2", 20000, R.drawable.apple_airpods_2_pro_img1, imgs, colors, specs_col);
     }
 
 }

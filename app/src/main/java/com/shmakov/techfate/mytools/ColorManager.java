@@ -2,8 +2,6 @@ package com.shmakov.techfate.mytools;
 
 import android.graphics.Color;
 
-import com.shmakov.techfate.ColorsFragment;
-
 public class ColorManager {
 
     public static final String BLACK_COLOR = "black";

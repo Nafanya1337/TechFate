@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+
     private final ArrayList<String> categories;
     private final LayoutInflater inflater;
     private Context context;

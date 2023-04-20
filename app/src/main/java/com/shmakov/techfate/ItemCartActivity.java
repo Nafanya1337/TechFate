@@ -1,28 +1,24 @@
 package com.shmakov.techfate;
 
-import static com.shmakov.techfate.ColorsFragment.COLORS_ARRAY_TAG;
+import static com.shmakov.techfate.fragments.globals.ColorsFragment.COLORS_ARRAY_TAG;
+import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.CONF_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.shmakov.techfate.adapters.ImageAdapter;
 import com.shmakov.techfate.entities.inner.Product;
+import com.shmakov.techfate.fragments.globals.ColorsFragment;
+import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.mytools.StringWorker;
-
-import java.util.ArrayList;
 
 public class ItemCartActivity extends AppCompatActivity {
 
@@ -32,9 +28,10 @@ public class ItemCartActivity extends AppCompatActivity {
     private ViewPager imageSwitcher;
     private TextView category_product_name, item_name, product_cost;
     private TableLayout specifications_container;
-    private FrameLayout mini_reviews_container, stars_reviews_container, all_reviews_container, colors_item_container;
+    private FrameLayout mini_reviews_container, stars_reviews_container, all_reviews_container, colors_item_container, configurations_item_container;
     private boolean headphones = false;
     private FragmentManager fragmentManager;
+    private Bundle arr = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +53,19 @@ public class ItemCartActivity extends AppCompatActivity {
         }
         colors_item_container = findViewById(R.id.colors_item_container);
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        Bundle arr = new Bundle();
-        String[] a = current_product.getAllRelativeColors();
+        String[] a = current_product.getColors();
         arr.putStringArray(COLORS_ARRAY_TAG, a);
         ColorsFragment colorsFragment = new ColorsFragment();
         colorsFragment.setArguments(arr);
         ft.replace(colors_item_container.getId(), colorsFragment).commit();
+
+        configurations_item_container = findViewById(R.id.configurations_item_container);
+        a = current_product.getConfigurations();
+        arr.putStringArray(CONF_KEY, a);
+        ConfigurationFragment configurationFragment = new ConfigurationFragment();
+        configurationFragment.setArguments(arr);
+        ft = fragmentManager.beginTransaction();
+        ft.replace(configurations_item_container.getId(), configurationFragment).commit();
     }
 
     public void closeItem(View view) {

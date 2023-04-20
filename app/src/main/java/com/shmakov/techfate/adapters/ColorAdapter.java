@@ -41,8 +41,6 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         GradientDrawable bgShape = (GradientDrawable)holder.color_img.getBackground();
-        Log.d("mymy", "size " + colors.size());
-        Log.d("mymy", "color " + colors.get(position));
         bgShape.setColor(ColorManager.nameColorToInt(colors.get(position)));
     }
 
