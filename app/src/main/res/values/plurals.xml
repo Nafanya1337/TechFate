@@ -12,4 +12,10 @@
         <item quantity="many">Доступно: </item>
     </plurals>
 
+    <plurals name="reviews">
+        <item quantity="one">отзыв</item>
+        <item quantity="few">отзыва</item>
+        <item quantity="many">отзывов</item>
+    </plurals>
+
 </resources>

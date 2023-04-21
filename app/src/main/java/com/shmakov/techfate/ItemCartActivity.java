@@ -1,8 +1,12 @@
 package com.shmakov.techfate;
 
+import static android.view.Gravity.CENTER;
+import static com.shmakov.techfate.ReviewsFragment.REVIEWS_TAG;
 import static com.shmakov.techfate.fragments.globals.ColorsFragment.COLORS_ARRAY_TAG;
 import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.AMOUNT_KEY;
 import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.CONF_KEY;
+import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.AVG_RATING;
+import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.REVIEWS_AMOUNT;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -12,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -21,7 +26,10 @@ import com.shmakov.techfate.adapters.ImageAdapter;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ColorsFragment;
 import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
+import com.shmakov.techfate.fragments.globals.MiniReviewsFragment;
 import com.shmakov.techfate.mytools.StringWorker;
+
+import java.util.ArrayList;
 
 public class ItemCartActivity extends AppCompatActivity implements ConfigurationsAdapter.ChooseConf {
 
@@ -63,7 +71,31 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
         configuration_text = findViewById(R.id.configuration_text);
         makeAllColors();
         makeConfigurations();
+        makeReviews();
+        makeAllReviews();
+        makeStarsReviews();
+    }
 
+    public void makeStarsReviews() {
+        if (current_product == null) return;
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putFloat(AVG_RATING, current_product.getAvgReviewsRating());
+        bundle.putInt(REVIEWS_AMOUNT, current_product.getReviewsAmount());
+        MiniReviewsFragment miniReviewsFragment = new MiniReviewsFragment();
+        miniReviewsFragment.setArguments(bundle);
+        ft.replace(stars_reviews_container.getId(), miniReviewsFragment).commit();
+    }
+
+    public void makeAllReviews() {
+        if (current_product.getReviewsAmount() != 0) {
+            ReviewsFragment reviewsFragment = new ReviewsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(REVIEWS_TAG, current_product.getReviews());
+            reviewsFragment.setArguments(bundle);
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.replace(all_reviews_container.getId(), reviewsFragment).commit();
+        }
     }
 
     public void closeItem(View view) {
@@ -72,6 +104,17 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
 
     public void addToCart(View view) {
 
+    }
+
+    public void makeReviews() {
+        if (current_product == null) return;
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putFloat(AVG_RATING, current_product.getAvgReviewsRating());
+        bundle.putInt(REVIEWS_AMOUNT, current_product.getReviewsAmount());
+        MiniReviewsFragment miniReviewsFragment = new MiniReviewsFragment();
+        miniReviewsFragment.setArguments(bundle);
+        ft.replace(mini_reviews_container.getId(), miniReviewsFragment).commit();
     }
 
     public void makeInfoProduct() {

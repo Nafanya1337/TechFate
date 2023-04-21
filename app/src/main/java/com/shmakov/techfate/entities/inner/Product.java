@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.shmakov.techfate.entities.Review;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -22,6 +25,25 @@ public class Product implements Parcelable {
     protected String[] colors;
     protected HashMap<String, int[]> configuration_colors = null;
     protected int amountOfWatches;
+    protected ArrayList<Review> reviews = new ArrayList<>();
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+    public Product(String categoryProduct, String mark, String name, int cost,
+                   int img, int[] imgs, String colors[], HashMap<String, int[]> configuration_colors,
+                   ArrayList<Review> reviews) {
+        this(categoryProduct,
+                mark,
+                name,
+                cost,
+                img,
+                imgs,
+                colors,
+                configuration_colors);
+        this.reviews = reviews;
+    }
 
     public Product(String categoryProduct, String mark, String name, int cost,
                    int img, int[] imgs, String colors[], HashMap<String, int[]> configuration_colors) {
@@ -63,7 +85,6 @@ public class Product implements Parcelable {
         global_id++;
     }
 
-
     protected Product(Parcel in) {
         id = in.readInt();
         categoryProduct = in.readString();
@@ -72,11 +93,11 @@ public class Product implements Parcelable {
         cost = in.readInt();
         img = in.readInt();
         images = in.createIntArray();
+        amount = in.createIntArray();
         colors = in.createStringArray();
         amountOfWatches = in.readInt();
+        reviews = in.createTypedArrayList(Review.CREATOR);
         configuration_colors = in.readHashMap(HashMap.class.getClassLoader());
-        amount = in.createIntArray();
-        in.recycle();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -90,6 +111,22 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
+
+    public int getReviewsAmount() {
+        return reviews.size();
+    }
+
+    public float getAvgReviewsRating() {
+        float sum = 0;
+        for ( Review review : reviews ) {
+            sum += review.getRating();
+        }
+        return reviews.size() > 0 ? sum / reviews.size() : 0f;
+    }
+
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
 
     public int getCost() {
         return cost;
@@ -155,9 +192,10 @@ public class Product implements Parcelable {
         dest.writeInt(cost);
         dest.writeInt(img);
         dest.writeIntArray(images);
+        dest.writeIntArray(amount);
         dest.writeStringArray(colors);
         dest.writeInt(amountOfWatches);
+        dest.writeTypedList(reviews);
         dest.writeMap(configuration_colors);
-        dest.writeIntArray(amount);
     }
 }

@@ -78,7 +78,7 @@
                 style="@style/mini_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:maxLength="30"
                 android:maxLines="1"
@@ -124,6 +124,7 @@
             <TextView
                 android:id="@+id/configuration_text"
                 style="@style/hint_text"
+                android:gravity="left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -184,7 +185,7 @@
             <FrameLayout
                 android:id="@+id/stars_reviews_container"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="25dp"
@@ -195,10 +196,10 @@
             <FrameLayout
                 android:id="@+id/all_reviews_container"
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
-                android:layout_marginLeft="25dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/stars_reviews_container" />

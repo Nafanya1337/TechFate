@@ -38,3 +38,10 @@ public void makeSpec(Product product) {
             specifications_container.addView(name_spec);
         }
     }
+
+
+
+
+
+
+

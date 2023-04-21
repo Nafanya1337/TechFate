@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
+import com.shmakov.techfate.entities.Review;
+import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Headphones;
 import com.shmakov.techfate.entities.inner.Product;
@@ -88,6 +90,7 @@ public class HomeFragment extends Fragment {
         Product headphones1 = new Product(Category.HEADPHONES_NAME_CATEGORY, "Apple", "AirPods Pro 2", 20000, R.drawable.apple_airpods_2_pro_img1, imgs, colors, new int[]{1});
         Product smartphone = new Product(Category.SMARTPHONE_NAME_CATEGORY, "Apple", "iPhone 13 Pro Max", 120000, R.drawable.smartphones_img, new int[]{}, new String[]{"white", "black"}, specs_col);
 
+        smartphone.addReview(new Review(new User("Nikolay", "dwdwa", 915086), "norm", "18/09/20", 4.5f));
     }
 
 }
