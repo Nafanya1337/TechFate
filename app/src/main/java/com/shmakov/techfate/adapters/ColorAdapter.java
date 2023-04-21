@@ -9,12 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.dynamicanimation.animation.FlingAnimation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shmakov.techfate.R;
@@ -28,7 +31,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
 
     private int picked = -1;
     private ArrayList<String> colors;
-
+    private Context context;
     private LayoutInflater inflater;
 
     private int[] amount;
@@ -36,6 +39,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
     public ColorAdapter(Context context, ArrayList<String> colors, int[] amount) {
         this.colors = colors;
         inflater = LayoutInflater.from(context);
+        this.context = context;
         this.amount = amount;
     }
 
@@ -73,6 +77,10 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
         bgShape.setColor(ColorManager.nameColorToInt(colors.get(position)));
         holder.position = position;
         if (this.amount[position]<=0) {
+            if (holder.color_radiobutton.isChecked()){
+                Animation fadeOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+                holder.color_radiobutton.startAnimation(fadeOut);
+            }
             holder.color_radiobutton.setClickable(false);
             holder.color_radiobutton.setAlpha(0.2f);
             holder.color.setAlpha(0.4f);
