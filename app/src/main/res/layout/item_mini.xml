@@ -24,11 +24,12 @@
         <TableRow>
             <ImageView
                 android:id="@+id/mini_item_img"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="80dp"
+                android:layout_height="110dp"
                 android:layout_gravity="center"
                 tools:srcCompat="@tools:sample/avatars"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:scaleType="centerInside"/>
         </TableRow>
 
         <TableRow>
@@ -65,8 +66,21 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="11dp"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/ic_fire"
         android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/mini_star"
+        android:layout_width="wrap_content"
+        android:maxLength="3"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="30dp"
+        android:text="5.2"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_gravity="end"
+        android:drawableRight="@drawable/ic_star"/>
 
 </FrameLayout>

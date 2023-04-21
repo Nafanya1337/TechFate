@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
         specs_col.put("8/128 Gb", new int[]{1, 3});
         specs_col.put("12/128 Gb", new int[]{0, 5});
 
-        Product headphones1 = new Product(Category.HEADPHONES_NAME_CATEGORY, "Apple", "AirPods Pro 2", 20000, R.drawable.apple_airpods_2_pro_img1, imgs, colors, new int[]{1});
+        Product headphones1 = new Product(Category.HEADPHONES_NAME_CATEGORY, "Apple", "AirPods Pro 2", 20000, R.drawable.headphones_2, imgs, colors, new int[]{1});
         Product smartphone = new Product(Category.SMARTPHONE_NAME_CATEGORY, "Apple", "iPhone 13 Pro Max", 120000, R.drawable.smartphones_img, new int[]{}, new String[]{"white", "black"}, specs_col);
 
         smartphone.addReview(new Review(new User("Nikolay", "dwdwa", 915086),
@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment {
 
         smartphone.addReview(new Review(new User("Данек", "dwdwa", 915086),
                 "Разочарован",
-                "18/09/20", 1.5f));
+                "18/09/20", 4.5f));
 
         smartphone.addReview(new Review(new User("Иван", "dwdwa", 915086),
                 "Продавец Мегафон. Покупку отправили сразу после оплаты. Телефон новый, неактивированный, оригинальный. Все проверки прошёл)) Доставили даже раньше заявленного срока. Упаковка отличная, пломбы на месте.\n" +
@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
                         "Телефон прекрасен. С андроида все данные перенеслись. Все нужнын мне приложения установила. Да, нет приложений банков. Это не очень удобно. Но можно пользоваться версией сайтов для мобильных устройств, настроить вход по код-паролю (это лучше, чем каждый раз ждать код на телефон).\n" +
                         "\n" +
                         "Камера отличная, настроек много. Огромное поле для творчества))",
-                "18/09/20", 3.12345f));
+                "18/09/20", 3.5f));
 
         smartphone.addReview(new Review(new User("Иван", "dwdwa", 915086),
                 "Продавец Мегафон. Покупку отправили сразу после оплаты. Телефон новый, неактивированный, оригинальный. Все проверки прошёл)) Доставили даже раньше заявленного срока. Упаковка отличная, пломбы на месте.\n" +
@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment {
                         "Телефон прекрасен. С андроида все данные перенеслись. Все нужнын мне приложения установила. Да, нет приложений банков. Это не очень удобно. Но можно пользоваться версией сайтов для мобильных устройств, настроить вход по код-паролю (это лучше, чем каждый раз ждать код на телефон).\n" +
                         "\n" +
                         "Камера отличная, настроек много. Огромное поле для творчества))",
-                "18/09/20", 4.2f));
+                "18/09/20", 4.0f));
 
         smartphone.addReview(new Review(new User("Иван", "dwdwa", 915086),
                 "Продавец Мегафон. Покупку отправили сразу после оплаты. Телефон новый, неактивированный, оригинальный. Все проверки прошёл)) Доставили даже раньше заявленного срока. Упаковка отличная, пломбы на месте.\n" +
@@ -119,11 +119,15 @@ public class HomeFragment extends Fragment {
                         "Телефон прекрасен. С андроида все данные перенеслись. Все нужнын мне приложения установила. Да, нет приложений банков. Это не очень удобно. Но можно пользоваться версией сайтов для мобильных устройств, настроить вход по код-паролю (это лучше, чем каждый раз ждать код на телефон).\n" +
                         "\n" +
                         "Камера отличная, настроек много. Огромное поле для творчества))",
-                "18/09/20", 1.3f));
+                "18/09/20", 4.5f));
 
         smartphone.addReview(new Review(new User("Иван", "dwdwa", 915086),
                 "Понравился",
                 "18/09/20", 5.0f));
+
+
+        Product headphones2 = new Product(Category.SMARTPHONE_NAME_CATEGORY, "Skullcandy", "Hesh2", 8000, R.drawable.headphones_1, new int[]{}, new String[]{"blue", "black"}, new int[]{1, 0});
+
 
     }
 

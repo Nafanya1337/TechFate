@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.shmakov.techfate.entities.Review;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -122,7 +123,11 @@ public class Product implements Parcelable {
         for ( Review review : reviews ) {
             sum += review.getRating();
         }
-        return reviews.size() > 0 ? sum / reviews.size() : 0f;
+        if (sum == 0) return 0f;
+        sum = sum / reviews.size();
+        sum = sum * 10;
+        sum = Math.round(sum);
+        return sum / 10;
     }
 
     public void addReview(Review review) {

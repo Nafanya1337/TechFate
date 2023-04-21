@@ -18,7 +18,7 @@ import com.shmakov.techfate.mytools.StringWorker;
 public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
     private Product[] products;
-    private TextView name, price;
+    private TextView name, price, stars;
     private ImageView img, fire;
 
     public interface onClickProduct {
@@ -42,6 +42,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         name = convertView.findViewById(R.id.mini_item_name);
         price = convertView.findViewById(R.id.mini_item_price);
         img = convertView.findViewById(R.id.mini_item_img);
+        stars = convertView.findViewById(R.id.mini_star);
+
+        stars.setText(String.valueOf(products[position].getAvgReviewsRating()));
 
         StringBuilder mark_and_name = new StringBuilder(products[position].getMark() + " " + products[position].getName());
         if (mark_and_name.length() >= 32) {
