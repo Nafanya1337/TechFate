@@ -29,11 +29,11 @@
 
     <RatingBar
         android:id="@+id/full_review_bar"
-        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:isIndicator="true"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toBottomOf="@id/reviewer_name" />
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="tetesggsgsef"
-            android:textSize="20dp"/>
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/show_full_review_button"
