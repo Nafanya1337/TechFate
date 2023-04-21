@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -43,8 +45,25 @@ public class FullReviewAdapter extends RecyclerView.Adapter<FullReviewAdapter.My
         holder.avatar.setImageResource(user.getImg());
         holder.reviewer_name.setText(user.getName());
         holder.date.setText(review.getDate());
-        holder.review_text.setText(review.getText());
+        String txt = review.getText();
+        if (txt.length() > 200) {
+            txt = txt.substring(0, 200);
+            Button showFullReviewButton = holder.itemView.findViewById(R.id.show_full_review_button);
+            showFullReviewButton.setVisibility(View.VISIBLE);
+            showFullReviewButton.setOnClickListener(v -> {
+                if (showFullReviewButton.getText() == "Показать полный комментарий") {
+                    holder.review_text.setText(review.getText());
+                    showFullReviewButton.setText("Скрыть комментарий");
+                }
+                else {
+                    holder.review_text.setText(review.getText().substring(0, 200));
+                    showFullReviewButton.setText("Показать полный комментарий");
+                }
+            });
+        }
+        holder.review_text.setText(txt);
         holder.ratingBar.setRating(review.getRating());
+
     }
 
     @Override

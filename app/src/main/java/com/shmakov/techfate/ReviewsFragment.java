@@ -36,6 +36,7 @@ public class ReviewsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reviews, container, false);
         reviews_recycler = view.findViewById(R.id.reviews_recycler);
+        reviews_recycler.setNestedScrollingEnabled(false);
         return view;
     }
 
