@@ -98,6 +98,7 @@ public class Product implements Parcelable {
         amountOfWatches = in.readInt();
         reviews = in.createTypedArrayList(Review.CREATOR);
         configuration_colors = in.readHashMap(HashMap.class.getClassLoader());
+        in.recycle();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -197,5 +198,9 @@ public class Product implements Parcelable {
         dest.writeInt(amountOfWatches);
         dest.writeTypedList(reviews);
         dest.writeMap(configuration_colors);
+    }
+
+    public void addWatch() {
+        this.amountOfWatches++;
     }
 }

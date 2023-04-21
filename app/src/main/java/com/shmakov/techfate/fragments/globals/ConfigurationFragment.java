@@ -23,6 +23,10 @@ public class ConfigurationFragment extends Fragment {
     public static final String CONF_KEY = "CONFIGURATIONS";
     public static final String AMOUNT_KEY = "AMOUNT";
 
+    public String getConfiguration() {
+        return conf[configurationsAdapter.selected];
+    }
+
     private RecyclerView recyclerView;
     private String[] conf;
     private ConfigurationsAdapter configurationsAdapter;

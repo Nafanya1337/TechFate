@@ -65,7 +65,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             }
         });
 
-        if (position <= 5) {
+        if (products[position].getAmountOfWatches() > 1000) {
             fire = convertView.findViewById(R.id.fire);
             fire.setVisibility(View.VISIBLE);
         }

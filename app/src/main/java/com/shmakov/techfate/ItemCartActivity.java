@@ -1,26 +1,29 @@
 package com.shmakov.techfate;
 
-import static android.view.Gravity.CENTER;
+
 import static com.shmakov.techfate.ReviewsFragment.REVIEWS_TAG;
 import static com.shmakov.techfate.fragments.globals.ColorsFragment.COLORS_ARRAY_TAG;
-import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.AMOUNT_KEY;
 import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.CONF_KEY;
 import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.AVG_RATING;
 import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.REVIEWS_AMOUNT;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TableLayout;
-import android.widget.TextView;
-
+import com.shmakov.techfate.adapters.ColorAdapter;
 import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 import com.shmakov.techfate.adapters.ImageAdapter;
 import com.shmakov.techfate.entities.inner.Product;
@@ -29,15 +32,16 @@ import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.fragments.globals.MiniReviewsFragment;
 import com.shmakov.techfate.mytools.StringWorker;
 
-import java.util.ArrayList;
-
-public class ItemCartActivity extends AppCompatActivity implements ConfigurationsAdapter.ChooseConf {
+public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.pickAColor, ConfigurationsAdapter.ChooseConf {
 
     public static final String PRODUCT_TAG = "PRODUCT";
 
+    private Button addToCartButton;
+
+    private ConfigurationFragment configurationFragment;
     private Product current_product;
     private ViewPager imageSwitcher;
-    private TextView category_product_name, item_name, product_cost, configuration_text;
+    private TextView category_product_name, item_name, product_cost, configuration_text, text_amount_views;
 
     ColorsFragment colorsFragment;
     private TableLayout specifications_container;
@@ -69,11 +73,36 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
         colors_item_container = findViewById(R.id.colors_item_container);
         configurations_item_container = findViewById(R.id.configurations_item_container);
         configuration_text = findViewById(R.id.configuration_text);
+        text_amount_views = findViewById(R.id.text_amount_views);
+        text_amount_views.setText(current_product.getAmountOfWatches() + " за день");
+        addToCartButton = findViewById(R.id.addToCartButton);
         makeAllColors();
         makeConfigurations();
         makeReviews();
         makeAllReviews();
         makeStarsReviews();
+        current_product.addWatch();
+    }
+
+    public void checkForAdding(int pos){
+        String conf = configurationFragment.getConfiguration();
+        Log.d("mymy", "pos / conf " + pos + " / " + conf);
+        if (current_product.getCurrentConfigurationAmount(conf)[pos] <= 0) {
+            Log.d("mymy", "!");
+            addToCartButton.setClickable(false);
+            Animation go_down = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+            addToCartButton.setAnimation(go_down);
+            addToCartButton.setVisibility(View.GONE);
+        }
+        else {
+            if (addToCartButton.getVisibility() == View.GONE) {
+                addToCartButton.setClickable(true);
+                Animation go_down = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
+                addToCartButton.setText("Добавить товар в корзину");
+                addToCartButton.setAnimation(go_down);
+                addToCartButton.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     public void makeStarsReviews() {
@@ -103,7 +132,7 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
     }
 
     public void addToCart(View view) {
-
+        Toast.makeText(this, "Товар добавлен в корзину!", Toast.LENGTH_SHORT).show();
     }
 
     public void makeReviews() {
@@ -152,7 +181,7 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
     private void makeConfigurations() {
         if (current_product.getConfigurations() != null) {
             FragmentTransaction ft = fragmentManager.beginTransaction();
-            ConfigurationFragment configurationFragment = new ConfigurationFragment();
+            configurationFragment = new ConfigurationFragment();
             String[] b = current_product.getConfigurations();
             arr.putStringArray(CONF_KEY, b);
             configurationFragment.setArguments(arr);
@@ -165,8 +194,21 @@ public class ItemCartActivity extends AppCompatActivity implements Configuration
         }
     }
 
+
     @Override
-    public void updateColors(String conf_name) {
-        colorsFragment.updateColorsAvailable(current_product.getCurrentConfigurationAmount(conf_name), colorsFragment.selectedColor());
+    protected void onDestroy() {
+        super.onDestroy();
+        current_product = null;
+    }
+
+    @Override
+    public void pickAColor(int position) {
+        checkForAdding(position);
+    }
+
+    @Override
+    public void updateColors(String conf) {
+        colorsFragment.updateColorsAvailable(current_product.getCurrentConfigurationAmount(conf), colorsFragment.selectedColor());
+        checkForAdding(colorsFragment.selectedColor());
     }
 }

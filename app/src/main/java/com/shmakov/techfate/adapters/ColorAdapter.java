@@ -29,6 +29,10 @@ import java.util.logging.LogRecord;
 
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder> {
 
+    public interface pickAColor{
+        public void pickAColor(int position);
+    }
+
     private int picked = -1;
     private ArrayList<String> colors;
     private Context context;
@@ -36,11 +40,14 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
 
     private int[] amount;
 
+    private pickAColor pickAColor;
+
     public ColorAdapter(Context context, ArrayList<String> colors, int[] amount) {
         this.colors = colors;
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.amount = amount;
+        pickAColor = (ColorAdapter.pickAColor) context;
     }
 
     @NonNull
@@ -57,6 +64,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
                     if (picked != holder.position) {
                         picked = holder.position;
                         notifyDataSetChanged();
+                        pickAColor.pickAColor(holder.position);
                     }
                 }
             }

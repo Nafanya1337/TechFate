@@ -23,6 +23,8 @@ public class ColorsFragment extends Fragment {
 
     public static final String COLORS_ARRAY_TAG = "COLORS";
 
+    private int picked = 0;
+
     public int[] amount;
     private RecyclerView colors_container;
     private ColorAdapter colorAdapter;
@@ -70,4 +72,5 @@ public class ColorsFragment extends Fragment {
     }
 
     public int selectedColor(){return colorAdapter.getPicked();}
+
 }

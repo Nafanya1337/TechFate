@@ -56,8 +56,10 @@
                 style="@style/regular_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="5dp"
+                android:maxWidth="325dp"
+                android:maxLines="3"
                 android:text="Название товара"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/category_product_name" />
@@ -68,8 +70,6 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_name" />
 
@@ -78,12 +78,13 @@
                 style="@style/mini_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:maxLength="30"
                 android:maxLines="1"
                 android:text="10.000 Р"
                 android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.06"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mini_reviews_container" />
 
@@ -91,7 +92,7 @@
                 android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/line"
                 app:layout_constraintTop_toBottomOf="@id/product_cost" />
@@ -112,10 +113,10 @@
                 android:id="@+id/colors_item_container"
                 android:name="com.shmakov.techfate.ColorsFragment"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:layout_height="45dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/color_text"
@@ -124,11 +125,11 @@
             <TextView
                 android:id="@+id/configuration_text"
                 style="@style/hint_text"
-                android:gravity="left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
+                android:gravity="left"
                 android:text="Конфигурации"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,8 +141,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/configuration_text"
@@ -186,12 +187,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:orientation="vertical"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="25dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/abc">
 
                 <FrameLayout
@@ -208,12 +209,28 @@
                     app:layout_constraintTop_toBottomOf="@id/stars_reviews_container" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_amount_views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:drawableLeft="@drawable/ic_eye"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="30 за день"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/item_name"
+                app:layout_constraintStart_toEndOf="@+id/item_name"
+                app:layout_constraintTop_toTopOf="@+id/item_name"
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
     </LinearLayout>
 
     <Button
+        android:id="@+id/addToCartButton"
         android:onClick="addToCart"
         android:layout_width="match_parent"
         android:layout_height="55dp"
