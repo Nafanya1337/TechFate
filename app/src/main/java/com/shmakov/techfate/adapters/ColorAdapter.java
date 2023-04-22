@@ -80,7 +80,6 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Log.d("ColorAdapter", "onBindViewHolder: position=" + position);
         GradientDrawable bgShape = (GradientDrawable)holder.color.getBackground();
         bgShape.setColor(ColorManager.nameColorToInt(colors.get(position)));
         holder.position = position;
@@ -97,8 +96,10 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
             holder.color_radiobutton.setClickable(true);
             holder.color_radiobutton.setAlpha(1f);
             holder.color.setAlpha(1f);
-            if (picked == -1)
+            if (picked == -1) {
                 picked = position;
+                pickAColor.pickAColor(holder.position);
+            }
         }
         holder.color_radiobutton.setChecked(picked != -1 && amount[picked] > 0 && position == picked);
     }

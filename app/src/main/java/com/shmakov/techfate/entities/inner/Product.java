@@ -86,6 +86,22 @@ public class Product implements Parcelable {
         global_id++;
     }
 
+
+    public Product(Product product) {
+        this.id = product.id;
+        this.categoryProduct = product.categoryProduct;
+        this.mark = product.mark;
+        this.name = product.name;
+        this.cost = product.cost;
+        this.img = product.img;
+        this.images = product.images;
+        this.amount = product.amount;
+        this.colors = product.colors;
+        this.amountOfWatches = product.amountOfWatches;
+        this.reviews = product.reviews;
+        this.configuration_colors = product.configuration_colors;
+    }
+
     protected Product(Parcel in) {
         id = in.readInt();
         categoryProduct = in.readString();
@@ -99,7 +115,6 @@ public class Product implements Parcelable {
         amountOfWatches = in.readInt();
         reviews = in.createTypedArrayList(Review.CREATOR);
         configuration_colors = in.readHashMap(HashMap.class.getClassLoader());
-        in.recycle();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {

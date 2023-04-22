@@ -23,8 +23,6 @@ public class ColorsFragment extends Fragment {
 
     public static final String COLORS_ARRAY_TAG = "COLORS";
 
-    private int picked = 0;
-
     public int[] amount;
     private RecyclerView colors_container;
     private ColorAdapter colorAdapter;
@@ -42,6 +40,7 @@ public class ColorsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("mymy", "onCreate() colFrag");
         String[] temp = getArguments().getStringArray(COLORS_ARRAY_TAG);
         colors.addAll(Arrays.asList(temp));
         if (amount == null) {
@@ -50,27 +49,36 @@ public class ColorsFragment extends Fragment {
                 amount[i] = 1;
             }
         }
+        colorAdapter = new ColorAdapter(getContext(), colors, amount);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("mymy", "onCreateView() colFrag");
         View view = inflater.inflate(R.layout.fragment_colors, container, false);
         colors_container = view.findViewById(R.id.colors_container);
         return view;
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("mymy", "onResumme() colFrag");
+        colors_container.setAdapter(colorAdapter);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        colorAdapter = new ColorAdapter(getContext(), colors, amount);
-        colors_container.setAdapter(colorAdapter);
+        Log.d("mymy", "onViewCreated colFrag");
     }
 
     public void updateColorsAvailable(int[] available,int position){
         colorAdapter.updateAvailable(available, position);
     }
 
-    public int selectedColor(){return colorAdapter.getPicked();}
+    public int selectedColor(){
+        return colorAdapter.getPicked();}
 
 }

@@ -67,18 +67,21 @@ public class ItemsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gridView = view.findViewById(R.id.products_grid);
-        if (type.equals(MAKE_POPULAR_ITEMS))
-            makePopularGridView();
-        else
+        if (!type.equals(MAKE_POPULAR_ITEMS))
             makeCurrentItems();
         gridView.setAdapter(productAdapter);
         gridView.setFriction(0.1f);
     }
 
-    public void makePopularGridView() {
-        all = Category.getAllProducts().toArray(new Product[0]);
+    public void notifyAboutChanges(){
+        all = Category.getPopularProducts().toArray(new Product[0]);
         makeSort();
-        productAdapter = new ProductAdapter(getContext(), all);
+        productAdapter= new ProductAdapter(getContext(), all);
+        gridView.setAdapter(productAdapter);
+        gridView.setFriction(0.1f);
+    }
+
+    public void makePopularGridView() {
     }
 
     private void makeCurrentItems(){

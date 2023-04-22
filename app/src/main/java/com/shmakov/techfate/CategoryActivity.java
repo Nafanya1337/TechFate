@@ -1,5 +1,11 @@
 package com.shmakov.techfate;
 
+import static com.shmakov.techfate.ItemCartActivity.PRODUCT_TAG;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Cart;
@@ -32,15 +39,12 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     private CategoryHeaderFragment header;
     private ItemsFragment itemsFragment;
     private String tittle;
-    private Cart cart = new Cart();
     private Spinner spinner;
     private TextView category_amount, category_available;
     private FragmentAdapterUpdater fragmentAdapterUpdater;
 
     public static final String CATEGORY_TAG = "CATEGORY_TAG";
     public static final String CATEGORY_IMG_TAG = "CATEGORY_IMG_TAG";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +106,31 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     @Override
     public void onClickProduct(View view, Product product) {
         Intent intent = new Intent(this, ItemCartActivity.class);
-        intent.putExtra(Product.class.getSimpleName(), product);
-        startActivity(intent);
+        product.addWatch();
+        intent.putExtra(PRODUCT_TAG, product);
+        activityResultLauncher.launch(intent);
+    }
+
+    ArrayList<Product> products_in_cart = new ArrayList<Product>();
+
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        Product product = new Product(data.getParcelableExtra(PRODUCT_TAG));
+                        products_in_cart.add(product);
+                    }
+                }
+            });
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent main_data = new Intent();
+        main_data.putParcelableArrayListExtra(PRODUCT_TAG, products_in_cart);
+        setResult(RESULT_OK, main_data);
     }
 }

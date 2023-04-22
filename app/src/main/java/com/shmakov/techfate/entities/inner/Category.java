@@ -61,6 +61,18 @@ public class Category {
         return all;
     }
 
+    public static ArrayList<Product> getPopularProducts() {
+        ArrayList<Product> popular = new ArrayList<>();
+        for (int i=0; i<Categories_names.length; i++) {
+            ArrayList<Product> categoryList = categories.get(Categories_names[i]);
+            for (Product temp: categoryList) {
+                if (temp.getAmountOfWatches() > 1000)
+                    popular.add(temp);
+            }
+        }
+        return popular;
+    }
+
     public void setCategory(String category) {
         this.category = category;
     }

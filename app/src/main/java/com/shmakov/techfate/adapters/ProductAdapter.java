@@ -17,15 +17,25 @@ import com.shmakov.techfate.mytools.StringWorker;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
-    private Product[] products;
+    private Product[] products = new Product[0];
     private TextView name, price, stars;
     private ImageView img, fire;
+
+    public void setProducts(Product[] products) {
+        this.products = products;
+    }
 
     public interface onClickProduct {
         public void onClickProduct(View view, Product product);
     }
 
     private onClickProduct onClickProduct;
+
+    public ProductAdapter(@NonNull Context context) {
+        super(context, R.layout.item_mini);
+        this.context = context;
+        onClickProduct = (ProductAdapter.onClickProduct) context;
+    }
 
     public ProductAdapter(@NonNull Context context, Product[] products) {
         super(context, R.layout.item_mini, products);

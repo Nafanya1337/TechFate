@@ -7,7 +7,13 @@ import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.CONF_
 import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.AVG_RATING;
 import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.REVIEWS_AMOUNT;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -18,6 +24,8 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -30,6 +38,7 @@ import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ColorsFragment;
 import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.fragments.globals.MiniReviewsFragment;
+import com.shmakov.techfate.mytools.ColorManager;
 import com.shmakov.techfate.mytools.StringWorker;
 
 public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.pickAColor, ConfigurationsAdapter.ChooseConf {
@@ -67,7 +76,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         stars_reviews_container = findViewById(R.id.stars_reviews_container);
         all_reviews_container = findViewById(R.id.all_reviews_container);
         if (arguments != null) {
-            current_product = arguments.getParcelable(Product.class.getSimpleName());
+            current_product = arguments.getParcelable(PRODUCT_TAG);
             makeInfoProduct();
         }
         colors_item_container = findViewById(R.id.colors_item_container);
@@ -81,25 +90,34 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         makeReviews();
         makeAllReviews();
         makeStarsReviews();
-        current_product.addWatch();
+        checkForAdding(-1);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("mymy", "onStart() itemact");
+    }
+
+
     public void checkForAdding(int pos){
-        String conf = configurationFragment.getConfiguration();
-        Log.d("mymy", "pos / conf " + pos + " / " + conf);
-        if (current_product.getCurrentConfigurationAmount(conf)[pos] <= 0) {
-            Log.d("mymy", "!");
+        if (pos == -1) {
             addToCartButton.setClickable(false);
             Animation go_down = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
             addToCartButton.setAnimation(go_down);
             addToCartButton.setVisibility(View.GONE);
+            return;
         }
-        else {
+        if (configurationFragment != null && current_product.getCurrentConfigurationAmount(configurationFragment.getConfiguration())[pos] <= 0) {
+            addToCartButton.setClickable(false);
+            Animation go_down = AnimationUtils.loadAnimation(this, R.anim.slide_down);
+            addToCartButton.setAnimation(go_down);
+            addToCartButton.setVisibility(View.GONE);
+        } else {
             if (addToCartButton.getVisibility() == View.GONE) {
                 addToCartButton.setClickable(true);
-                Animation go_down = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
-                addToCartButton.setText("Добавить товар в корзину");
-                addToCartButton.setAnimation(go_down);
+                Animation go_up = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+                addToCartButton.setAnimation(go_up);
                 addToCartButton.setVisibility(View.VISIBLE);
             }
         }
@@ -132,7 +150,21 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     }
 
     public void addToCart(View view) {
-        Toast.makeText(this, "Товар добавлен в корзину!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Товар добавлен в корзину!", Toast.LENGTH_SHORT).show();
+        Button btn = ((Button)view);
+        if (btn.getText().equals("Добавить в корзину")) {
+            Intent data = new Intent();
+            data.putExtra(PRODUCT_TAG, current_product);
+            setResult(RESULT_OK, data);
+            btn.setText("Удалить из корзины");
+            btn.setBackgroundColor(Color.parseColor("#ff4d4d"));
+        }
+        else {
+            setResult(RESULT_CANCELED);
+            btn.setText("Добавить в корзину");
+            btn.setBackgroundColor(Color.parseColor("#FFDB47"));
+        }
+
     }
 
     public void makeReviews() {
@@ -198,7 +230,6 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        current_product = null;
     }
 
     @Override
