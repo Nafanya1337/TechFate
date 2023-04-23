@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.shmakov.techfate.adapters.FullReviewAdapter;
 import com.shmakov.techfate.entities.Review;
+import com.shmakov.techfate.entities.inner.Product;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,8 @@ public class ReviewsFragment extends Fragment {
     private FullReviewAdapter fullReviewAdapter;
     private ArrayList<Review> reviews;
     private RecyclerView reviews_recycler;
+
+    private Button btn_showMore;
 
     private ProgressBar progress_1, progress_2, progress_3, progress_4, progress_5;
 
@@ -70,6 +74,9 @@ public class ReviewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reviews, container, false);
         reviews_recycler = view.findViewById(R.id.reviews_recycler);
         reviews_recycler.setNestedScrollingEnabled(false);
+        btn_showMore = view.findViewById(R.id.btn_showMore);
+        if (reviews.size() <= 3)
+            btn_showMore.setVisibility(View.GONE);
         progress_1 = view.findViewById(R.id.progress_1);
         progress_2 = view.findViewById(R.id.progress_2);
         progress_3 = view.findViewById(R.id.progress_3);
@@ -85,6 +92,11 @@ public class ReviewsFragment extends Fragment {
         progress_3.setProgress(makePercent(3));
         progress_4.setProgress(makePercent(4));
         progress_5.setProgress(makePercent(5));
+        registerForContextMenu(progress_1);
+        registerForContextMenu(progress_2);
+        registerForContextMenu(progress_3);
+        registerForContextMenu(progress_4);
+        registerForContextMenu(progress_5);
         percent_1.setText(String.valueOf(makePercent(1)) + "%");
         percent_2.setText(String.valueOf(makePercent(2)) + "%");
         percent_3.setText(String.valueOf(makePercent(3)) + "%");
@@ -108,5 +120,11 @@ public class ReviewsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         fullReviewAdapter = new FullReviewAdapter(getContext(), new ArrayList<Review>(reviews.subList(0, last_index)));
         reviews_recycler.setAdapter(fullReviewAdapter);
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
     }
 }

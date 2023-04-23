@@ -1,5 +1,6 @@
 package com.shmakov.techfate.adapters;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         if (products[position].getAmountOfWatches() > 1000) {
             fire = convertView.findViewById(R.id.fire);
             fire.setVisibility(View.VISIBLE);
+        }
+        else {
+            fire = convertView.findViewById(R.id.fire);
+            fire.setVisibility(View.GONE);
         }
         return convertView;
     }

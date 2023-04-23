@@ -6,6 +6,7 @@ import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
 
 public class FragmentAdapterUpdater implements AdapterView.OnItemSelectedListener{
@@ -23,6 +24,8 @@ public class FragmentAdapterUpdater implements AdapterView.OnItemSelectedListene
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         fragment.setSortType(position);
+        Product[] products = fragment.getAll();
+        fragment.getProductAdapter().setProducts(fragment.getAll());
         fragment.getProductAdapter().notifyDataSetChanged();
         ft.replace(container, fragment);
     }

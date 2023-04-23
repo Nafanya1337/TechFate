@@ -16,19 +16,18 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.shmakov.techfate.R;
+import com.shmakov.techfate.fragments.globals.ItemsFragment;
 
 public class SearchFragment extends Fragment {
 
     private EditText search_bar;
     private FrameLayout search_container;
     private HistorySearchFragment historySearchFragment;
-    private CurrentSearchFragment currentSearchFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         historySearchFragment = new HistorySearchFragment();
-        currentSearchFragment = new CurrentSearchFragment();
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
@@ -45,11 +44,12 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                changeFragment(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                changeFragment(s.toString());
+
             }
         });
     }
@@ -58,7 +58,6 @@ public class SearchFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         historySearchFragment = null;
-        currentSearchFragment = null;
     }
 
     private void changeFragment(String search_text) {
@@ -68,7 +67,8 @@ public class SearchFragment extends Fragment {
             ft.replace(search_container.getId(), historySearchFragment).commit();
         }
         else {
-            ft.replace(search_container.getId(), currentSearchFragment).commit();
+            ItemsFragment itemsFragment = new ItemsFragment(search_text);
+            ft.replace(search_container.getId(), itemsFragment).commit();
         }
     }
 }

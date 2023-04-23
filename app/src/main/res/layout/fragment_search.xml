@@ -20,7 +20,7 @@
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="32"
+            android:maxWidth="70dp"
             android:maxLines="1"
             android:inputType="textAutoCorrect"
             android:background="@drawable/searchbar_bg"
