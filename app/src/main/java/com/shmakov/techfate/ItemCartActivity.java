@@ -27,14 +27,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.shmakov.techfate.adapters.ColorAdapter;
 import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 import com.shmakov.techfate.adapters.ImageAdapter;
-import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ColorsFragment;
 import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.fragments.globals.MiniReviewsFragment;
 import com.shmakov.techfate.mytools.StringWorker;
 
-import java.util.ArrayList;
 
 public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.pickAColor, ConfigurationsAdapter.ChooseConf {
 
@@ -42,7 +40,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
 
     private Button addToCartButton;
 
-    private ReviewsFragment reviewsFragment;
+    private com.shmakov.techfate.ReviewsFragment reviewsFragment;
 
     private ConfigurationFragment configurationFragment;
     private Product current_product;
@@ -132,7 +130,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     }
 
     public void makeAllReviews() {
-        reviewsFragment = new ReviewsFragment();
+        reviewsFragment = new com.shmakov.techfate.ReviewsFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(REVIEWS_TAG, current_product.getReviews());
         reviewsFragment.setArguments(bundle);
@@ -145,7 +143,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     }
 
     public void showMore(View view){
-        reviewsFragment.showMore();
+        reviewsFragment.showMore(view);
     }
 
     public void addToCart(View view) {

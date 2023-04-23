@@ -1,9 +1,11 @@
 package com.shmakov.techfate.adapters;
 
 import android.content.Context;
+import android.icu.util.Freezable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.animation.AnimationUtils;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.User;
@@ -30,6 +33,10 @@ public class FullReviewAdapter extends RecyclerView.Adapter<FullReviewAdapter.My
     }
 
     public void addNewReviews(ArrayList<Review> reviews){
+        this.reviews.addAll(reviews);
+    }
+
+    public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
     }
 
@@ -48,16 +55,16 @@ public class FullReviewAdapter extends RecyclerView.Adapter<FullReviewAdapter.My
         holder.reviewer_name.setText(user.getName());
         String txt = review.getText();
         if (txt.length() > 200) {
-            txt = txt.substring(0, 200) + "...";
             Button showFullReviewButton = holder.itemView.findViewById(R.id.show_full_review_button);
+            txt = txt.substring(0, 200) + "...";
             showFullReviewButton.setVisibility(View.VISIBLE);
             showFullReviewButton.setOnClickListener(v -> {
-                if (showFullReviewButton.getText() == "Показать полный комментарий") {
+                if (showFullReviewButton.getText().equals("Показать полный комментарий")) {
                     holder.review_text.setText(review.getText());
                     showFullReviewButton.setText("Скрыть комментарий");
                 }
                 else {
-                    holder.review_text.setText(review.getText().substring(0, 200));
+                    holder.review_text.setText(review.getText().substring(0, 200) + "...");
                     showFullReviewButton.setText("Показать полный комментарий");
                 }
             });

@@ -5,12 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,13 +27,6 @@ public class ReviewsFragment extends Fragment {
 
     private int last_index = 3;
 
-    public void showMore(){
-        last_index += Math.min(reviews.size(), 3);
-        fullReviewAdapter = new FullReviewAdapter(getContext(), new ArrayList<Review>(reviews.subList(0, last_index)));
-        fullReviewAdapter.addNewReviews(new ArrayList<Review>(reviews.subList(0, last_index)));
-        fullReviewAdapter.notifyDataSetChanged();
-    }
-
     public static final String REVIEWS_TAG = "REVIEWS";
 
     private FullReviewAdapter fullReviewAdapter;
@@ -41,12 +37,31 @@ public class ReviewsFragment extends Fragment {
 
     private TextView percent_1, percent_2, percent_3, percent_4, percent_5;
 
+    public void showMore(View view) {
+        if (((Button) view).getText().equals("Показать больше")) {
+            fullReviewAdapter.addNewReviews(new ArrayList<Review>(reviews.subList(last_index, last_index + Math.min(reviews.size() - last_index, 3))));
+            last_index += Math.min(reviews.size() - last_index, 3);
+            fullReviewAdapter.notifyDataSetChanged();
+            if (last_index == reviews.size()) {
+                ((Button) view).setText("Скрыть комментарии");
+            }
+            reviews_recycler.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT * last_index));
+        }
+        else {
+            ((Button) view).setText("Показать больше");
+            last_index = Math.min(reviews.size(), 3);
+            fullReviewAdapter.setReviews(new ArrayList<Review>(reviews.subList(0, last_index )));
+            fullReviewAdapter.notifyDataSetChanged();
+            reviews_recycler.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        }
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         reviews = getArguments().getParcelableArrayList(REVIEWS_TAG);
         last_index = Math.min(reviews.size(), 3);
-        reviews = new ArrayList<Review>(reviews.subList(0, last_index));
     }
 
     @Override
@@ -91,7 +106,7 @@ public class ReviewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fullReviewAdapter = new FullReviewAdapter(getContext(), reviews);
+        fullReviewAdapter = new FullReviewAdapter(getContext(), new ArrayList<Review>(reviews.subList(0, last_index)));
         reviews_recycler.setAdapter(fullReviewAdapter);
     }
 }

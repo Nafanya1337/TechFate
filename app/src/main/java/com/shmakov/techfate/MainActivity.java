@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                         "Камера отличная, настроек много. Огромное поле для творчества))",
                 "18/09/20", 3.5f));
 
-        smartphone.addReview(new Review(new User("Иван", "dwdwa", 915086),
+        smartphone.addReview(new Review(new User("ANV", "dwdwa", 915086),
                 "Продавец Мегафон. Покупку отправили сразу после оплаты. Телефон новый, неактивированный, оригинальный. Все проверки прошёл)) Доставили даже раньше заявленного срока. Упаковка отличная, пломбы на месте.\n" +
                         "\n" +
                         "Телефон прекрасен. С андроида все данные перенеслись. Все нужнын мне приложения установила. Да, нет приложений банков. Это не очень удобно. Но можно пользоваться версией сайтов для мобильных устройств, настроить вход по код-паролю (это лучше, чем каждый раз ждать код на телефон).\n" +
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                         "Камера отличная, настроек много. Огромное поле для творчества))",
                 "18/09/20", 4.0f));
 
-        smartphone.addReview(new Review(new User("Иван", "dwdwa", 915086),
+        smartphone.addReview(new Review(new User("Jorj", "dwdwa", 915086),
                 "Продавец Мегафон. Покупку отправили сразу после оплаты. Телефон новый, неактивированный, оригинальный. Все проверки прошёл)) Доставили даже раньше заявленного срока. Упаковка отличная, пломбы на месте.\n" +
                         "\n" +
                         "Телефон прекрасен. С андроида все данные перенеслись. Все нужнын мне приложения установила. Да, нет приложений банков. Это не очень удобно. Но можно пользоваться версией сайтов для мобильных устройств, настроить вход по код-паролю (это лучше, чем каждый раз ждать код на телефон).\n" +
@@ -96,8 +96,28 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                         "Камера отличная, настроек много. Огромное поле для творчества))",
                 "18/09/20", 4.5f));
 
-        smartphone.addReview(new Review(new User("Иван", "dwdwa", 915086),
-                "Понравился",
+        smartphone.addReview(new Review(new User("Minecraft", "dwdwa", 915086),
+                "",
+                "18/09/20", 5.0f));
+
+        smartphone.addReview(new Review(new User("Minecraft", "dwdwa", 915086),
+                "",
+                "18/09/20", 5.0f));
+
+        smartphone.addReview(new Review(new User("Minecraft", "dwdwa", 915086),
+                "",
+                "18/09/20", 5.0f));
+
+        smartphone.addReview(new Review(new User("Minecraft", "dwdwa", 915086),
+                "",
+                "18/09/20", 5.0f));
+
+        smartphone.addReview(new Review(new User("Minecraft", "dwdwa", 915086),
+                "",
+                "18/09/20", 5.0f));
+
+        smartphone.addReview(new Review(new User("Minecraft", "dwdwa", 915086),
+                "",
                 "18/09/20", 5.0f));
 
 
