@@ -245,6 +245,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <Button
+        android:id="@+id/btn_showMore"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom|center"
