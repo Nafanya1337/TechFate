@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.shmakov.techfate.adapters.FullReviewAdapter;
 import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.inner.Product;
+import com.shmakov.techfate.mytools.ProgressBarAnimation;
 
 import java.util.ArrayList;
 
@@ -87,11 +88,7 @@ public class ReviewsFragment extends Fragment {
         percent_3 = view.findViewById(R.id.percent_3);
         percent_4 = view.findViewById(R.id.percent_4);
         percent_5 = view.findViewById(R.id.percent_5);
-        progress_1.setProgress(makePercent(1));
-        progress_2.setProgress(makePercent(2));
-        progress_3.setProgress(makePercent(3));
-        progress_4.setProgress(makePercent(4));
-        progress_5.setProgress(makePercent(5));
+
         registerForContextMenu(progress_1);
         registerForContextMenu(progress_2);
         registerForContextMenu(progress_3);
@@ -103,6 +100,26 @@ public class ReviewsFragment extends Fragment {
         percent_4.setText(String.valueOf(makePercent(4)) + "%");
         percent_5.setText(String.valueOf(makePercent(5)) + "%");
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ProgressBarAnimation anim = new ProgressBarAnimation(progress_1, 0, makePercent(1));
+        anim.setDuration(500);
+        progress_1.startAnimation(anim);
+        anim = new ProgressBarAnimation(progress_2, 0, makePercent(2));
+        anim.setDuration(500);
+        progress_2.startAnimation(anim);
+        anim = new ProgressBarAnimation(progress_3, 0, makePercent(3));
+        anim.setDuration(500);
+        progress_3.startAnimation(anim);
+        anim = new ProgressBarAnimation(progress_4, 0, makePercent(4));
+        anim.setDuration(500);
+        progress_4.startAnimation(anim);
+        anim = new ProgressBarAnimation(progress_5, 0, makePercent(5));
+        anim.setDuration(500);
+        progress_5.startAnimation(anim);
     }
 
     public int makePercent(int i){
