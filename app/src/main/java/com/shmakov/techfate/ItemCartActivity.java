@@ -7,13 +7,9 @@ import static com.shmakov.techfate.fragments.globals.ConfigurationFragment.CONF_
 import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.AVG_RATING;
 import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.REVIEWS_AMOUNT;
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -22,10 +18,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -34,18 +27,22 @@ import androidx.viewpager.widget.ViewPager;
 import com.shmakov.techfate.adapters.ColorAdapter;
 import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 import com.shmakov.techfate.adapters.ImageAdapter;
+import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ColorsFragment;
 import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.fragments.globals.MiniReviewsFragment;
-import com.shmakov.techfate.mytools.ColorManager;
 import com.shmakov.techfate.mytools.StringWorker;
+
+import java.util.ArrayList;
 
 public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.pickAColor, ConfigurationsAdapter.ChooseConf {
 
     public static final String PRODUCT_TAG = "PRODUCT";
 
     private Button addToCartButton;
+
+    private ReviewsFragment reviewsFragment;
 
     private ConfigurationFragment configurationFragment;
     private Product current_product;
@@ -124,29 +121,31 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     }
 
     public void makeStarsReviews() {
-        if (current_product == null) return;
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        Bundle bundle = new Bundle();
-        bundle.putFloat(AVG_RATING, current_product.getAvgReviewsRating());
-        bundle.putInt(REVIEWS_AMOUNT, current_product.getReviewsAmount());
-        MiniReviewsFragment miniReviewsFragment = new MiniReviewsFragment();
-        miniReviewsFragment.setArguments(bundle);
-        ft.replace(stars_reviews_container.getId(), miniReviewsFragment).commit();
+//        if (current_product == null) return;
+//        FragmentTransaction ft = fragmentManager.beginTransaction();
+//        Bundle bundle = new Bundle();
+//        bundle.putFloat(AVG_RATING, current_product.getAvgReviewsRating());
+//        bundle.putInt(REVIEWS_AMOUNT, current_product.getReviewsAmount());
+//        MiniReviewsFragment miniReviewsFragment = new MiniReviewsFragment();
+//        miniReviewsFragment.setArguments(bundle);
+//        ft.replace(stars_reviews_container.getId(), miniReviewsFragment).commit();
     }
 
     public void makeAllReviews() {
-        if (current_product.getReviewsAmount() != 0) {
-            ReviewsFragment reviewsFragment = new ReviewsFragment();
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(REVIEWS_TAG, current_product.getReviews());
-            reviewsFragment.setArguments(bundle);
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            ft.replace(all_reviews_container.getId(), reviewsFragment).commit();
-        }
+        reviewsFragment = new ReviewsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(REVIEWS_TAG, current_product.getReviews());
+        reviewsFragment.setArguments(bundle);
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(all_reviews_container.getId(), reviewsFragment).commit();
     }
 
     public void closeItem(View view) {
         finish();
+    }
+
+    public void showMore(View view){
+        reviewsFragment.showMore();
     }
 
     public void addToCart(View view) {

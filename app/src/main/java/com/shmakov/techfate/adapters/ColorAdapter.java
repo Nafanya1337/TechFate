@@ -90,7 +90,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
             }
             holder.color_radiobutton.setClickable(false);
             holder.color_radiobutton.setAlpha(0.2f);
-            holder.color.setAlpha(0.4f);
+            holder.color.setAlpha(0.05f);
         }
         else {
             holder.color_radiobutton.setClickable(true);

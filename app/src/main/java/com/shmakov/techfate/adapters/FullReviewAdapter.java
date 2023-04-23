@@ -23,12 +23,15 @@ public class FullReviewAdapter extends RecyclerView.Adapter<FullReviewAdapter.My
     private ArrayList<Review> reviews;
     private LayoutInflater inflater;
 
+
     public FullReviewAdapter(Context context, ArrayList<Review> reviews) {
         inflater = LayoutInflater.from(context);
         this.reviews = reviews;
     }
 
-
+    public void addNewReviews(ArrayList<Review> reviews){
+        this.reviews = reviews;
+    }
 
     @NonNull
     @Override
