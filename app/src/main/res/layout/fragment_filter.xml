@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             style="@style/Widget.MaterialComponents.Slider"
+
             />
 
         <LinearLayout
@@ -80,8 +81,26 @@
                 android:hint="100000"
                 android:gravity="center"/>
 
+
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Цвет"
+            style="@style/regular_text"
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="left"/>
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/frag1"
+            android:name="com.shmakov.techfate.ColorCheckboxFragment"
+            tools:layout="@layout/fragment_color_checkbox"
+            android:layout_marginHorizontal="25dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
     </ScrollView>

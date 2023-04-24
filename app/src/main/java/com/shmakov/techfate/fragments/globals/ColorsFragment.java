@@ -40,7 +40,6 @@ public class ColorsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("mymy", "onCreate() colFrag");
         String[] temp = getArguments().getStringArray(COLORS_ARRAY_TAG);
         colors.addAll(Arrays.asList(temp));
         if (amount == null) {
@@ -55,7 +54,6 @@ public class ColorsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("mymy", "onCreateView() colFrag");
         View view = inflater.inflate(R.layout.fragment_colors, container, false);
         colors_container = view.findViewById(R.id.colors_container);
         return view;
@@ -64,14 +62,12 @@ public class ColorsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("mymy", "onResumme() colFrag");
         colors_container.setAdapter(colorAdapter);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("mymy", "onViewCreated colFrag");
     }
 
     public void updateColorsAvailable(int[] available,int position){

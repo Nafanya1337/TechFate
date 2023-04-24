@@ -24,13 +24,10 @@ public class FragmentAdapterUpdater implements AdapterView.OnItemSelectedListene
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         fragment.setSortType(position);
-        Product[] products = fragment.getAll();
-        fragment.setAll(fragment.getAll());
-        ft.replace(container, fragment).commit();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        fragment.setSortType(0);
     }
 }

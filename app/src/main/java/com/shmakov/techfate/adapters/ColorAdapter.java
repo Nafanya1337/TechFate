@@ -117,7 +117,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
         return colors.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    protected class MyViewHolder extends RecyclerView.ViewHolder {
         private final RadioButton color_radiobutton;
         private final ImageView color;
         private int position;

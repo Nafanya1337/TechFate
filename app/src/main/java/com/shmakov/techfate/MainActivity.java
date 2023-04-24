@@ -29,6 +29,7 @@ import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.home.HomeFragment;
+import com.shmakov.techfate.mytools.ColorManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -138,6 +139,18 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                 "",
                 "18/09/20", 4.5f));
 
+
+        HashMap<String, int[]> specs_xiomi = new HashMap<>();
+        specs_xiomi.put("6/128 Gb", new int[]{0, 0, 0, 4, 0});
+        specs_xiomi.put("8/128 Gb", new int[]{0, 0, 0, 0, 0});
+        specs_xiomi.put("8/256 Gb", new int[]{0, 0, 0, 0 , 5});
+        Product xiaomi = new Product(Category.SMARTPHONE_NAME_CATEGORY, "Xiaomi", "11 Lite 5G NE", 29900, R.drawable.xiomi_front, new int[]{}, new String[]{"blue", "black", "white", ColorManager.GRAY_COLOR, ColorManager.GREEN_COLOR}, specs_xiomi);
+        xiaomi.addReview(new Review(new User("Ivan", "dwdwa", 915086),
+                "",
+                "18/09/20", 3.0f));
+        xiaomi.addReview(new Review(new User("Fedor", "dwdwa", 915086),
+                "",
+                "18/09/20", 2.5f));
 
 
     }

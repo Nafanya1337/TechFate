@@ -54,6 +54,8 @@ public class ItemsFragment extends Fragment {
     public void setSortType(int sortType) {
         this.sortType = sortType;
         makeSort();
+        productAdapter.setProducts(all);
+        productAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -78,6 +80,7 @@ public class ItemsFragment extends Fragment {
 
 
     public void setAll(Product[] all) {
+        this.all = all;
         productAdapter.setProducts(all);
     }
 
@@ -89,8 +92,9 @@ public class ItemsFragment extends Fragment {
             case 1:
                Arrays.sort(all, new MyComparator.CostMaxToMin());
                 break;
-            case 2:
+            case 3:
                 Arrays.sort(all, new MyComparator.SortByRating());
+                break;
             default:
                 Arrays.sort(all, new MyComparator.AmountOfWatches());
                 break;
