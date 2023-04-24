@@ -42,9 +42,12 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createProducts();
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
-        createProducts();
+        menu = findViewById(R.id.nav_menu);
+        navController = Navigation.findNavController(this, R.id.nav_fragment);
+        NavigationUI.setupWithNavController(menu, navController);
     }
 
     private void createProducts(){
@@ -124,15 +127,25 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
         new Product(Category.HEADPHONES_NAME_CATEGORY, "Skullcandy", "Hesh2", 8000, R.drawable.headphones_1, new int[]{}, new String[]{"blue", "black"}, new int[]{1, 0});
         new Product(Category.HEADPHONES_NAME_CATEGORY, "Skullcandy", "Hesh3", 10000, R.drawable.headphones_1, new int[]{}, new String[]{"blue", "black"}, new int[]{0, 0});
 
+        HashMap<String, int[]> specs_realme = new HashMap<>();
+        specs_realme.put("6/128 Gb", new int[]{1, 3});
+        specs_realme.put("8/128 Gb", new int[]{0, 0});
+        Product realme = new Product(Category.SMARTPHONE_NAME_CATEGORY, "Realme", "9 Pro 5G", 18000, R.drawable.realme_9_pro, new int[]{}, new String[]{"blue", "black"}, specs_realme);
+        realme.addReview(new Review(new User("Ivan", "dwdwa", 915086),
+                "",
+                "18/09/20", 5.0f));
+        realme.addReview(new Review(new User("Fedor", "dwdwa", 915086),
+                "",
+                "18/09/20", 4.5f));
+
+
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        menu = findViewById(R.id.nav_menu);
-        navController = Navigation.findNavController(this, R.id.nav_fragment);
-        NavigationUI.setupWithNavController(menu, navController);
+
     }
 
     @Override

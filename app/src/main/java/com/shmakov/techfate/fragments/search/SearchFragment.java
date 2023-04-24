@@ -9,20 +9,33 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.shmakov.techfate.R;
+import com.shmakov.techfate.entities.inner.Category;
+import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
+import com.shmakov.techfate.mytools.StringWorker;
 
 public class SearchFragment extends Fragment {
 
     private EditText search_bar;
     private FrameLayout search_container;
     private HistorySearchFragment historySearchFragment;
+
+    ItemsFragment itemsFragment;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        itemsFragment = new ItemsFragment(getContext(), new Product[0]);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,8 +80,45 @@ public class SearchFragment extends Fragment {
             ft.replace(search_container.getId(), historySearchFragment).commit();
         }
         else {
-            ItemsFragment itemsFragment = new ItemsFragment(search_text);
-            ft.replace(search_container.getId(), itemsFragment).commit();
+            if (itemsFragment.getAll().length == 0)
+                ft.replace(search_container.getId(), itemsFragment).commit();
+            Product[] products = Category.getAllProducts()
+                    .stream()
+                    .filter(product ->
+                            product.getMark().toUpperCase().contains(search_text.toUpperCase())
+                                    | product.getName().toUpperCase().contains(search_text.toUpperCase())
+                                    | StringWorker.makeProductName(product.getMark(), product.getName()).toUpperCase().contains(search_text.toUpperCase())
+                    )
+                    .toArray(Product[]::new);
+            if (search_text.equals("Realme 9")) {
+                Log.d("mymy", "321312");
+            }
+            itemsFragment.setAll(products);
         }
+    }
+
+    private Product[] searchEngine(String search_text) {
+        Product[] products = Category.getAllProducts()
+                .stream()
+                .filter(product ->searchWords(product, search_text)
+                )
+                .toArray(Product[]::new);
+
+
+        return products;
+    }
+
+
+    private boolean searchWords(Product product, String text){
+        String[] searchWords = text.toUpperCase().split("\\s+");
+        Log.d("mymy", "slova  " + searchWords.toString());
+        for (String searchWord : searchWords) {
+            if (product.getMark().toUpperCase().contains(searchWord) ||
+                    product.getName().toUpperCase().contains(searchWord) ||
+                    StringWorker.makeProductName(product.getMark(), product.getName()).toUpperCase().contains(searchWord)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

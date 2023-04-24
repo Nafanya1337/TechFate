@@ -25,9 +25,8 @@ public class FragmentAdapterUpdater implements AdapterView.OnItemSelectedListene
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         fragment.setSortType(position);
         Product[] products = fragment.getAll();
-        fragment.getProductAdapter().setProducts(fragment.getAll());
-        fragment.getProductAdapter().notifyDataSetChanged();
-        ft.replace(container, fragment);
+        fragment.setAll(fragment.getAll());
+        ft.replace(container, fragment).commit();
     }
 
     @Override

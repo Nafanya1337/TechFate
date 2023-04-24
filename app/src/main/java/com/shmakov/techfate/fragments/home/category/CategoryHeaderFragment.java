@@ -30,7 +30,12 @@ public class CategoryHeaderFragment extends Fragment {
         public void goBack(View view);
     }
 
+    public interface openFilters {
+        public void openFilters(View view);
+    }
+
     goBack goBack;
+    openFilters openFilters;
 
     public void setCategoryTittle(String categoryTittle) {
         this.categoryTittleName = categoryTittle;
@@ -44,6 +49,7 @@ public class CategoryHeaderFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.goBack = (CategoryHeaderFragment.goBack) context;
+        this.openFilters = (openFilters) context;
     }
 
     @Override
@@ -68,5 +74,9 @@ public class CategoryHeaderFragment extends Fragment {
         });
         categoryTittle.setText(this.categoryTittleName);
         categoryBackground.setImageResource(this.categoryBackgroundImage);
+    }
+
+    public void onClickFilters(View view) {
+        openFilters.openFilters(view);
     }
 }

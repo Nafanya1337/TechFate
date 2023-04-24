@@ -39,4 +39,16 @@
         <item name="android:minHeight">23dip</item>
         <item name="android:maxHeight">25dip</item>
     </style>
+
+
+    <style name="FilterStyle"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_corners</item>
+    </style>
+
 </resources>

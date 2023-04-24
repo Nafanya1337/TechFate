@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.shmakov.techfate.adapters.ColorAdapter;
 import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 import com.shmakov.techfate.adapters.ImageAdapter;
@@ -216,13 +218,11 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
             configurationFragment.setArguments(arr);
             ft = fragmentManager.beginTransaction();
             ft.replace(configurations_item_container.getId(), configurationFragment).commit();
-        }
-        else {
+        } else {
             configuration_text.setVisibility(View.GONE);
             configurations_item_container.setVisibility(View.GONE);
         }
     }
-
 
     @Override
     protected void onDestroy() {

@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import com.shmakov.techfate.MainActivity;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 import com.shmakov.techfate.entities.Review;
@@ -38,7 +40,9 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
+        popular_items_container = view.findViewById(R.id.popular_items_container);
+        return view;
     }
 
 
@@ -55,17 +59,14 @@ public class HomeFragment extends Fragment {
         RecyclerView categories_list = view.findViewById(R.id.categories_list);
 
         Category.init();
+        Log.d("mymy", "Context = " + getContext());
 
         categoryAdapter = new CategoryAdapter(getContext(), Category.getCategoriesNamesAsArrayList());
 
         categories_list.setAdapter(categoryAdapter);
 
-        popular_items_container = view.findViewById(R.id.popular_items_container);
-
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        itemsFragment = new ItemsFragment(ItemsFragment.MAKE_POPULAR_ITEMS);
-        ft.replace(popular_items_container.getId(), itemsFragment);
-        ft.commit();
+        Product[] populars = Category.getPopularProducts().toArray(new Product[0]);
+        itemsFragment = new ItemsFragment(getContext(), populars);
     }
 
     @Override
@@ -76,7 +77,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        itemsFragment.notifyAboutChanges();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(popular_items_container.getId(), itemsFragment).commit();
     }
 
     @Override

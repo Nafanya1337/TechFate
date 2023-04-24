@@ -15,15 +15,20 @@ import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.mytools.StringWorker;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
-    private Product[] products = new Product[0];
+    private ArrayList<Product> products = new ArrayList<>();
     private TextView name, price, stars;
     private ImageView img, fire;
 
     public void setProducts(Product[] products) {
-        this.products = products;
+        this.products.clear();
+        this.products.addAll(Arrays.asList(products));
+        notifyDataSetChanged();
     }
 
     public interface onClickProduct {
@@ -41,7 +46,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public ProductAdapter(@NonNull Context context, Product[] products) {
         super(context, R.layout.item_mini, products);
         this.context = context;
-        this.products = products;
+        this.products.addAll(Arrays.asList(products));
         onClickProduct = (ProductAdapter.onClickProduct) context;
     }
 
@@ -50,14 +55,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null)
             convertView = LayoutInflater.from(context).inflate(R.layout.item_mini, parent, false);
+        Log.d("mymy", "Лог продукт адаптера " + products + "   " + position + "   " + products.get(position));
         name = convertView.findViewById(R.id.mini_item_name);
         price = convertView.findViewById(R.id.mini_item_price);
         img = convertView.findViewById(R.id.mini_item_img);
         stars = convertView.findViewById(R.id.mini_star);
 
-        stars.setText(String.valueOf(products[position].getAvgReviewsRating()));
+        stars.setText(String.valueOf(products.get(position).getAvgReviewsRating()));
 
-        StringBuilder mark_and_name = new StringBuilder(products[position].getMark() + " " + products[position].getName());
+        StringBuilder mark_and_name = new StringBuilder(products.get(position).getMark() + " " + products.get(position).getName());
         if (mark_and_name.length() >= 32) {
             int i = mark_and_name.lastIndexOf(" ", 25);
             if (i == -1)
@@ -66,20 +72,20 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             mark_and_name.append("...");
         }
         name.setText(mark_and_name);
-        String price_string = StringWorker.makePriceString(products[position].getCost());
+        String price_string = StringWorker.makePriceString(products.get(position).getCost());
         price.setText(price_string);
-        img.setImageResource(products[position].getImg());
+        img.setImageResource(products.get(position).getImg());
         Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
         convertView.setAnimation(animation);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickProduct.onClickProduct(v, products[position]);
+                onClickProduct.onClickProduct(v, products.get(position));
             }
         });
 
-        if (products[position].getAmountOfWatches() > 1000) {
+        if (products.get(position).getAmountOfWatches() > 1000) {
             fire = convertView.findViewById(R.id.fire);
             fire.setVisibility(View.VISIBLE);
         }
@@ -88,5 +94,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             fire.setVisibility(View.GONE);
         }
         return convertView;
+    }
+
+    @Override
+    public int getCount() {
+        return products.size();
     }
 }

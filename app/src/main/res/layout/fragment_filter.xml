@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FilterFragment"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_corners">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/round_horizontal_rule_24"
+        android:layout_gravity="top|center"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Фильтры"
+            android:textSize="25sp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Цена"
+            style="@style/regular_text"
+            android:layout_marginLeft="25dp"/>
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/CostRangeSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            style="@style/Widget.MaterialComponents.Slider"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextMin"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_gravity="left|center"
+                android:hint="0"
+                android:inputType="numberDecimal"
+                android:lines="1"
+                android:layout_marginHorizontal="25dp"
+                android:gravity="center"/>
+
+            <EditText
+                android:id="@+id/editTextMax"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|right"
+                android:layout_marginHorizontal="25dp"
+                android:inputType="numberDecimal"
+                android:lines="1"
+
+                android:hint="100000"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+</FrameLayout>

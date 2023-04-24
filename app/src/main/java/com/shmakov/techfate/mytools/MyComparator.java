@@ -53,4 +53,20 @@ public class MyComparator {
         }
     }
 
+    public static class SortByRating implements Comparator<Product> {
+
+        @Override
+        public int compare(Product o1, Product o2) {
+            float amount1 = o1.getAvgReviewsRating();
+            float amount2 = o2.getAvgReviewsRating();
+            if (amount1 < amount2) {
+                return 1;
+            } else if (amount1 > amount2) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
 }

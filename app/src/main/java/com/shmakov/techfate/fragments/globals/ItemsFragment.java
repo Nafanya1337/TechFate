@@ -1,16 +1,20 @@
 package com.shmakov.techfate.fragments.globals;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+
+import com.shmakov.techfate.MainActivity;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.inner.Category;
@@ -18,6 +22,7 @@ import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.mytools.MyComparator;
 
 import java.util.Arrays;
+import java.util.function.IntFunction;
 
 
 public class ItemsFragment extends Fragment {
@@ -28,28 +33,23 @@ public class ItemsFragment extends Fragment {
     public static final int SORT_100_0 = 1;
 
     public static final int SORT_BY_WATCHES = 2;
+    private final Context context;
 
     private GridView gridView;
-    private String type;
     private ProductAdapter productAdapter;
     private int sortType = 2;
     private Product[] all;
-
     public Product[] getAll() {
         return all;
     }
 
-    public ProductAdapter getProductAdapter() {
-        return productAdapter;
+    public ItemsFragment(Context context, Product[] all) {
+        this.context = context;
+        Log.d("mymy", "Context = " + context);
+        this.all = all;
+        this.productAdapter = new ProductAdapter(this.context, all);
     }
 
-    public ItemsFragment() {
-        this.type = MAKE_POPULAR_ITEMS;
-    }
-
-    public ItemsFragment(String type) {
-        this.type = type;
-    }
 
     public void setSortType(int sortType) {
         this.sortType = sortType;
@@ -64,57 +64,21 @@ public class ItemsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_items, container, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_items, container, false);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         gridView = view.findViewById(R.id.products_grid);
-        if (!type.equals(MAKE_POPULAR_ITEMS) && !Category.getCategoriesNamesAsArrayList().contains(type))
-            makeCurrentItems();
-        else if (type.equals(MAKE_POPULAR_ITEMS))
-            makePopularGridView();
-        else
-            makeCategoryItem();
-
         gridView.setAdapter(productAdapter);
         gridView.setFriction(0.1f);
     }
 
-    private void makeCategoryItem() {
-        all = Category.categories.get(type).toArray(new Product[0]);
-        makeSort();
-        productAdapter= new ProductAdapter(getContext(), all);
-        gridView.setAdapter(productAdapter);
-        gridView.setFriction(0.1f);
-    }
 
-    public void notifyAboutChanges(){
-        all = Category.getPopularProducts().toArray(new Product[0]);
-        makeSort();
-        productAdapter= new ProductAdapter(getContext(), all);
-        gridView.setAdapter(productAdapter);
-        gridView.setFriction(0.1f);
-    }
-
-    public void makePopularGridView() {
-        all = Category.getPopularProducts().toArray(new Product[0]);
-        makeSort();
-        productAdapter= new ProductAdapter(getContext(), all);
-    }
-
-    private void makeCurrentItems(){
-        all = Category.getAllProducts()
-                .stream()
-                .filter(product ->
-                        product.getMark().toUpperCase().contains(type.toUpperCase())
-                        || product.getName().toUpperCase().contains(type.toUpperCase())
-                )
-                .toArray(Product[]::new);
-        makeSort();
-        productAdapter = new ProductAdapter(getContext(), all);
+    public void setAll(Product[] all) {
+        productAdapter.setProducts(all);
     }
 
     public void makeSort() {
@@ -125,6 +89,8 @@ public class ItemsFragment extends Fragment {
             case 1:
                Arrays.sort(all, new MyComparator.CostMaxToMin());
                 break;
+            case 2:
+                Arrays.sort(all, new MyComparator.SortByRating());
             default:
                 Arrays.sort(all, new MyComparator.AmountOfWatches());
                 break;

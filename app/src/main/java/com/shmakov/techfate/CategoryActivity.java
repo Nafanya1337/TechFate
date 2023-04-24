@@ -12,13 +12,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Cart;
 import com.shmakov.techfate.entities.inner.Category;
@@ -30,8 +35,9 @@ import com.shmakov.techfate.mytools.FragmentAdapterUpdater;
 import com.shmakov.techfate.mytools.ImageManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class CategoryActivity extends AppCompatActivity implements goBack, ProductAdapter.onClickProduct {
+public class CategoryActivity extends AppCompatActivity implements goBack, ProductAdapter.onClickProduct, CategoryHeaderFragment.openFilters, FilterFragment.makeFilters {
 
     private FrameLayout container, product_container;
     private FragmentManager fragmentManager;
@@ -43,6 +49,11 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     private TextView category_amount, category_available;
     private FragmentAdapterUpdater fragmentAdapterUpdater;
 
+    private BottomSheetDialogFragment dialog;
+
+    private ArrayList<Product> products;
+    private ArrayList<Product> all;
+
     public static final String CATEGORY_TAG = "CATEGORY_TAG";
     public static final String CATEGORY_IMG_TAG = "CATEGORY_IMG_TAG";
 
@@ -51,7 +62,6 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         fragmentManager = getSupportFragmentManager();
-        ft = fragmentManager.beginTransaction();
 
         tittle = getIntent().getExtras().getString(CATEGORY_TAG);
 
@@ -59,19 +69,17 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         header = new CategoryHeaderFragment();
         header.setCategoryTittle(tittle);
         header.setCategoryBackgroundImage(ImageManager.findCategoryBackgroundIMG(tittle));
-        ft.replace(container.getId(), header).commit();
 
 
-        ft = fragmentManager.beginTransaction();
         product_container = findViewById(R.id.category_items_container);
-        itemsFragment = new ItemsFragment(tittle);
-        ft.replace(product_container.getId(), itemsFragment);
-        ft.commit();
+        products = Category.categories.get(tittle);
+        itemsFragment = new ItemsFragment(this, products.toArray(new Product[0]));
 
         String[] array_modes = {
                 "По возрастанию",
                 "По убыванию",
-                "По популярности"
+                "По популярности",
+                "По рейтингу"
         };
 
         spinner = findViewById(R.id.spinner);
@@ -84,11 +92,8 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         adapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
         spinner.setAdapter(adapter);
 
-        fragmentAdapterUpdater = new FragmentAdapterUpdater(itemsFragment, ft, product_container.getId());
-        spinner.setOnItemSelectedListener(fragmentAdapterUpdater);
-
         category_amount = findViewById(R.id.category_amount);
-        ArrayList<Product> products = Category.categories.get(tittle);
+        products = Category.categories.get(tittle);
         int amount = products.size();
         String amounts = getResources().getQuantityString(R.plurals.products, amount, amount);
         category_amount.setText(amounts);
@@ -96,6 +101,19 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         category_available = findViewById(R.id.category_available);
         String category_available_str = getResources().getQuantityString(R.plurals.avaliable, amount);
         category_available.setText(category_available_str);
+        all = Category.categories.get(tittle);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ft = fragmentManager.beginTransaction();
+        ft.replace(container.getId(), header).commit();
+        ft = fragmentManager.beginTransaction();
+        ft.replace(product_container.getId(), itemsFragment);
+        ft.commit();
+//        fragmentAdapterUpdater = new FragmentAdapterUpdater(itemsFragment, ft, product_container.getId());
+//        spinner.setOnItemSelectedListener(fragmentAdapterUpdater);
     }
 
     @Override
@@ -132,5 +150,21 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         Intent main_data = new Intent();
         main_data.putParcelableArrayListExtra(PRODUCT_TAG, products_in_cart);
         setResult(RESULT_OK, main_data);
+    }
+
+    private void createDialog() {
+        new FilterFragment(this, all).show(getSupportFragmentManager(), "tag");
+    }
+    @Override
+    public void openFilters(View view) {
+        createDialog();
+    }
+
+    @Override
+    public void makeFilters(int minCost, int maxCost) {
+        all = Category.categories.get(tittle);
+        products = new ArrayList<Product>(Arrays.asList(all.stream().filter(product -> product.getCost() >= minCost && product.getCost() <= maxCost).toArray(Product[]::new)));
+        itemsFragment.setAll(products.toArray(new Product[0]));
+        //itemsFragment.setSortType(spinner.getSelectedItemPosition());
     }
 }
