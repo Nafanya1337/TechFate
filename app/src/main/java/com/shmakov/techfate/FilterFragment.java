@@ -1,13 +1,16 @@
 package com.shmakov.techfate;
 
+
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+
 
 
 public class FilterFragment extends BottomSheetDialogFragment {
@@ -52,6 +56,8 @@ public class FilterFragment extends BottomSheetDialogFragment {
     private boolean available = true;
     private boolean order = true;
     private boolean notAvailable = false;
+
+    private float step = 500f;
 
     public FilterFragment(Context context, ArrayList<Product> products, HashMap<String, ArrayList<String>> filters) {
         this.context = context;
@@ -137,6 +143,10 @@ public class FilterFragment extends BottomSheetDialogFragment {
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
                 if (fromUser) {
+                    //Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        //v.vibrate(VibrationEffect.createOneShot(1, VibrationEffect.DEFAULT_AMPLITUDE));
+                    }
                     List<Float> val = slider.getValues();
                     min_val = Math.round(val.get(0));
                     max_val = Math.round(val.get(val.size() - 1));
@@ -157,8 +167,7 @@ public class FilterFragment extends BottomSheetDialogFragment {
 //
 //            @Override
 //            public void afterTextChanged(Editable s) {
-//                makeSlider();
-//
+//                CostRangeSlider.setValueFrom(Float.valueOf(s.toString()));
 //            }
 //        });
 //        max.addTextChangedListener(new TextWatcher() {
@@ -173,13 +182,12 @@ public class FilterFragment extends BottomSheetDialogFragment {
 //
 //            @Override
 //            public void afterTextChanged(Editable s) {
-//                makeSlider();
-//
+//                CostRangeSlider.setValueTo(Float.valueOf(s.toString()));
 //            }
 //        });
     }
 
-    private void makeSlider () {
+    private void makeSlider() {
         if (valueFrom.equals(-1)) {
             valueFrom = 0;
         }
@@ -189,10 +197,11 @@ public class FilterFragment extends BottomSheetDialogFragment {
             valueTo = 100;
         if (max_val.equals(-1))
             max_val = Math.round(valueTo);
-        max.setText(String.valueOf(max_val));
-        CostRangeSlider.setStepSize(500f);
         if (min_val.equals(-1))
             min_val = 0;
+        min.setText(String.valueOf(min_val));
+        max.setText(String.valueOf(max_val));
+        CostRangeSlider.setStepSize(step);
         CostRangeSlider.setValueTo(Float.valueOf(valueTo));
         CostRangeSlider.setValueFrom(Float.valueOf(valueFrom));
         CostRangeSlider.setValues(Float.valueOf(min_val), Float.valueOf(max_val));

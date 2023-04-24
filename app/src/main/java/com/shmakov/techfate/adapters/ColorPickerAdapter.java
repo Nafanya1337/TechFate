@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shmakov.techfate.R;
@@ -63,6 +64,14 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
         } else {
             holder.color_checkbox.setChecked(false);
         }
+
+        holder.color_checkbox.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                TooltipCompat.setTooltipText(holder.color_checkbox, colors.get(position));
+                return false;
+            }
+        });
 
         holder.color_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
