@@ -80,8 +80,7 @@ public class SearchFragment extends Fragment {
             ft.replace(search_container.getId(), historySearchFragment).commit();
         }
         else {
-            if (itemsFragment.getAll().length == 0)
-                ft.replace(search_container.getId(), itemsFragment).commit();
+            ft.replace(search_container.getId(), itemsFragment).commit();
             Product[] products = Category.getAllProducts()
                     .stream()
                     .filter(product ->
