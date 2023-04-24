@@ -167,7 +167,7 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     private HashMap<String, ArrayList<String>> filters = new HashMap<>();
 
     private void createDialog() {
-        if (products.size() > 0)
+        if (all.size() > 0)
             new FilterFragment(this, all, filters).show(getSupportFragmentManager(), "tag");
     }
 
