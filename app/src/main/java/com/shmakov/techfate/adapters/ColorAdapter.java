@@ -3,7 +3,11 @@ package com.shmakov.techfate.adapters;
 import static android.os.Looper.myLooper;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.dynamicanimation.animation.FlingAnimation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +62,14 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
 
         MyViewHolder holder = new MyViewHolder(view);
 
+        holder.color_radiobutton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                TooltipCompat.setTooltipText(holder.color_radiobutton, colors.get(holder.position));
+                return false;
+            }
+        });
+
         holder.color_radiobutton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -90,7 +103,10 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
             }
             holder.color_radiobutton.setClickable(false);
             holder.color_radiobutton.setAlpha(0.2f);
-            holder.color.setAlpha(0.05f);
+            if (colors.get(position).equals(ColorManager.BLACK_COLOR) || colors.get(position).equals(ColorManager.GRAY_COLOR))
+                holder.color.setAlpha(0.4321f);
+            else
+                holder.color.setAlpha(0.35f);
         }
         else {
             holder.color_radiobutton.setClickable(true);

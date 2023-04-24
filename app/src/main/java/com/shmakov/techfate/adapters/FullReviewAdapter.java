@@ -53,6 +53,7 @@ public class FullReviewAdapter extends RecyclerView.Adapter<FullReviewAdapter.My
         User user = review.getUser();
         holder.avatar.setImageResource(user.getImg());
         holder.reviewer_name.setText(user.getName());
+        holder.date.setText(review.getDate());
         String txt = review.getText();
         if (txt.length() > 200) {
             Button showFullReviewButton = holder.itemView.findViewById(R.id.show_full_review_button);

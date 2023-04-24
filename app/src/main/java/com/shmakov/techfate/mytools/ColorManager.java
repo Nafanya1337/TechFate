@@ -23,7 +23,7 @@ public class ColorManager {
             case "yellow":
                 return Color.YELLOW;
             case "gray":
-                return Color.GRAY;
+                return Color.parseColor("#696969");
             case "blue":
                 return Color.BLUE;
             case "green":
