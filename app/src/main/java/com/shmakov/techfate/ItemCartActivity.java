@@ -35,6 +35,10 @@ import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.fragments.globals.MiniReviewsFragment;
 import com.shmakov.techfate.mytools.StringWorker;
 
+import java.util.Arrays;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
+
 
 public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.pickAColor, ConfigurationsAdapter.ChooseConf {
 
@@ -100,19 +104,31 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     public void checkForAdding(int pos){
         if (pos == -1) {
             addToCartButton.setClickable(false);
-            Animation go_down = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
-            addToCartButton.setAnimation(go_down);
-            addToCartButton.setVisibility(View.GONE);
+            boolean fl = false;
+            if (!fl) {
+                Animation go_down = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+                addToCartButton.setAnimation(go_down);
+                addToCartButton.setVisibility(View.GONE);
+            }
+            else {
+                addToCartButton.setText("Продажи прекращены");
+            }
             return;
         }
         if (configurationFragment != null && current_product.getCurrentConfigurationAmount(configurationFragment.getConfiguration())[pos] <= 0) {
             addToCartButton.setClickable(false);
-            Animation go_down = AnimationUtils.loadAnimation(this, R.anim.slide_down);
-            addToCartButton.setAnimation(go_down);
-            addToCartButton.setVisibility(View.GONE);
+            Animation go_up = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+            if (current_product.getCurrentConfigurationAmount(configurationFragment.getConfiguration())[pos] == 0)
+                addToCartButton.setText("Временно отсутствует");
+            else
+                addToCartButton.setText("Продажи прекращены");
+            addToCartButton.setAnimation(go_up);
+            addToCartButton.setBackgroundColor(Color.parseColor("#fafafa"));
         } else {
-            if (addToCartButton.getVisibility() == View.GONE) {
+            if (addToCartButton.getVisibility() == View.GONE | addToCartButton.getText() != "Добавить в корзину") {
                 addToCartButton.setClickable(true);
+                addToCartButton.setBackgroundColor(Color.parseColor("#FFDB47"));
+                addToCartButton.setText("Добавить в корзину");
                 Animation go_up = AnimationUtils.loadAnimation(this, R.anim.slide_up);
                 addToCartButton.setAnimation(go_up);
                 addToCartButton.setVisibility(View.VISIBLE);

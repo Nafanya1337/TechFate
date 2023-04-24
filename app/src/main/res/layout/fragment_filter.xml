@@ -100,8 +100,45 @@
             tools:layout="@layout/fragment_color_checkbox"
             android:layout_marginHorizontal="25dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginVertical="10dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Наличие"
+            style="@style/regular_text"
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="left"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:paddingHorizontal="20dp">
+
+            <CheckBox
+                android:id="@+id/checkbox_available"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="В наличии"
+                android:gravity="left|center"/>
+
+            <CheckBox
+                android:id="@+id/checkbox_order"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="Временно отсутствующие"
+                android:lines="2"
+                android:maxWidth="135dp"
+                android:gravity="left|center"/>
+            <CheckBox
+                android:id="@+id/checkbox_notAvailable"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="Отсутствующие в продаже"
+                android:gravity="left|center"/>
+
+        </LinearLayout>
     </LinearLayout>
     </ScrollView>
 </FrameLayout>

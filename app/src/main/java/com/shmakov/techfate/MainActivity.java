@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
 
         HashMap<String, int[]> specs_realme = new HashMap<>();
         specs_realme.put("6/128 Gb", new int[]{1, 3});
-        specs_realme.put("8/128 Gb", new int[]{0, 0});
+        specs_realme.put("8/128 Gb", new int[]{0, -1});
         Product realme = new Product(Category.SMARTPHONE_NAME_CATEGORY, "Realme", "9 Pro 5G", 18000, R.drawable.realme_9_pro, new int[]{}, new String[]{"blue", "black"}, specs_realme);
         realme.addReview(new Review(new User("Ivan", "dwdwa", 915086),
                 "",

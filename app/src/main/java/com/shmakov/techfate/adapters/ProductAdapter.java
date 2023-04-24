@@ -55,7 +55,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null)
             convertView = LayoutInflater.from(context).inflate(R.layout.item_mini, parent, false);
-        Log.d("mymy", "Лог продукт адаптера " + products + "   " + position + "   " + products.get(position));
         name = convertView.findViewById(R.id.mini_item_name);
         price = convertView.findViewById(R.id.mini_item_price);
         img = convertView.findViewById(R.id.mini_item_img);

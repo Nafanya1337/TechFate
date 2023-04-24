@@ -58,8 +58,6 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
         GradientDrawable bgShape = (GradientDrawable) holder.color.getBackground();
         bgShape.setColor(ColorManager.nameColorToInt(color));
 
-        // Set the checked state of the color checkbox based on whether
-        // the current color is in the selected colors list
         if (selected.size() == 0 || selected.contains(color)) {
             holder.color_checkbox.setChecked(true);
         } else {
