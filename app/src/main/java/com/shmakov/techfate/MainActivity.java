@@ -63,11 +63,17 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
         };
 
         HashMap<String, int[]> specs_col = new HashMap<>();
-        specs_col.put("8/128 Gb", new int[]{1, 3});
-        specs_col.put("12/128 Gb", new int[]{0, 5});
+        specs_col.put("6/128 Gb", new int[]{1, 3});
+        specs_col.put("6/256 Gb", new int[]{0, 5});
+
+        int[] imgs_iphone = {
+            R.drawable.iphone13pro_1,
+            R.drawable.iphone13pro_2,
+            R.drawable.iphone13pro_3
+        };
 
         Product headphones1 = new Product(Category.HEADPHONES_NAME_CATEGORY, "Apple", "AirPods Pro 2", 20000, R.drawable.headphones_2, imgs, colors, new int[]{1});
-        Product smartphone = new Product(Category.SMARTPHONE_NAME_CATEGORY, "Apple", "iPhone 13 Pro Max", 120000, R.drawable.smartphones_img, new int[]{}, new String[]{"white", "black"}, specs_col);
+        Product smartphone = new Product(Category.SMARTPHONE_NAME_CATEGORY, "Apple", "iPhone 13 Pro Max", 40000, R.drawable.smartphones_img, imgs_iphone, new String[]{"white", "black"}, specs_col);
 
         smartphone.addReview(new Review(new User("Nikolay", "dwdwa", 915086),
                 "И так начнем по порядку.Продавец был сам Яндекс Маркет ,купила его 2 января вечером пришел 7января утром,не отслеживался товар,завис на точке обработка данных,поэтому сильно переживала что будет с задержкой,но нет пришел в срок !Сильно скачет цена я взяла за 116 тсч 512гб.Удобно что можно оформить кредит почти за 5 минут!По телефону,лично у меня держит заряд он только день ,активно пользуюсь телефоном,сутки или полутора он конечно у меня не выдержит точно!Взяла черный графит цвет нравится.Достаточно тяжелый и большой .Не удобно одной рукой что то делать ,но наверное это дело привычки\uD83E\uDD37\uD83C\uDFFB\u200D♀️Всю жизнь у меня были андроиды в последние 7 лет дак вообще ходила с Самсунгами s серии,в прошлом голу взяла Самсунг s 22,не скажу что аппарат огонь часто грелся ,маленькая память 128 гб ,а в последнее время так вообще начал тупить сильно ,телефону 7 месяцев\uD83E\uDD37\uD83C\uDFFB\u200D♀️Решила брать айфон в декабре ,по работе нужна камера хорошая ,ну и что тут сказать конечно айфон выигрывает любой Самсунг тут даже говорить не о чем ,а так как я занимаюсь сьемками ,уж понимаю о чем говорю\uD83D\uDC4CСамсунг даже на качестве 8к ультра hd не выдавал такой результат как айфон 1080 \uD83E\uDD37\uD83C\uDFFB\u200D♀️По приложениям и нфс,да очень не удобно что отсутствует платежная система ,но всегда можно найти выход,Сбербанк тоже можно установить !!! В офисах банка!Пришел тебе все сделали за бесплатно !Вроде бы все нужные МНЕ приложения я смогла найти и установить единственное приложение совкомбанка нельзя установить на айфон ни в каком виде ,только вкладку на рабочий стол можно добавить браузера все ,это не удобно конечно", "18/09/20", 4.5f));
