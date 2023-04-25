@@ -77,9 +77,9 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked)
-                    checkboxColor.addColor(color);
+                    checkboxColor.addColor(colors.get(position));
                 else
-                    checkboxColor.deleteColor(color);
+                    checkboxColor.deleteColor(colors.get(position));
             }
         });
     }

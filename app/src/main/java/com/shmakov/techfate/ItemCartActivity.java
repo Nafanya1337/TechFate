@@ -109,7 +109,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
             addToCartButton.setVisibility(View.GONE);
             return;
         }
-        if (current_product.getAmount()[pos] <= 0 | (configurationFragment != null && current_product.getCurrentConfigurationAmount(configurationFragment.getConfiguration())[pos] <= 0)) {
+        if ((current_product.getAmount() != null && current_product.getAmount()[pos] <= 0) | (configurationFragment != null && current_product.getCurrentConfigurationAmount(configurationFragment.getConfiguration())[pos] <= 0)) {
             if (addToCartButton.getVisibility() == View.VISIBLE) {
                 addToCartButton.setClickable(false);
                 Animation go_down = AnimationUtils.loadAnimation(this, R.anim.slide_down);

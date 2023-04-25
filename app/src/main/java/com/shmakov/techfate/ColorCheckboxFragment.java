@@ -50,10 +50,7 @@ public class ColorCheckboxFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if (CategoryActivity.selected_colors.size() == 0)
-            colorPickerAdapter = new ColorPickerAdapter(getContext(), ColorManager.all_available_colors);
-        else
-            colorPickerAdapter = new ColorPickerAdapter(getContext(), ColorManager.all_available_colors, CategoryActivity.selected_colors);
+        colorPickerAdapter = new ColorPickerAdapter(getContext(), ColorManager.all_available_colors, CategoryActivity.selected_colors);
         checkbox_color_recycler = view.findViewById(R.id.checkbox_color_recycler);
         checkbox_color_recycler.setAdapter(colorPickerAdapter);
         super.onViewCreated(view, savedInstanceState);

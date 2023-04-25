@@ -213,6 +213,10 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         return false;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public void addColor(String col) {
