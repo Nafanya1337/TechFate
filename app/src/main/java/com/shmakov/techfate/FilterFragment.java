@@ -32,7 +32,7 @@ import java.util.List;
 public class FilterFragment extends BottomSheetDialogFragment {
 
     public interface makeFilters{
-        public void makeFilters(int minCost, int maxCost, Integer valueFrom, Integer valueTo, Boolean[] areChecked);
+        public void makeFilters(int minCost, int maxCost, Integer valueFrom, Integer valueTo);
     }
 
     private Context context;
@@ -53,10 +53,6 @@ public class FilterFragment extends BottomSheetDialogFragment {
     public static final String AVAILABLE = "AVAILABLE_STATUS";
     private makeFilters makeFilters;
 
-    private boolean available = true;
-    private boolean order = true;
-    private boolean notAvailable = false;
-
     private float step = 500f;
 
     public FilterFragment(Context context, ArrayList<Product> products, HashMap<String, ArrayList<String>> filters) {
@@ -70,11 +66,6 @@ public class FilterFragment extends BottomSheetDialogFragment {
         }
         if (filters.containsKey(COLORS_KEY)) {
             addedColors = filters.get(COLORS_KEY);
-        }
-        if (filters.containsKey(AVAILABLE)) {
-            available = Boolean.valueOf(filters.get(AVAILABLE).get(0));
-            order = Boolean.valueOf(filters.get(AVAILABLE).get(1));
-            notAvailable = Boolean.valueOf(filters.get(AVAILABLE).get(2));
         }
     }
 
@@ -97,34 +88,7 @@ public class FilterFragment extends BottomSheetDialogFragment {
         min = view.findViewById(R.id.editTextMin);
         max = view.findViewById(R.id.editTextMax);
         makeFilters = (makeFilters) context;
-        CheckBox checkbox_available = view.findViewById(R.id.checkbox_available);
-        CheckBox checkbox_order = view.findViewById(R.id.checkbox_order);
-        CheckBox checkbox_notAvailable = view.findViewById(R.id.checkbox_notAvailable);
 
-        checkbox_available.setChecked(available);
-        checkbox_order.setChecked(order);
-        checkbox_notAvailable.setChecked(notAvailable);
-
-        checkbox_available.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                available = isChecked;
-            }
-        });
-
-        checkbox_order.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                order = isChecked;
-            }
-        });
-
-        checkbox_notAvailable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                notAvailable = isChecked;
-            }
-        });
 
 //        FragmentTransaction ft = fragmentManager.beginTransaction();
 //        ArrayList<String> tremp = new ArrayList<String>();
@@ -210,6 +174,6 @@ public class FilterFragment extends BottomSheetDialogFragment {
     @Override
     public void onStop() {
         super.onStop();
-        makeFilters.makeFilters(min_val, max_val, valueFrom, valueTo, new Boolean[]{available, order, notAvailable});
+        makeFilters.makeFilters(min_val, max_val, valueFrom, valueTo);
     }
 }

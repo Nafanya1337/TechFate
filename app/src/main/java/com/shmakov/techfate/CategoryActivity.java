@@ -177,9 +177,9 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     }
 
     @Override
-    public void makeFilters(int minCost, int maxCost, Integer valueFrom, Integer valueTo, Boolean[] areChecked) {
+    public void makeFilters(int minCost, int maxCost, Integer valueFrom, Integer valueTo) {
         all = Category.categories.get(tittle);
-        products = new ArrayList<Product>(Arrays.asList(all.stream().filter(product -> acceptFilters(product, minCost, maxCost, areChecked)).toArray(Product[]::new)));
+        products = new ArrayList<Product>(Arrays.asList(all.stream().filter(product -> acceptFilters(product, minCost, maxCost)).toArray(Product[]::new)));
         itemsFragment.setAll(products.toArray(new Product[0]));
         itemsFragment.setSortType(spinner.getSelectedItemPosition());
         this.min_cost = minCost;
@@ -187,34 +187,26 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(new String[]{String.valueOf(minCost), String.valueOf(maxCost), String.valueOf(valueFrom), String.valueOf(valueTo)}));
         filters.put(MIN_MAX_COST_KEY, arrayList);
         filters.put(COLORS_KEY, selected_colors);
-        filters.put(AVAILABLE, new ArrayList<>(Arrays.asList(new String[]{areChecked[0].toString(), areChecked[1].toString(), areChecked[2].toString()})));
     }
 
-    private boolean acceptFilters(Product product, int minCost, int maxCost, Boolean[] areChecked) {
-        if (areChecked[0] | areChecked[1] | areChecked[2]) {
-            if ((product.getCost() >= minCost) && (product.getCost() <= maxCost)) {
-                if (Arrays.stream(product.getColors()).anyMatch(color -> selected_colors.contains(color))) {
-                    int position_of_color = -1;
-                    for (String color : selected_colors) {
-                        if (Arrays.asList(product.getColors()).contains(color))
-                            position_of_color = Arrays.asList(product.getColors()).indexOf(color);
-                        if (product.getConfigurations() != null && position_of_color != -1) {
-                            String[] conf = product.getConfigurations();
-                            for (String current_conf : conf) {
-                                if ((product.getCurrentConfigurationAmount(current_conf)[position_of_color] > 0 && areChecked[0])
-                                        | (product.getCurrentConfigurationAmount(current_conf)[position_of_color] == 0 && areChecked[1]) |
-                                        (product.getCurrentConfigurationAmount(current_conf)[position_of_color] == -1 && areChecked[2])) {
-                                    return true;
-                                }
+    private boolean acceptFilters(Product product, int minCost, int maxCost) {
+        if ((product.getCost() >= minCost) && (product.getCost() <= maxCost)) {
+            if (Arrays.stream(product.getColors()).anyMatch(color -> selected_colors.contains(color))) {
+                int position_of_color = -1;
+                for (String color : selected_colors) {
+                    if (Arrays.asList(product.getColors()).contains(color))
+                        position_of_color = Arrays.asList(product.getColors()).indexOf(color);
+                    if (product.getConfigurations() != null && position_of_color != -1) {
+                        String[] conf = product.getConfigurations();
+                        for (String current_conf : conf) {
+                            if (product.getCurrentConfigurationAmount(current_conf)[position_of_color] > 0) {
+                                return true;
                             }
-                        } else if (position_of_color != -1 && ((product.getAmount()[position_of_color] > 0 && areChecked[0]) |
-                                (product.getAmount()[position_of_color] == 0 && areChecked[1]) |
-                                (product.getAmount()[position_of_color] == -1 && areChecked[2]))) {
-                            return true;
                         }
+                    } else if (position_of_color != -1 && product.getAmount()[position_of_color] > 0) {
+                        return true;
                     }
                 }
-                return false;
             }
             return false;
         }

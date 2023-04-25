@@ -97,13 +97,14 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         GradientDrawable bgShape = (GradientDrawable)holder.color.getBackground();
         bgShape.setColor(ColorManager.nameColorToInt(colors.get(position)));
+        holder.color.setClickable(false);
         holder.position = position;
         if (this.amount[position]<=0) {
+            holder.color_radiobutton.setClickable(false);
             if (holder.color_radiobutton.isChecked()){
                 Animation fadeOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
                 holder.color_radiobutton.startAnimation(fadeOut);
             }
-            holder.color_radiobutton.setClickable(false);
             holder.color_radiobutton.setAlpha(0.2f);
             if (colors.get(position).equals(ColorManager.BLACK_COLOR) || colors.get(position).equals(ColorManager.GRAY_COLOR))
                 holder.color.setAlpha(0.4321f);

@@ -129,7 +129,7 @@ public class ReviewsFragment extends Fragment {
             if (rating == i)
                 sum ++;
         }
-        return (int)(((float)sum / reviews.size()) * 100);
+        return Math.round((((float)sum / reviews.size()) * 100));
     }
 
     @Override

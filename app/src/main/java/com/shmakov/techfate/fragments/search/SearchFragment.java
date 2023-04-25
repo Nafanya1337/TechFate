@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -25,7 +26,7 @@ import com.shmakov.techfate.mytools.StringWorker;
 
 public class SearchFragment extends Fragment {
 
-    private EditText search_bar;
+    private AutoCompleteTextView search_bar;
     private FrameLayout search_container;
     private HistorySearchFragment historySearchFragment;
 

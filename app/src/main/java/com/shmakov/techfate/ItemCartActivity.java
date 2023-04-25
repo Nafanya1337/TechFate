@@ -103,27 +103,19 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
 
     public void checkForAdding(int pos){
         if (pos == -1) {
+            Animation go_down = AnimationUtils.loadAnimation(this, R.anim.slide_down);
             addToCartButton.setClickable(false);
-            boolean fl = false;
-            if (!fl) {
-                Animation go_down = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
-                addToCartButton.setAnimation(go_down);
-                addToCartButton.setVisibility(View.GONE);
-            }
-            else {
-                addToCartButton.setText("Продажи прекращены");
-            }
+            addToCartButton.setAnimation(go_down);
+            addToCartButton.setVisibility(View.GONE);
             return;
         }
         if (configurationFragment != null && current_product.getCurrentConfigurationAmount(configurationFragment.getConfiguration())[pos] <= 0) {
-            addToCartButton.setClickable(false);
-            Animation go_up = AnimationUtils.loadAnimation(this, R.anim.slide_up);
-            if (current_product.getCurrentConfigurationAmount(configurationFragment.getConfiguration())[pos] == 0)
-                addToCartButton.setText("Временно отсутствует");
-            else
-                addToCartButton.setText("Продажи прекращены");
-            addToCartButton.setAnimation(go_up);
-            addToCartButton.setBackgroundColor(Color.parseColor("#fafafa"));
+            if (addToCartButton.getVisibility() == View.VISIBLE) {
+                addToCartButton.setClickable(false);
+                Animation go_down = AnimationUtils.loadAnimation(this, R.anim.slide_down);
+                addToCartButton.setAnimation(go_down);
+                addToCartButton.setVisibility(View.GONE);
+            }
         } else {
             if (addToCartButton.getVisibility() == View.GONE | addToCartButton.getText() != "Добавить в корзину") {
                 addToCartButton.setClickable(true);
