@@ -35,6 +35,7 @@ import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.fragments.globals.MiniReviewsFragment;
 import com.shmakov.techfate.mytools.StringWorker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
@@ -128,14 +129,6 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     }
 
     public void makeStarsReviews() {
-//        if (current_product == null) return;
-//        FragmentTransaction ft = fragmentManager.beginTransaction();
-//        Bundle bundle = new Bundle();
-//        bundle.putFloat(AVG_RATING, current_product.getAvgReviewsRating());
-//        bundle.putInt(REVIEWS_AMOUNT, current_product.getReviewsAmount());
-//        MiniReviewsFragment miniReviewsFragment = new MiniReviewsFragment();
-//        miniReviewsFragment.setArguments(bundle);
-//        ft.replace(stars_reviews_container.getId(), miniReviewsFragment).commit();
     }
 
     public void makeAllReviews() {
@@ -155,10 +148,12 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         reviewsFragment.showMore(view);
     }
 
+    public ArrayList<Product> products = new ArrayList<>();
     public void addToCart(View view) {
         Button btn = ((Button)view);
         if (btn.getText().equals("Добавить в корзину")) {
             Intent data = new Intent();
+            products.add(current_product);
             data.putExtra(PRODUCT_TAG, current_product);
             setResult(RESULT_OK, data);
             btn.setText("Удалить из корзины");

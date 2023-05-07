@@ -20,30 +20,82 @@
 
     <FrameLayout
         android:id="@+id/frame_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingHorizontal="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/total_price_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center|top"
+        app:layout_constraintBottom_toTopOf="@id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        app:layout_constraintVertical_bias="0.997">
+        app:layout_constraintTop_toBottomOf="@id/textView">
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cart_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/promocode_bg" />
 
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/promocode_bg"
+        app:layout_constraintBottom_toTopOf="@+id/total_price_frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <RadioButton
+        android:id="@+id/promocode_check"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/promocode_check_selector"
+        android:button="@color/transparent"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/promocode_active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-10000 ₽"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/promocode_check"
+        app:layout_constraintStart_toEndOf="@+id/promocodeEditText"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+
+    <EditText
+        android:id="@+id/promocodeEditText"
+        android:layout_width="95dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center|left"
+        android:background="@drawable/promocode_edittext_bg"
+        android:drawableLeft="@drawable/baseline_percent_24"
+        android:gravity="center"
+        android:hint="Промокод"
+        android:inputType="textCapCharacters"
+        android:lines="1"
+        android:maxEms="5"
+        android:maxLength="7"
+        android:paddingRight="5dp"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -59,6 +111,7 @@
         android:id="@+id/total_price_frame"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -74,6 +127,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/cost_cart"
             style="@style/regular_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

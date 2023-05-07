@@ -5,9 +5,13 @@ package com.shmakov.techfate;
 import static com.shmakov.techfate.ItemCartActivity.PRODUCT_TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.ui.NavigationUI;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,19 +26,21 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.shmakov.techfate.adapters.CartAdapter;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Product;
+import com.shmakov.techfate.fragments.cart.CartFragment;
 import com.shmakov.techfate.fragments.home.HomeFragment;
 import com.shmakov.techfate.mytools.ColorManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct {
+public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct, CartAdapter.updateAmount {
 
     BottomNavigationView menu;
     NavController navController;
@@ -222,12 +228,12 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
         public void onActivityResult(ActivityResult result) {
             Intent data = result.getData();
             if (data != null) {
-                Product product = data.getParcelableExtra(PRODUCT_TAG);
-                Toast.makeText(MainActivity.this, "Добавлен " + product.getName(), Toast.LENGTH_SHORT).show();
+                products.add(data.getParcelableExtra(PRODUCT_TAG));
             }
         }
     });
 
+    public static ArrayList<Product> products = new ArrayList<>();
     ActivityResultLauncher<Intent> activityCategoryResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -235,11 +241,18 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                 public void onActivityResult(ActivityResult result) {
                     Intent data = result.getData();
                     if (data != null) {
-                        ArrayList<Product> products = data.getParcelableArrayListExtra(PRODUCT_TAG);
-                        for (Product product : products)
-                            Toast.makeText(MainActivity.this, "Добавлен " + product.getName(), Toast.LENGTH_SHORT).show();
+                        products.addAll(data.getParcelableArrayListExtra(PRODUCT_TAG));
                     }
                 }
             });
 
+    @Override
+    public void add(int cost) {
+
+    }
+
+    @Override
+    public void remove(int cost) {
+
+    }
 }
