@@ -63,6 +63,14 @@ public class CategoryHeaderFragment extends Fragment {
         return view;
     }
 
+    public void setOptionsAreCheckable(boolean checkable) {
+        if (categoryOptions==null) return;
+        if (checkable)
+            categoryOptions.setImageResource(R.drawable.ic_options_activated);
+        else
+            categoryOptions.setImageResource(R.drawable.ic_options);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

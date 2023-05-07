@@ -63,9 +63,19 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+            }
 
+
+        });
+
+        search_bar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus)
+                    historySearchFragment.addToHistory(search_bar.getText().toString());
             }
         });
+
     }
 
     @Override
@@ -90,9 +100,6 @@ public class SearchFragment extends Fragment {
                                     | StringWorker.makeProductName(product.getMark(), product.getName()).toUpperCase().contains(search_text.toUpperCase())
                     )
                     .toArray(Product[]::new);
-            if (search_text.equals("Realme 9")) {
-                Log.d("mymy", "321312");
-            }
             itemsFragment.setAll(products);
         }
     }
@@ -111,7 +118,6 @@ public class SearchFragment extends Fragment {
 
     private boolean searchWords(Product product, String text){
         String[] searchWords = text.toUpperCase().split("\\s+");
-        Log.d("mymy", "slova  " + searchWords.toString());
         for (String searchWord : searchWords) {
             if (product.getMark().toUpperCase().contains(searchWord) ||
                     product.getName().toUpperCase().contains(searchWord) ||

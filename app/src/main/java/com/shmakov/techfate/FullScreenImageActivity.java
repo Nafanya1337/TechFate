@@ -24,8 +24,19 @@ public class FullScreenImageActivity extends AppCompatActivity {
         imgs = getIntent().getIntArrayExtra(ARRAY_TAG);
         img = getIntent().getIntExtra(POSITION_TAG, 0);
         full_image_container = findViewById(R.id.full_image_container);
-        imageAdapter = new ImageAdapter(this, imgs, img);
+        imageAdapter = new ImageAdapter(this, imgs);
         full_image_container.setAdapter(imageAdapter);
+        full_image_container.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                full_image_container.setCurrentItem(img);
+            }
+        }, 100);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

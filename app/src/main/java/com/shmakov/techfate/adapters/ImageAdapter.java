@@ -5,8 +5,6 @@ import static com.shmakov.techfate.FullScreenImageActivity.POSITION_TAG;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,17 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.shmakov.techfate.FullScreenImageActivity;
-import com.shmakov.techfate.R;
 
 public class ImageAdapter extends PagerAdapter {
     private Context context;
     private int[] images;
-    private int start_position = 0;
-
-    public ImageAdapter(Context context, int[] images, int start_position) {
-        this(context, images);
-        this.start_position = start_position;
-    }
 
     public ImageAdapter(Context context, int[] images) {
         this.context = context;

@@ -180,13 +180,19 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     public void makeFilters(int minCost, int maxCost, Integer valueFrom, Integer valueTo) {
         all = Category.categories.get(tittle);
         products = new ArrayList<Product>(Arrays.asList(all.stream().filter(product -> acceptFilters(product, minCost, maxCost)).toArray(Product[]::new)));
-        itemsFragment.setAll(products.toArray(new Product[0]));
-        itemsFragment.setSortType(spinner.getSelectedItemPosition());
-        this.min_cost = minCost;
-        this.max_cost = maxCost;
-        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(new String[]{String.valueOf(minCost), String.valueOf(maxCost), String.valueOf(valueFrom), String.valueOf(valueTo)}));
-        filters.put(MIN_MAX_COST_KEY, arrayList);
-        filters.put(COLORS_KEY, selected_colors);
+        if (!products.isEmpty()) {
+            itemsFragment.setAll(products.toArray(new Product[0]));
+            itemsFragment.setSortType(spinner.getSelectedItemPosition());
+            this.min_cost = minCost;
+            this.max_cost = maxCost;
+            ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(new String[]{String.valueOf(minCost), String.valueOf(maxCost), String.valueOf(valueFrom), String.valueOf(valueTo)}));
+            filters.put(MIN_MAX_COST_KEY, arrayList);
+            filters.put(COLORS_KEY, selected_colors);
+            header.setOptionsAreCheckable(minCost != valueFrom | maxCost != valueTo | !selected_colors.containsAll(ColorManager.all_available_colors));
+        }
+        else {
+            header.setOptionsAreCheckable(false);
+        }
     }
 
     private boolean acceptFilters(Product product, int minCost, int maxCost) {
@@ -194,6 +200,7 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
             if (Arrays.stream(product.getColors()).anyMatch(color -> selected_colors.contains(color))) {
                 int position_of_color = -1;
                 for (String color : selected_colors) {
+                    position_of_color = -1;
                     if (Arrays.asList(product.getColors()).contains(color))
                         position_of_color = Arrays.asList(product.getColors()).indexOf(color);
                     if (product.getConfigurations() != null && position_of_color != -1) {
@@ -204,6 +211,7 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
                             }
                         }
                     } else if (position_of_color != -1 && product.getAmount()[position_of_color] > 0) {
+
                         return true;
                     }
                 }

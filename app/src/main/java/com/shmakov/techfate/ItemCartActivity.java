@@ -97,7 +97,6 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("mymy", "onStart() itemact");
     }
 
 
@@ -157,7 +156,6 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     }
 
     public void addToCart(View view) {
-        //Toast.makeText(this, "Товар добавлен в корзину!", Toast.LENGTH_SHORT).show();
         Button btn = ((Button)view);
         if (btn.getText().equals("Добавить в корзину")) {
             Intent data = new Intent();
