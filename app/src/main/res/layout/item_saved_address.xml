@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:padding="5dp">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/baseline_pin_drop_24"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/item_saved_addresses_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Город"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:id="@+id/item_saved_addresses_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ул. Пушкина, д. 10, кв. 123"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center|left"
+            android:textIsSelectable="true" />
+    </LinearLayout>
+
+    <CheckBox
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:button="@color/transparent"
+        android:background="@drawable/address_selector"/>
+</LinearLayout>

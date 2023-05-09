@@ -49,7 +49,6 @@ public class MiniReviewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("mymy", "onViewCreated");
         avgRating.setText(String.valueOf(avg_rating));
         reviews_count.setText("(" + reviews_amount + " " + getResources().getQuantityString(R.plurals.reviews, reviews_amount) + ")");
         ratingBar.setRating(avg_rating);

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.inner.Product;
+import com.shmakov.techfate.fragments.cart.CartFragment;
 import com.shmakov.techfate.mytools.StringWorker;
 
 import java.util.ArrayList;
@@ -34,10 +35,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     }
 
     updateAmount updateAmount;
-    public CartAdapter(Context context, ArrayList<Product> productsInCart) {
-        this.context = context;
+    public CartAdapter(CartFragment fragment, ArrayList<Product> productsInCart) {
+        this.context = fragment.getContext();
         this.productsInCart = productsInCart;
-        updateAmount = (updateAmount) context;
+        updateAmount = (updateAmount) fragment;
     }
 
     @NonNull
@@ -56,12 +57,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             @Override
             public void onClick(View v) {
                 holder.amount_product.setText((Integer.valueOf(holder.amount_product.getText().toString()) + 1) + "");
+                updateAmount.add(productsInCart.get(position).getCost());
             }
         });
         holder.remove_amount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.amount_product.setText((Integer.valueOf(holder.amount_product.getText().toString()) - 1) + "");
+                updateAmount.remove(productsInCart.get(position).getCost()); // Добавить эту строку
                 if (holder.amount_product.getText().equals("0")) {
                     productsInCart.remove(position);
                     notifyDataSetChanged();

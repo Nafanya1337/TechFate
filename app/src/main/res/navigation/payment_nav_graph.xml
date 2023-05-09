@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/payment_nav_graph"
+    app:startDestination="@id/adressFragment">
+
+    <fragment
+        android:id="@+id/adressFragment"
+        android:name="com.shmakov.techfate.fragments.cart.AdressFragment"
+        android:label="fragment_adress"
+        tools:layout="@layout/fragment_adress" >
+        <argument
+            android:name="Address"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_adressFragment_to_deliveryFragment2"
+            app:destination="@id/deliveryFragment" />
+        <action
+            android:id="@+id/action_adressFragment_to_addressBottomSheetFragment2"
+            app:destination="@id/addressBottomSheetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deliveryFragment"
+        android:name="com.shmakov.techfate.fragments.cart.DeliveryFragment"
+        android:label="fragment_delivery"
+        tools:layout="@layout/fragment_delivery" >
+        <action
+            android:id="@+id/action_deliveryFragment_to_cardPaymentFragment"
+            app:destination="@id/cardPaymentFragment" />
+        <argument
+            android:name="Adress"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardPaymentFragment"
+        android:name="com.shmakov.techfate.fragments.cart.CardPaymentFragment"
+        android:label="fragment_card_payment"
+        tools:layout="@layout/fragment_card_payment" >
+        <action
+            android:id="@+id/action_cardPaymentFragment_to_addingCardFragment"
+            app:destination="@id/addingCardFragment" />
+        <action
+            android:id="@+id/action_cardPaymentFragment_to_makeOrderFragment"
+            app:destination="@id/makeOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addingCardFragment"
+        android:name="com.shmakov.techfate.fragments.cart.AddingCardFragment"
+        android:label="fragment_adding_card"
+        tools:layout="@layout/fragment_adding_card" >
+        <action
+            android:id="@+id/action_addingCardFragment_to_cardPaymentFragment"
+            app:destination="@id/cardPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeOrderFragment"
+        android:name="com.shmakov.techfate.fragments.cart.MakeOrderFragment"
+        android:label="fragment_make_order"
+        tools:layout="@layout/fragment_make_order" >
+        <action
+            android:id="@+id/action_makeOrderFragment_to_orderInfoFragment"
+            app:destination="@id/orderInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderInfoFragment"
+        android:name="com.shmakov.techfate.fragments.cart.OrderInfoFragment"
+        android:label="fragment_order_info"
+        tools:layout="@layout/fragment_order_info" />
+    <dialog
+        android:id="@+id/addressBottomSheetFragment"
+        android:name="com.shmakov.techfate.AddressBottomSheetFragment"
+        android:label="fragment_address_bottom_sheet"
+        tools:layout="@layout/fragment_address_bottom_sheet" >
+        <argument
+            android:name="parts"
+            app:argType="java.lang.String[]"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_addressBottomSheetFragment_to_adressFragment"
+            app:destination="@id/adressFragment" />
+    </dialog>
+</navigation>

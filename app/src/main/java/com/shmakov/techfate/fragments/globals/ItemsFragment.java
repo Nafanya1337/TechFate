@@ -45,7 +45,6 @@ public class ItemsFragment extends Fragment {
 
     public ItemsFragment(Context context, Product[] all) {
         this.context = context;
-        Log.d("mymy", "Context = " + context);
         this.all = all;
         this.productAdapter = new ProductAdapter(this.context, all);
     }

@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -36,11 +37,12 @@ import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.cart.CartFragment;
 import com.shmakov.techfate.fragments.home.HomeFragment;
 import com.shmakov.techfate.mytools.ColorManager;
+import com.yandex.mapkit.MapKitFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct, CartAdapter.updateAmount {
+public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct {
 
     BottomNavigationView menu;
     NavController navController;
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createProducts();
+        MapKitFactory.setApiKey("f425d115-72d7-4ff9-bff7-20f64fbd8769");
+        MapKitFactory.initialize(this);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         menu = findViewById(R.id.nav_menu);
@@ -246,13 +250,8 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                 }
             });
 
-    @Override
-    public void add(int cost) {
-
-    }
-
-    @Override
-    public void remove(int cost) {
-
+    public void makePayment(View view) {
+        Intent intent = new Intent(this, PaymentActivity.class);
+        startActivity(intent);
     }
 }

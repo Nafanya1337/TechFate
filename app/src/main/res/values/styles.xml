@@ -41,14 +41,16 @@
     </style>
 
 
-    <style name="FilterStyle"
-        parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="BottomSheetStyle"
+        parent="Theme.Material3.DayNight.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="colorAccent">@color/yellow</item>
     </style>
 
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_corners</item>
     </style>
+
 
 </resources>

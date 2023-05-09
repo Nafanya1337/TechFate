@@ -77,7 +77,7 @@ public class FilterFragment extends BottomSheetDialogFragment {
 
     @Override
     public int getTheme() {
-        return R.style.FilterStyle;
+        return R.style.BottomSheetStyle;
     }
 
     @Override
