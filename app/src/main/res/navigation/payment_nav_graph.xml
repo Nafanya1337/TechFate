@@ -16,8 +16,12 @@
             app:nullable="true"
             android:defaultValue="0" />
         <action
-            android:id="@+id/action_adressFragment_to_deliveryFragment2"
-            app:destination="@id/deliveryFragment" />
+            android:id="@+id/action_adressFragment_to_deliveryFragment"
+            app:destination="@id/deliveryFragment"
+            app:enterAnim="@anim/slide_right_to_left_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@anim/slide_left_to_right_out"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_adressFragment_to_addressBottomSheetFragment2"
             app:destination="@id/addressBottomSheetFragment" />
@@ -29,11 +33,14 @@
         tools:layout="@layout/fragment_delivery" >
         <action
             android:id="@+id/action_deliveryFragment_to_cardPaymentFragment"
-            app:destination="@id/cardPaymentFragment" />
+            app:destination="@id/cardPaymentFragment"
+            app:enterAnim="@anim/slide_right_to_left_in"
+            app:popExitAnim="@anim/slide_left_to_right_out" />
         <argument
-            android:name="Adress"
+            android:name="Address"
             app:argType="string"
-            app:nullable="true" />
+            app:nullable="true"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/cardPaymentFragment"
@@ -42,10 +49,24 @@
         tools:layout="@layout/fragment_card_payment" >
         <action
             android:id="@+id/action_cardPaymentFragment_to_addingCardFragment"
-            app:destination="@id/addingCardFragment" />
+            app:destination="@id/addingCardFragment"
+            app:enterAnim="@anim/slide_right_to_left_in"
+            app:popExitAnim="@anim/slide_left_to_right_out" />
         <action
             android:id="@+id/action_cardPaymentFragment_to_makeOrderFragment"
-            app:destination="@id/makeOrderFragment" />
+            app:destination="@id/makeOrderFragment"
+            app:enterAnim="@anim/slide_right_to_left_in"
+            app:popExitAnim="@anim/slide_left_to_right_out" />
+        <argument
+            android:name="DeliveryMethod"
+            app:argType="string"
+            android:defaultValue="0"
+            app:nullable="true" />
+        <argument
+            android:name="Address"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/addingCardFragment"
@@ -54,7 +75,9 @@
         tools:layout="@layout/fragment_adding_card" >
         <action
             android:id="@+id/action_addingCardFragment_to_cardPaymentFragment"
-            app:destination="@id/cardPaymentFragment" />
+            app:destination="@id/cardPaymentFragment"
+            app:enterAnim="@anim/slide_right_to_left_in"
+            app:popExitAnim="@anim/slide_left_to_right_out" />
     </fragment>
     <fragment
         android:id="@+id/makeOrderFragment"
@@ -63,7 +86,9 @@
         tools:layout="@layout/fragment_make_order" >
         <action
             android:id="@+id/action_makeOrderFragment_to_orderInfoFragment"
-            app:destination="@id/orderInfoFragment" />
+            app:destination="@id/orderInfoFragment"
+            app:enterAnim="@anim/slide_right_to_left_in"
+            app:popExitAnim="@anim/slide_left_to_right_out" />
     </fragment>
     <fragment
         android:id="@+id/orderInfoFragment"
@@ -72,7 +97,7 @@
         tools:layout="@layout/fragment_order_info" />
     <dialog
         android:id="@+id/addressBottomSheetFragment"
-        android:name="com.shmakov.techfate.AddressBottomSheetFragment"
+        android:name="com.shmakov.techfate.fragments.cart.AddressBottomSheetFragment"
         android:label="fragment_address_bottom_sheet"
         tools:layout="@layout/fragment_address_bottom_sheet" >
         <argument

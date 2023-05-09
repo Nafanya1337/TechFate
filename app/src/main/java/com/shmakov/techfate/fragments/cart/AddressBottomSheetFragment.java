@@ -1,4 +1,4 @@
-package com.shmakov.techfate;
+package com.shmakov.techfate.fragments.cart;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
+import com.shmakov.techfate.R;
 
 
 public class AddressBottomSheetFragment extends BottomSheetDialogFragment {
@@ -93,10 +94,11 @@ public class AddressBottomSheetFragment extends BottomSheetDialogFragment {
                 }
 
                 if (!adressFragment_houseNum.getText().toString().equals("")) {
-                    if (!address.contains(adressFragment_houseNum.getText().toString()))
+                    if (!address.contains(adressFragment_houseNum.getText().toString())) {
                         if (!adressFragment_houseNum.getText().toString().contains("д"))
                             address += ", д.";
                         address += " " + adressFragment_houseNum.getText().toString();
+                    }
                 } else {
                     adressFragment_houseNum.setError("Поле не может быть пустым!");
                     isEmpty = true;

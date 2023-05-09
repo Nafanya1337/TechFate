@@ -9,13 +9,17 @@
 
 
     <TextView
+        android:fontFamily="@font/dmsans_regular"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:textSize="17sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Адрес доставки"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:layout_gravity="center"
-        android:textSize="25sp"
         android:textColor="@color/black"/>
 
     <com.yandex.mapkit.mapview.MapView
@@ -29,10 +33,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Сохранненые адреса"
+        android:gravity="center"
+        android:fontFamily="@font/dmsans_medium"
         android:layout_marginTop="15dp"
+        android:textStyle="normal"
         android:layout_marginBottom="15dp"
         android:layout_gravity="center"
-        android:textSize="25sp"
+        android:textSize="17sp"
         android:textColor="@color/black"/>
 
     <FrameLayout
@@ -42,11 +49,13 @@
         android:layout_height="0dp"/>
 
     <Button
+        android:id="@+id/adressFragmentNextBtn"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="25dp"
         android:layout_height="wrap_content"
         android:text="Выбор способа доставки"
         android:layout_gravity="center"
+        android:fontFamily="@font/dmsans_medium"
         android:layout_marginBottom="15dp"
         android:textColor="@color/black"
         android:drawableRight="@drawable/ic_arrow_right"

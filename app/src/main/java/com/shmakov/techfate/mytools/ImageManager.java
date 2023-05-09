@@ -10,6 +10,9 @@ import static com.shmakov.techfate.entities.inner.Category.WATCHES_NAME_CATEGORY
 
 import com.shmakov.techfate.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ImageManager {
     public static int findCategoryMiniIMG(String name) {
         switch (name) {
@@ -47,6 +50,24 @@ public class ImageManager {
                 return R.drawable.category_laptops_back;
             case MONITORS_NAME_CATEGORY:
                 return R.drawable.category_monitors_back;
+        }
+        return 0;
+    }
+
+    public static int findDeliveryIMG(String name) {
+        Pattern pattern = Pattern.compile("\\s\\((.+)");
+        Matcher matcher = pattern.matcher(name);
+        do {
+            name = matcher.replaceAll("");
+            matcher = pattern.matcher(name);
+        } while (matcher.find());
+        switch (name) {
+            case "Курьером":
+                return R.drawable.baseline_face_24;
+            case "Почтой":
+                return R.drawable.pochta_rossii;
+            case "Курьерской службой СДЭК":
+                return R.drawable.sdek;
         }
         return 0;
     }

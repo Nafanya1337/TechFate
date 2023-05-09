@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/item_delivery_img"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_face_24"/>
+
+        <TextView
+            android:id="@+id/item_delivery_text"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"
+            android:fontFamily="@font/dmsans_regular"
+            android:textColor="@color/black"
+            android:text="Ку" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/item_delivery_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:layout_marginRight="15dp"
+            android:fontFamily="@font/dmsans_regular"
+            android:textColor="@color/hint_mini"
+            android:gravity="center|right"
+            android:text="300 ₽" />
+
+        <RadioButton
+            android:id="@+id/item_delivery_radioButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center|right"
+            android:button="@color/transparent"
+            android:background="@drawable/address_selector"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/line" />
+</LinearLayout>

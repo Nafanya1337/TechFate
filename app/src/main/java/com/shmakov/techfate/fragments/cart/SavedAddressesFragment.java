@@ -1,4 +1,4 @@
-package com.shmakov.techfate;
+package com.shmakov.techfate.fragments.cart;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.SavedAdressesAdapter;
 
 import java.util.ArrayList;
@@ -54,6 +55,13 @@ public class SavedAddressesFragment extends Fragment {
             noAddressesMessage.setVisibility(View.VISIBLE);
             savedAddresses_listView.setVisibility(View.GONE);
         }
+    }
+
+    public String getChosenAddress() {
+        if (savedAdressesAdapter == null)
+            return null;
+        int i =savedAdressesAdapter.getChosen_position();
+        return addresses.get(i);
     }
 
     public void setAddresses(ArrayList<String> addresses) {

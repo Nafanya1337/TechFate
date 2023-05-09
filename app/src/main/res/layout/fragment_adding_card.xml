@@ -1,14 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".fragments.cart.AddingCardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавление новой карты"
+        android:fontFamily="@font/dmsans_regular"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center"
+        android:textSize="17sp"
+        android:textColor="@color/black"/>
 
-</FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include
+                android:layout_gravity="center"
+                android:layout_marginVertical="15dp"
+                android:id="@+id/newCard"
+                layout="@layout/new_card"
+                android:layout_width="250dp"
+                android:layout_height="150dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="25dp"
+                android:background="@color/white"
+                app:counterMaxLength="18"
+                app:counterEnabled="true"
+                app:startIconDrawable="@drawable/baseline_person_outline_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addingCardFragment_Holder"
+                    android:layout_width="match_parent"
+                    android:maxLength="18"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:autofillHints="name"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
+                    android:fontFamily="@font/dmsans_regular"
+                    android:hint="Владелец карты"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="25dp"
+                android:background="@color/white"
+                app:counterMaxLength="19"
+                app:counterEnabled="true"
+                app:startIconDrawable="@drawable/baseline_credit_card_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addingCardFragment_CardNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:maxLength="19"
+                    android:textColor="@color/black"
+                    android:autofillHints="creditCardNumber"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:inputType="none"
+                    android:fontFamily="@font/dmsans_regular"
+                    android:hint="Номер карты"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_marginHorizontal="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/white"
+                    app:counterMaxLength="5"
+                    app:counterEnabled="true"
+                    app:startIconDrawable="@drawable/baseline_date_range_24"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addingCardFragment_Date"
+                        android:layout_width="165dp"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="creditCardExpirationDate"
+                        android:fontFamily="@font/dmsans_regular"
+                        android:hint="Срок действия"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:maxLength="5"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/white"
+                    app:counterMaxLength="3"
+                    app:counterEnabled="true"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="#999999"
+                    app:startIconDrawable="@drawable/baseline_password_24"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addingCardFragment_CVC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="creditCardSecurityCode"
+                        android:fontFamily="@font/dmsans_regular"
+                        android:hint="CVV/CVC"
+                        android:inputType="numberPassword"
+                        android:maxLength="3"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавить карту"
+        android:textColor="@color/black"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/dmsans_medium"
+        android:layout_gravity="bottom|center"/>
+</LinearLayout>

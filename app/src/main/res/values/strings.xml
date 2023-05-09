@@ -10,4 +10,11 @@
         <item>По убыванию</item>
         <item>По возсрастанию</item>
     </string-array>
+
+    <string-array name="delivery_methods">
+        <item>Курьером (2-3 дня) 300 ₽</item>
+        <item>Почтой (7-8 дней) 0 ₽</item>
+        <item>Курьерской службой СДЭК (3-5 дней) 150 ₽</item>
+
+    </string-array>
 </resources>

@@ -2,19 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
     android:padding="5dp">
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:id="@+id/item_saved_addresses_address_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@drawable/line"
+        android:scaleType="fitXY"/>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/baseline_pin_drop_24"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center|bottom"/>
 
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/item_saved_addresses_city"
@@ -22,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Город"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="16sp"
             />
 
         <TextView
@@ -30,16 +44,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ул. Пушкина, д. 10, кв. 123"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="center|left"
             android:textIsSelectable="true" />
     </LinearLayout>
 
-    <CheckBox
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <RadioButton
+        android:id="@+id/address_checkbox"
+        android:layout_width="30dp"
+        android:layout_gravity="center"
+        android:layout_height="30dp"
         android:button="@color/transparent"
         android:background="@drawable/address_selector"/>
+    </LinearLayout>
 </LinearLayout>

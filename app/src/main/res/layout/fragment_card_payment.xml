@@ -6,11 +6,45 @@
     android:orientation="vertical"
     tools:context=".fragments.cart.CardPaymentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Способ оплаты"
+        android:fontFamily="@font/dmsans_regular"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center"
+        android:textSize="17sp"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/baseline_credit_card_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Сохраненные банковские карты"
+            android:textSize="17sp"
+            android:fontFamily="@font/dmsans_regular"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/cardPaymentFragmentContainerCard"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
 
 </LinearLayout>

@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".fragments.cart.DeliveryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/temptemptemp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Способ доставки"
+        android:fontFamily="@font/dmsans_regular"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center"
+        android:textSize="17sp"
+        android:textColor="@color/black"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/deliveryFragmentDeliveryMethodsRecyclerView"
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+
+    <Button
+        android:id="@+id/deliveryFragmentNextBtn"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_height="wrap_content"
+        android:text="Выбор способа оплаты"
+        android:layout_gravity="center"
+        android:fontFamily="@font/dmsans_medium"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/black"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:textSize="16sp"/>
+
+</LinearLayout>

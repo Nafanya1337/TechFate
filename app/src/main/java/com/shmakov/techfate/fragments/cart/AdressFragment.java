@@ -1,11 +1,14 @@
 package com.shmakov.techfate.fragments.cart;
 
+import android.content.DialogInterface;
+
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentManager;
@@ -16,12 +19,11 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.shmakov.techfate.R;
 
-import com.shmakov.techfate.SavedAddressesFragment;
 import com.yandex.mapkit.MapKitFactory;
 
 import com.yandex.mapkit.geometry.Point;
@@ -39,7 +41,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 
 public class AdressFragment extends Fragment implements GeoObjectTapListener, InputListener {
@@ -51,6 +52,8 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
     SavedAddressesFragment savedAddressesFragment;
 
     ArrayList<String> addresses = new ArrayList<>();
+
+    Button adressFragmentNextBtn;
 
     PlacemarkMapObject placemark = null;
 
@@ -65,6 +68,7 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_adress, container, false);
         mapView = view.findViewById(R.id.mapview);
+        adressFragmentNextBtn = view.findViewById(R.id.adressFragmentNextBtn);
         adressFragmentFrameLayout = view.findViewById(R.id.adressFragmentFrameLayout);
         return view;
     }
@@ -74,7 +78,7 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
         super.onViewCreated(view, savedInstanceState);
 
         mapView.getMap().move(
-                new CameraPosition(new Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
+                new CameraPosition(new Point(55.758021, 37.617638), 11.0f, 0.0f, 0.0f),
                 new Animation(Animation.Type.SMOOTH, 0),
                 null);
 
@@ -98,6 +102,36 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
             }
         });
 
+        adressFragmentNextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String address = savedAddressesFragment.getChosenAddress();
+                if (address == null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("Мы не сможем доставить товар без выбранного адреса доставки \uD83D\uDCE6");
+                    builder.setTitle("Выберите адрес доставки");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Хорошо", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("Пожалуйста, убедитесь в корректности выбранного вами адреса доставки:\n\n\uD83D\uDCCD " + address);
+                    builder.setTitle("Подтвердите корректность выбранного адреса");
+                    builder.setPositiveButton("✅ Подтвердить", (DialogInterface.OnClickListener) (dialog, which) -> {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Address", address);
+                        Navigation.findNavController(view).navigate(R.id.action_adressFragment_to_deliveryFragment, bundle);
+                    });
+                    builder.setNegativeButton("\uD83D\uDD8A️ Изменить", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            }
+        });
     }
 
     @Override
