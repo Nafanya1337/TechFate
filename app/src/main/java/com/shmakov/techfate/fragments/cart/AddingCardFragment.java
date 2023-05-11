@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.shmakov.techfate.R;
+import com.shmakov.techfate.mytools.TextWatchers.CardDateTextWatcher;
+import com.shmakov.techfate.mytools.TextWatchers.CardHolderTextWatcher;
 import com.shmakov.techfate.mytools.TextWatchers.CardNumTextWatcher;
 
 public class AddingCardFragment extends Fragment {
@@ -39,5 +41,7 @@ public class AddingCardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addingCardFragment_CardNum.addTextChangedListener(new CardNumTextWatcher(view.findViewById(R.id.new_card_num)));
+        addingCardFragment_Holder.addTextChangedListener(new CardHolderTextWatcher(view.findViewById(R.id.new_card_holder)));
+        addingCardFragment_Date.addTextChangedListener(new CardDateTextWatcher(view.findViewById(R.id.new_card_data)));
     }
 }

@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.shmakov.techfate.R;
 
@@ -161,12 +162,17 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
                 .getItem(GeoObjectSelectionMetadata.class);
 
         if (selectionMetadata != null) {
-            mapView.getMap().selectGeoObject(selectionMetadata.getId(), selectionMetadata.getLayerId());
-            address = getAdress(geoObjectTapEvent);
-            String[] parts = makeAddressSplit();
-            Bundle bundle = new Bundle();
-            bundle.putStringArray("parts", parts);
-            Navigation.findNavController(getView()).navigate(R.id.addressBottomSheetFragment, bundle);
+            try {
+                mapView.getMap().selectGeoObject(selectionMetadata.getId(), selectionMetadata.getLayerId());
+                address = getAdress(geoObjectTapEvent);
+                String[] parts = makeAddressSplit();
+                Bundle bundle = new Bundle();
+                bundle.putStringArray("parts", parts);
+                Navigation.findNavController(getView()).navigate(R.id.addressBottomSheetFragment, bundle);
+            }
+            catch (Exception e) {
+                Toast.makeText(getContext(), "Плохое соединение с интернетом", Toast.LENGTH_SHORT).show();
+            }
         }
 
 

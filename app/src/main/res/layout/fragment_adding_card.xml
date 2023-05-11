@@ -110,7 +110,7 @@
                         android:autofillHints="creditCardExpirationDate"
                         android:fontFamily="@font/dmsans_regular"
                         android:hint="Срок действия"
-                        android:inputType="numberDecimal"
+                        android:inputType="date"
                         android:maxLines="1"
                         android:maxLength="5"
                         android:textColor="@color/black"
