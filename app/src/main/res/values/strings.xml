@@ -17,4 +17,11 @@
         <item>Курьерской службой СДЭК (3-5 дней) 150 ₽</item>
 
     </string-array>
+
+    <string-array name="payment_methods">
+        <item>Через СБП</item>
+        <item>Картой</item>
+        <item>QIWI Wallet</item>
+        <item>ЮMoney</item>
+    </string-array>
 </resources>

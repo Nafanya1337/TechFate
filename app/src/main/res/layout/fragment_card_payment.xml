@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".fragments.cart.CardPaymentFragment">
 
     <TextView
@@ -20,6 +21,7 @@
         android:textColor="@color/black"/>
 
     <LinearLayout
+        android:background="@color/white"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,8 +45,33 @@
     </LinearLayout>
 
     <FrameLayout
+        android:background="@color/white"
         android:id="@+id/cardPaymentFragmentContainerCard"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="165dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/line"/>
+
+    <FrameLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/cardPaymentFragmentNextBtn"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_height="wrap_content"
+        android:text="Оформление заказа"
+        android:layout_gravity="center"
+        android:fontFamily="@font/dmsans_medium"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/black"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:textSize="16sp"/>
 
 </LinearLayout>

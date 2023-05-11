@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".fragments.cart.MakeOrderFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Информация о заказе"
+        android:fontFamily="@font/dmsans_regular"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center"
+        android:textSize="17sp"
+        android:textColor="@color/black"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Товары"
+        android:textAllCaps="true"
+        android:layout_marginLeft="25dp"
+        android:fontFamily="@font/dmsans_medium"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"/>
+
+    <FrameLayout
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/line"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Адрес доставки"
+        android:layout_marginTop="15dp"
+        android:textAllCaps="true"
+        android:layout_marginLeft="25dp"
+        android:fontFamily="@font/dmsans_medium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="#A1A1A1"/>
+
+    <include
+        android:layout_marginHorizontal="15dp"
+        android:layout_gravity="center"
+        android:layout_marginVertical="15dp"
+        android:id="@+id/newCard"
+        layout="@layout/item_saved_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

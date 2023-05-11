@@ -9,25 +9,28 @@ import com.shmakov.techfate.R;
 
 public class Card implements Parcelable {
 
-    private String cardHolder, cardNum, cardDate, cardType;
+    private String cardHolder, cardNum, cardDate, cardType, CVC;
 
     private int cardImg;
 
 
-    public Card(String cardHolder, String cardNum, String cardDate, String cardType) {
+    public Card(String cardHolder, String cardNum, String cardDate, String cardType, String CVC) {
         this.cardDate = cardDate;
         this.cardNum = cardNum;
         this.cardHolder = cardHolder;
         this.cardType = cardType;
-        switch (cardNum.charAt(0)){
-            case 2:
-                this.cardImg = R.drawable.card_mir;
-                break;
-            default:
-                this.cardImg = 0;
-        }
+        this.CVC = CVC;
+        this.cardImg = choosePaymentSystem(cardNum.charAt(0));
     }
 
+
+    public String getCVC() {
+        return CVC;
+    }
+
+    public void setCVC(String CVC) {
+        this.CVC = CVC;
+    }
 
     protected Card(Parcel in) {
         cardHolder = in.readString();
@@ -35,6 +38,7 @@ public class Card implements Parcelable {
         cardDate = in.readString();
         cardType = in.readString();
         cardImg = in.readInt();
+        CVC = in.readString();
     }
 
     public static final Creator<Card> CREATOR = new Creator<Card>() {
@@ -63,6 +67,21 @@ public class Card implements Parcelable {
 
     public void setCardNum(String cardNum) {
         this.cardNum = cardNum;
+        this.cardImg = choosePaymentSystem(cardNum.charAt(0));
+    }
+
+    public static int choosePaymentSystem(char a) {
+        switch (a) {
+            case '2':
+                return R.drawable.card_mir;
+            case '3':
+                return R.drawable.american_express;
+            case '4':
+                return R.drawable.visa;
+            case '5':
+                return R.drawable.mastercard;
+        }
+        return 0;
     }
 
     public void setCardType(String cardType) {
@@ -101,5 +120,6 @@ public class Card implements Parcelable {
         dest.writeString(cardDate);
         dest.writeString(cardType);
         dest.writeInt(cardImg);
+        dest.writeString(CVC);
     }
 }

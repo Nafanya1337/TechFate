@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +28,7 @@ import com.shmakov.techfate.fragments.cart.AddingCardFragment;
 
 import java.util.ArrayList;
 
-public class CardFragment extends Fragment {
+public class CardFragment extends Fragment implements SavedCardsAdapter.openCard {
 
     LinearLayout cardContainer;
 
@@ -36,6 +37,8 @@ public class CardFragment extends Fragment {
     Button cardFragmentAddingCardBtn;
     Context context;
     ArrayList<Card> cards;
+
+    CardSwiperFragment cardSwiperFragment;
 
     public CardFragment(Context context, ArrayList<Card> cards) {
         this.context = context;
@@ -54,28 +57,47 @@ public class CardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (cards.isEmpty()) {
-            TextView textView = new TextView(context);
-            textView.setText("Не найдено ни одной сохраненной карты \uD83D\uDCB3");
-            textView.setTextSize(16f);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(25, 0, 25, 0);
-            textView.setLayoutParams(params);
-            textView.setGravity(Gravity.CENTER);
-            textView.setTextColor(Color.parseColor( "#000000"));
-            cardContainer.addView(textView);
-        }
-        else {
-            FragmentManager fm = getParentFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            CardSwiperFragment cardSwiperFragment = new CardSwiperFragment(context, cards);
-            ft.replace(cardContainer.getId(), cardSwiperFragment).commit();
-        }
+        FragmentManager fm = getParentFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        cardSwiperFragment = new CardSwiperFragment(context, cards, this);
+        ft.replace(cardContainer.getId(), cardSwiperFragment).commit();
 
         cardFragmentAddingCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.action_cardPaymentFragment_to_addingCardFragment);
+            }
+        });
+
+        getParentFragmentManager().setFragmentResultListener("AddingCard", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                if (requestKey.equals("AddingCard")) {
+                    if (result.containsKey("Card")) {
+                        Card card = result.getParcelable("Card");
+                        cards.add(card);
+                        cardSwiperFragment.setCards(cards);
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void openCard(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("Card", cards.get(position));
+        Navigation.findNavController(getView()).navigate(R.id.action_cardPaymentFragment_to_addingCardFragment, bundle);
+        getParentFragmentManager().setFragmentResultListener("EdittingCard", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                if (requestKey.equals("EdittingCard")) {
+                    if (result.containsKey("Card")) {
+                        Card card = result.getParcelable("Card");
+                        cards.set(position, card);
+                        cardSwiperFragment.setCards(cards);
+                    }
+                }
             }
         });
     }

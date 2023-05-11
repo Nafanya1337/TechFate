@@ -26,25 +26,18 @@ public class CardDateTextWatcher implements TextWatcher {
 
     }
 
-    String mask = "XX/XX";
-
     @Override
     public void afterTextChanged(Editable s) {
         if (!nowEditting) {
-
-            for (int i_s = 0, i_m = 0; i_s < s.length() && i_m < mask.length(); i_s++, i_m++) {
-                if (mask.charAt(i_m) == 'X' && check(s.charAt(i_s))) {
-
-                    sb.append(s.charAt(i_s));
-                }
-                if (mask.charAt(i_m) == '/' && check(s.charAt(i_s))) {
-                    sb.append('/');
-                    sb.append(s.charAt(i_s));
-                }
+            sb.delete(0, sb.length());
+            for (int i = 0; i < s.length(); i++) {
+                if (check(s.charAt(i)))
+                    sb.append(s.charAt(i));
             }
+            if (sb.length() >= 3)
+                sb.insert(2, '/');
             nowEditting = true;
-            s.clear();
-            s.append(sb.toString());
+            s.replace(0, s.length(), sb);
             nowEditting = false;
             cardDate.post(new Runnable() {
                 @Override

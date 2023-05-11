@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.shmakov.techfate.adapters.SavedCardsAdapter;
 import com.shmakov.techfate.entities.Card;
@@ -25,13 +26,36 @@ public class CardSwiperFragment extends Fragment {
 
     Context context;
 
+    TextView swiper_zero_cards_text;
+
+    CardFragment cardFragment;
+
     ArrayList<Card> cards;
 
-    public CardSwiperFragment(Context context, ArrayList<Card> cards) {
-        this.context = context;
-        this.cards = cards;
+    public void replaceCard(int position, Card card) {
+        this.cards.set(position, card);
+        if (savedCardsAdapter != null)
+            savedCardsAdapter.setCard(position, card);
+        else
+            savedCardsAdapter = new SavedCardsAdapter(context, cards, cardFragment);
     }
 
+    public CardSwiperFragment(Context context, ArrayList<Card> cards, CardFragment cardFragment) {
+        this.context = context;
+        this.cards = cards;
+        this.cardFragment = cardFragment;
+    }
+
+    public void setCards(ArrayList<Card> cards) {
+        this.cards = cards;
+        if (swiper_zero_cards_text.getVisibility() == View.VISIBLE) {
+            swiper_zero_cards_text.setVisibility(View.GONE);
+        }
+        if (savedCardsAdapter != null)
+            savedCardsAdapter.setCards(cards);
+        else
+            savedCardsAdapter = new SavedCardsAdapter(context, cards, cardFragment);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,13 +63,19 @@ public class CardSwiperFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_card_swiper, container, false);
         cardSwiperRecycler = view.findViewById(R.id.cardSwiperRecycler);
+        swiper_zero_cards_text = view.findViewById(R.id.swiper_zero_cards_text);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        savedCardsAdapter = new SavedCardsAdapter(context, cards);
+        savedCardsAdapter = new SavedCardsAdapter(context, cards, cardFragment);
         cardSwiperRecycler.setAdapter(savedCardsAdapter);
+        if (cards.isEmpty())
+            swiper_zero_cards_text.setVisibility(View.VISIBLE);
+        if (!cards.isEmpty() && swiper_zero_cards_text.getVisibility() == View.VISIBLE) {
+            swiper_zero_cards_text.setVisibility(View.GONE);
+        }
     }
 }
