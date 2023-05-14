@@ -6,13 +6,18 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.shmakov.techfate.Helpers.SwipeHelper;
 import com.shmakov.techfate.adapters.SavedCardsAdapter;
 import com.shmakov.techfate.entities.Card;
 
@@ -29,6 +34,8 @@ public class CardSwiperFragment extends Fragment {
     TextView swiper_zero_cards_text;
 
     CardFragment cardFragment;
+
+    SwipeHelper linearSnapHelper;
 
     ArrayList<Card> cards;
 
@@ -55,6 +62,7 @@ public class CardSwiperFragment extends Fragment {
             savedCardsAdapter.setCards(cards);
         else
             savedCardsAdapter = new SavedCardsAdapter(context, cards, cardFragment);
+        card_position = 0;
     }
 
     @Override
@@ -67,6 +75,8 @@ public class CardSwiperFragment extends Fragment {
         return view;
     }
 
+    int card_position = -1;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -76,6 +86,18 @@ public class CardSwiperFragment extends Fragment {
             swiper_zero_cards_text.setVisibility(View.VISIBLE);
         if (!cards.isEmpty() && swiper_zero_cards_text.getVisibility() == View.VISIBLE) {
             swiper_zero_cards_text.setVisibility(View.GONE);
+            card_position = 0;
         }
+
+
+        linearSnapHelper = new SwipeHelper();
+        linearSnapHelper.attachToRecyclerView(cardSwiperRecycler);
+    }
+
+    public int getFocusableCardPosition(){
+        if (linearSnapHelper.getCurrent_pos() == -1) {
+            return card_position;
+        }
+        return linearSnapHelper.getCurrent_pos();
     }
 }

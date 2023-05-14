@@ -44,6 +44,8 @@ import java.util.function.Predicate;
 public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.pickAColor, ConfigurationsAdapter.ChooseConf {
 
     public static final String PRODUCT_TAG = "PRODUCT";
+    public static final String CONFIGURATION_TAG = "CONFIGURATION_TAG";
+    public static final String COLOR_TAG = "COLOR_TAG";
 
     private Button addToCartButton;
 
@@ -140,6 +142,16 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         ft.replace(all_reviews_container.getId(), reviewsFragment).commit();
     }
 
+
+    Intent main_data;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        main_data = new Intent();
+        main_data.putExtra("requestCode", getIntent().getIntExtra("requestCode", 0));
+        setResult(RESULT_CANCELED, main_data);
+    }
+
     public void closeItem(View view) {
         finish();
     }
@@ -152,15 +164,23 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     public void addToCart(View view) {
         Button btn = ((Button)view);
         if (btn.getText().equals("Добавить в корзину")) {
-            Intent data = new Intent();
+            Bundle bundle = new Bundle();
             products.add(current_product);
-            data.putExtra(PRODUCT_TAG, current_product);
-            setResult(RESULT_OK, data);
+            bundle.putParcelable(PRODUCT_TAG, current_product);
+            String color =  current_product.getColors()[colorsFragment.selectedColor()];
+            bundle.putString(COLOR_TAG, color);
+            if (configurationFragment != null)
+                bundle.putString(CONFIGURATION_TAG, configurationFragment.getConfiguration());
+            else
+                bundle.putString(CONFIGURATION_TAG, "");
+            main_data.putExtras(bundle);
+            main_data.putExtra("requestCode", getIntent().getIntExtra("requestCode", 0));
+            setResult(RESULT_OK, main_data);
             btn.setText("Удалить из корзины");
             btn.setBackgroundColor(Color.parseColor("#ff4d4d"));
         }
         else {
-            setResult(RESULT_CANCELED);
+            setResult(RESULT_CANCELED, main_data);
             btn.setText("Добавить в корзину");
             btn.setBackgroundColor(Color.parseColor("#FFDB47"));
         }

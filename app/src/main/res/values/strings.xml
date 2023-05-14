@@ -19,8 +19,8 @@
     </string-array>
 
     <string-array name="payment_methods">
-        <item>Через СБП</item>
         <item>Картой</item>
+        <item>Через СБП</item>
         <item>QIWI Wallet</item>
         <item>ЮMoney</item>
     </string-array>

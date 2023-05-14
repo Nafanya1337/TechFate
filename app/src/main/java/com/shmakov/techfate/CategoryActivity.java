@@ -3,6 +3,8 @@ package com.shmakov.techfate;
 import static com.shmakov.techfate.FilterFragment.AVAILABLE;
 import static com.shmakov.techfate.FilterFragment.COLORS_KEY;
 import static com.shmakov.techfate.FilterFragment.MIN_MAX_COST_KEY;
+import static com.shmakov.techfate.ItemCartActivity.COLOR_TAG;
+import static com.shmakov.techfate.ItemCartActivity.CONFIGURATION_TAG;
 import static com.shmakov.techfate.ItemCartActivity.PRODUCT_TAG;
 
 import androidx.activity.result.ActivityResult;
@@ -30,6 +32,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.shmakov.techfate.adapters.ColorPickerAdapter;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Cart;
+import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
@@ -141,7 +144,7 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         activityResultLauncher.launch(intent);
     }
 
-    ArrayList<Product> products_in_cart = new ArrayList<Product>();
+    ArrayList<ProductInCart> products_in_cart = new ArrayList<ProductInCart>();
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -150,19 +153,28 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
                 public void onActivityResult(ActivityResult result) {
                     Intent data = result.getData();
                     if (data != null) {
-                        Product product = new Product(data.getParcelableExtra(PRODUCT_TAG));
-                        products_in_cart.add(product);
+                        Bundle bundle = data.getExtras();
+                        Product product = new Product(bundle.getParcelable(PRODUCT_TAG));
+                        ProductInCart productInCart = new ProductInCart(product, bundle.getString(COLOR_TAG), bundle.getString(CONFIGURATION_TAG));
+                        products_in_cart.add(productInCart);
                     }
                 }
             });
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    public void onBackPressed() {
         Intent main_data = new Intent();
-        main_data.putParcelableArrayListExtra(PRODUCT_TAG, products_in_cart);
-        setResult(RESULT_OK, main_data);
+        main_data.putExtra("requestCode", getIntent().getIntExtra("requestCode", 0));
+        if (products_in_cart.size() > 0) {
+            main_data.putParcelableArrayListExtra(PRODUCT_ARRAY_TAG, products_in_cart);
+            setResult(RESULT_OK, main_data);
+        }
+        else
+            setResult(RESULT_CANCELED, main_data);
+        super.onBackPressed();
     }
+
+    public static final String PRODUCT_ARRAY_TAG = "ARRAY_OF_PRODUCTS";
 
     private HashMap<String, ArrayList<String>> filters = new HashMap<>();
 

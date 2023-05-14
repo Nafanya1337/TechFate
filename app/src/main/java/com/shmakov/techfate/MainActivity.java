@@ -2,6 +2,9 @@ package com.shmakov.techfate;
 
 
 
+import static com.shmakov.techfate.CategoryActivity.PRODUCT_ARRAY_TAG;
+import static com.shmakov.techfate.ItemCartActivity.COLOR_TAG;
+import static com.shmakov.techfate.ItemCartActivity.CONFIGURATION_TAG;
 import static com.shmakov.techfate.ItemCartActivity.PRODUCT_TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.FragmentNavigator;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,11 +34,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.shmakov.techfate.adapters.CartAdapter;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 import com.shmakov.techfate.adapters.ProductAdapter;
+import com.shmakov.techfate.entities.Cart;
+import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.cart.CartFragment;
+import com.shmakov.techfate.fragments.cart.CartFragment.makePayment;
 import com.shmakov.techfate.fragments.home.HomeFragment;
 import com.shmakov.techfate.mytools.ColorManager;
 import com.yandex.mapkit.MapKitFactory;
@@ -42,11 +49,18 @@ import com.yandex.mapkit.MapKitFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct {
+public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct, makePayment {
+
+    private static final int ITEM_ACTIVITY_REQUEST_CODE = 1;
+    private static final int CATERGORY_ACTIVITY_REQUEST_CODE = 2;
+    private static final int PAYMENT_ACTIVITY_REQUEST_CODE = 3;
+
 
     BottomNavigationView menu;
     NavController navController;
     FragmentManager fragmentManager;
+
+    public static Cart cart = new Cart();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +218,8 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
     public void openCategory(String category) {
         Intent intent = new Intent(this, CategoryActivity.class);
         intent.putExtra(CategoryActivity.CATEGORY_TAG, category);
-        activityCategoryResultLauncher.launch(intent);
+        intent.putExtra("requestCode", CATERGORY_ACTIVITY_REQUEST_CODE);
+        activityResultLauncher.launch(intent);
     }
 
 
@@ -221,37 +236,57 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
     public void onClickProduct(View view, Product product) {
         Intent intent = new Intent(this, ItemCartActivity.class);
         product.addWatch();
-        intent.putExtra(PRODUCT_TAG, product);
-        activityProductResultLauncher.launch(intent);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PRODUCT_TAG, product);
+        intent.putExtras(bundle);
+        intent.putExtra("requestCode", ITEM_ACTIVITY_REQUEST_CODE);
+        activityResultLauncher.launch(intent);
     }
 
-    ActivityResultLauncher<Intent> activityProductResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            Intent data = result.getData();
-            if (data != null) {
-                products.add(data.getParcelableExtra(PRODUCT_TAG));
-            }
-        }
-    });
-
-    public static ArrayList<Product> products = new ArrayList<>();
-    ActivityResultLauncher<Intent> activityCategoryResultLauncher = registerForActivityResult(
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    Intent data = result.getData();
-                    if (data != null) {
-                        products.addAll(data.getParcelableArrayListExtra(PRODUCT_TAG));
+                    int resultCode = result.getResultCode();
+                    int requestCode = result.getData().getIntExtra("requestCode", 0);
+                    if (requestCode == CATERGORY_ACTIVITY_REQUEST_CODE) {
+                        if (resultCode == RESULT_OK) {
+                            Intent data = result.getData();
+                            ArrayList<ProductInCart> products = data.getParcelableArrayListExtra(PRODUCT_ARRAY_TAG);
+                            cart.addProducts(products);
+                        }
+                        else {
+                        }
+                    } else if (requestCode == PAYMENT_ACTIVITY_REQUEST_CODE) {
+                        if (resultCode == RESULT_OK) {
+                            cart.clear();
+                        }
+                    } else if (requestCode == ITEM_ACTIVITY_REQUEST_CODE) {
+                        if (resultCode == RESULT_OK) {
+                            Intent data = result.getData();
+                            if (data != null) {
+                                Bundle bundle = data.getExtras();
+                                Product product = bundle.getParcelable(PRODUCT_TAG);
+                                String color = bundle.getString(COLOR_TAG);
+                                String configuration = bundle.getString(CONFIGURATION_TAG);
+                                cart.addProductToCart(product, color, configuration);
+                            }
+                        }
                     }
                 }
             });
 
-    public void makePayment(View view) {
+
+    @Override
+    public void makePayment(String PromocodeName, Float PromocodeRate, Cart cart) {
         Intent intent = new Intent(this, PaymentActivity.class);
-        startActivity(intent);
+        Bundle bundle = new Bundle();
+        bundle.putString("PromocodeName", PromocodeName);
+        bundle.putFloat("PromocodeRate", PromocodeRate);
+        bundle.putParcelable("Cart", cart);
+        intent.putExtras(bundle);
+        intent.putExtra("requestCode", PAYMENT_ACTIVITY_REQUEST_CODE);
+        activityResultLauncher.launch(intent);
     }
 }

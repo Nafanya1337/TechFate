@@ -4,20 +4,24 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.shmakov.techfate.CardFragment;
+import com.shmakov.techfate.ProductCardDialog;
 import com.shmakov.techfate.R;
+import com.shmakov.techfate.adapters.PaymentMethodAdapter;
 import com.shmakov.techfate.entities.Card;
 
 import java.util.ArrayList;
@@ -27,10 +31,15 @@ public class CardPaymentFragment extends Fragment {
 
     Button cardPaymentFragmentNextBtn;
     FrameLayout cardPaymentFragmentContainerCard;
+    RecyclerView payment_methods_listView;
 
     ArrayList<Card> cards = new ArrayList<>();
 
     CardFragment cardFragment;
+
+    String[] methods;
+
+    PaymentMethodAdapter paymentMethodAdapter;
 
     private String DeliveryMethod, Address;
 
@@ -49,12 +58,17 @@ public class CardPaymentFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_card_payment, container, false);
         cardPaymentFragmentContainerCard = view.findViewById(R.id.cardPaymentFragmentContainerCard);
         cardPaymentFragmentNextBtn = view.findViewById(R.id.cardPaymentFragmentNextBtn);
+        payment_methods_listView = view.findViewById(R.id.payment_methods_listView);
+        methods = getResources().getStringArray(R.array.payment_methods);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        paymentMethodAdapter = new PaymentMethodAdapter(getContext(), methods);
+        payment_methods_listView.setAdapter(paymentMethodAdapter);
+
         FragmentManager fm = getParentFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         cardFragment = new CardFragment(getContext(), cards);
@@ -62,8 +76,25 @@ public class CardPaymentFragment extends Fragment {
         cardPaymentFragmentNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_cardPaymentFragment_to_makeOrderFragment);
+                Card card = null;
+                String PaymentMethod = methods[paymentMethodAdapter.getSelected()];
+                if (paymentMethodAdapter.getSelected() == 0) {
+                    if (cardFragment.getCurrentCard() != -1) {
+                        card = cards.get(cardFragment.getCurrentCard());
+                    } else {
+                        Toast.makeText(getContext(), "Не выбрана ни одна карта", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("Card", card);
+                bundle.putString("DeliveryMethod", DeliveryMethod);
+                bundle.putString("Address", Address);
+                bundle.putString("PaymentMethod", PaymentMethod);
+                Navigation.findNavController(view).navigate(R.id.action_cardPaymentFragment_to_makeOrderFragment, bundle);
             }
         });
     }
+
+
 }

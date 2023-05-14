@@ -31,6 +31,7 @@ public class SavedCardsAdapter extends RecyclerView.Adapter<SavedCardsAdapter.My
     openCard openCard;
     Context context;
 
+
     public void setCard(int position, Card card) {
         cards.set(position, card);
         notifyItemChanged(position);
@@ -65,17 +66,10 @@ public class SavedCardsAdapter extends RecyclerView.Adapter<SavedCardsAdapter.My
         holder.card_type.setText(card.getCardType());
         holder.card_img.setImageResource(card.getCardImg());
 
-        holder.view.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                openCard.openCard(position);
-                return true;
-            }
-        });
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openCard.openCard(position);
             }
         });
     }

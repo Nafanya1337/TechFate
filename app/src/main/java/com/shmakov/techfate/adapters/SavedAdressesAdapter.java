@@ -60,6 +60,8 @@ public class SavedAdressesAdapter extends RecyclerView.Adapter<SavedAdressesAdap
                 }
             }
         });
+        if (addresses.size() > 1)
+            holder.item_saved_addresses_address_divider.setVisibility(View.VISIBLE);
     }
 
     public int getChosen_position() {

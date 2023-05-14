@@ -50,7 +50,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragmentManager = getParentFragmentManager();
-        Log.d("mymy", "onCreate HomeFragment");
     }
 
     @Override
@@ -59,7 +58,6 @@ public class HomeFragment extends Fragment {
         RecyclerView categories_list = view.findViewById(R.id.categories_list);
 
         Category.init();
-        Log.d("mymy", "Context = " + getContext());
 
         categoryAdapter = new CategoryAdapter(getContext(), Category.getCategoriesNamesAsArrayList());
 

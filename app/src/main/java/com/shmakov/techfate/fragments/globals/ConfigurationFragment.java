@@ -24,6 +24,8 @@ public class ConfigurationFragment extends Fragment {
     public static final String AMOUNT_KEY = "AMOUNT";
 
     public String getConfiguration() {
+        if (conf == null)
+            return "";
         return conf[configurationsAdapter.selected];
     }
 

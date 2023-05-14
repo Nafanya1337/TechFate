@@ -71,4 +71,18 @@ public class ImageManager {
         }
         return 0;
     }
+
+    public static int findPaymentIMG(String name) {
+        switch (name) {
+            case "Через СБП":
+                return R.drawable.sbp;
+            case "Картой":
+                return R.drawable.baseline_credit_card_24;
+            case "QIWI Wallet":
+                return R.drawable.qiwi;
+            case "ЮMoney":
+                return R.drawable.umoney;
+        }
+        return 0;
+    }
 }

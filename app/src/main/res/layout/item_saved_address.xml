@@ -54,10 +54,11 @@
     </LinearLayout>
 
     <ImageView
+        android:visibility="invisible"
         android:id="@+id/item_saved_addresses_address_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/line"
         android:scaleType="fitXY"/>
 </LinearLayout>

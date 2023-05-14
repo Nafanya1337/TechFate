@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cardSwiperRecycler"
         android:layout_gravity="center"
-        android:layout_width="260dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"/>

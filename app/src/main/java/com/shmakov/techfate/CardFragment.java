@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shmakov.techfate.adapters.SavedCardsAdapter;
 import com.shmakov.techfate.entities.Card;
@@ -100,5 +101,9 @@ public class CardFragment extends Fragment implements SavedCardsAdapter.openCard
                 }
             }
         });
+    }
+
+    public int getCurrentCard(){
+        return cardSwiperFragment.getFocusableCardPosition();
     }
 }
