@@ -26,6 +26,8 @@ import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.mytools.ImageManager;
 
 import java.util.Objects;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class MakeOrderFragment extends Fragment implements MiniProductInCardAdapter.showProductInfo {
@@ -113,7 +115,13 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
         makeOrderBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Order order = new Order(cart, address.getText().toString(), delivery.getText().toString(), cart.getTotal_cost());
+                Random random_num = new Random();
+                StringBuilder order_name = new StringBuilder();
+                order_name.append((char) (random_num.nextInt(26) + 65));
+                order_name.append((char) (random_num.nextInt(26) + 65));
+                order_name.append("#");
+                order_name.append(String.valueOf(random_num.nextInt(8999) + 1000));
+                Order order = new Order(order_name.toString(), cart, address.getText().toString(), delivery.getText().toString(), cart.getTotal_cost());
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("Order", order);
                 Navigation.findNavController(view).navigate(R.id.action_makeOrderFragment_to_orderInfoFragment, bundle);

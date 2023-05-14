@@ -5,6 +5,7 @@
     android:layout_width="100dp"
     android:background="@drawable/cart_product_bg"
     android:layout_marginRight="15dp"
+    android:layout_gravity="center"
     android:layout_height="100dp">
 
 

@@ -151,12 +151,14 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    Intent data = result.getData();
-                    if (data != null) {
-                        Bundle bundle = data.getExtras();
-                        Product product = new Product(bundle.getParcelable(PRODUCT_TAG));
-                        ProductInCart productInCart = new ProductInCart(product, bundle.getString(COLOR_TAG), bundle.getString(CONFIGURATION_TAG));
-                        products_in_cart.add(productInCart);
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null) {
+                            Bundle bundle = data.getExtras();
+                            Product product = new Product(bundle.getParcelable(PRODUCT_TAG));
+                            ProductInCart productInCart = new ProductInCart(product, bundle.getString(COLOR_TAG), bundle.getString(CONFIGURATION_TAG));
+                            products_in_cart.add(productInCart);
+                        }
                     }
                 }
             });

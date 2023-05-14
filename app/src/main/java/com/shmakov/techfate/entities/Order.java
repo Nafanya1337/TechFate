@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 
 public class Order implements Parcelable {
 
+    private final String name;
+
     private final Cart cart;
 
     private final String address;
@@ -16,7 +18,12 @@ public class Order implements Parcelable {
     private final int final_cost;
 
 
-    public Order(Cart cart, String address, String deliveryMethod, int final_cost) {
+    public String getName() {
+        return name;
+    }
+
+    public Order(String name, Cart cart, String address, String deliveryMethod, int final_cost) {
+        this.name = name;
         this.cart = cart;
         this.address = address;
         this.deliveryMethod = deliveryMethod;
@@ -24,6 +31,7 @@ public class Order implements Parcelable {
     }
 
     protected Order(Parcel in) {
+        name = in.readString();
         cart = in.readParcelable(Cart.class.getClassLoader());
         address = in.readString();
         deliveryMethod = in.readString();
@@ -65,6 +73,7 @@ public class Order implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(name);
         dest.writeParcelable(cart, flags);
         dest.writeString(address);
         dest.writeString(deliveryMethod);

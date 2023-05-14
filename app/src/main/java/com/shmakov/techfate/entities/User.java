@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 
 import com.shmakov.techfate.R;
 
+import java.util.ArrayList;
+
 public class User implements Parcelable {
 
     private String name;
@@ -14,6 +16,22 @@ public class User implements Parcelable {
     private String EmailAdress;
     private int phoneNumber;
 
+    private Cart cart = new Cart();
+
+    private ArrayList<Order> orders = new ArrayList<>();
+
+    public User(){
+        name = "Абоба абобович";
+        EmailAdress = "aboba@mail.ru";
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
 
     public User(String name, String EmailAdress, int img, int phone) {
         this.name = name;
@@ -28,11 +46,14 @@ public class User implements Parcelable {
         this.phoneNumber = phone;
     }
 
+
     protected User(Parcel in) {
         name = in.readString();
         img = in.readInt();
         EmailAdress = in.readString();
         phoneNumber = in.readInt();
+        cart = in.readParcelable(Cart.class.getClassLoader());
+        orders = in.createTypedArrayList(Order.CREATOR);
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -79,6 +100,7 @@ public class User implements Parcelable {
         this.phoneNumber = phoneNumber;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -90,5 +112,7 @@ public class User implements Parcelable {
         dest.writeInt(img);
         dest.writeString(EmailAdress);
         dest.writeInt(phoneNumber);
+        dest.writeParcelable(cart, flags);
+        dest.writeTypedList(orders);
     }
 }

@@ -1,5 +1,6 @@
 package com.shmakov.techfate.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,10 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.shmakov.techfate.OrdersFragment;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.ProductInCart;
+import com.shmakov.techfate.fragments.account.AccountFragment;
 import com.shmakov.techfate.fragments.cart.MakeOrderFragment;
 
 public class MiniProductInCardAdapter extends RecyclerView.Adapter<MiniProductInCardAdapter.ViewProductInCart> {
@@ -23,6 +26,11 @@ public class MiniProductInCardAdapter extends RecyclerView.Adapter<MiniProductIn
     }
 
     public MiniProductInCardAdapter(MakeOrderFragment context, ProductInCart[] products) {
+        showProductInfo = (showProductInfo) context;
+        this.products = products;
+    }
+
+    public MiniProductInCardAdapter(OrdersFragment context, ProductInCart[] products) {
         showProductInfo = (showProductInfo) context;
         this.products = products;
     }

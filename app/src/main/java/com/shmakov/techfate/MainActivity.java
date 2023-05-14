@@ -35,6 +35,7 @@ import com.shmakov.techfate.adapters.CartAdapter;
 import com.shmakov.techfate.adapters.CategoryAdapter;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Cart;
+import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.User;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
     FragmentManager fragmentManager;
 
     public static Cart cart = new Cart();
+
+    public static User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,6 +263,9 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                         }
                     } else if (requestCode == PAYMENT_ACTIVITY_REQUEST_CODE) {
                         if (resultCode == RESULT_OK) {
+                            Intent data = result.getData();
+                            Order order = data.getParcelableExtra("Order");
+                            user.addOrder(order);
                             cart.clear();
                         }
                     } else if (requestCode == ITEM_ACTIVITY_REQUEST_CODE) {

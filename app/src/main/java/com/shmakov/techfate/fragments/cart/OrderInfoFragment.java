@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.Order;
@@ -23,6 +24,8 @@ public class OrderInfoFragment extends Fragment {
 
     Button fragmentOrderInfoNextBtn;
     Order order;
+
+    TextView order_success;
 
     exitPayment exitPayment;
 
@@ -44,6 +47,7 @@ public class OrderInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_info, container, false);
         fragmentOrderInfoNextBtn = view.findViewById(R.id.fragmentOrderInfoNextBtn);
+        order_success = view.findViewById(R.id.order_success);
         return view;
     }
 
@@ -56,5 +60,6 @@ public class OrderInfoFragment extends Fragment {
                 exitPayment.exitPayment(order);
             }
         });
+        order_success.setText("Заказ " + order.getName() + " успешно оплачен!");
     }
 }

@@ -34,6 +34,9 @@ public class PaymentActivity extends AppCompatActivity implements OrderInfoFragm
     public void exitPayment(Order order) {
         Intent main_data = new Intent();
         main_data.putExtra("requestCode", getIntent().getIntExtra("requestCode", 0));
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("Order", order);
+        main_data.putExtras(bundle);
         setResult(RESULT_OK, main_data);
         finish();
     }
