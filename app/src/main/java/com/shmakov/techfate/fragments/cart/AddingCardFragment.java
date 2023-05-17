@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.shmakov.techfate.R;
@@ -74,6 +75,12 @@ public class AddingCardFragment extends Fragment {
         addingCardFragmentAddCardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (addingCardFragment_Holder.getText().length() == 0 || addingCardFragment_CardNum.getText().length() != 19 ||
+                        addingCardFragment_Date.getText().length() != 5 || addingCardFragment_CVC.getText().length() != 3)
+                {
+                    Toast.makeText(getContext(), "Не все поля были заполнены", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Bundle resultBundle = new Bundle();
                 if (card == null) {
                     card = new Card(addingCardFragment_Holder.getText().toString(),

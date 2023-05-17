@@ -133,7 +133,7 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
 
     @Override
     public void goBack(View view) {
-        finish();
+        onBackPressed();
     }
 
     @Override
