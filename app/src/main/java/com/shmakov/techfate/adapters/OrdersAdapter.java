@@ -62,7 +62,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderView>
             order_name = itemView.findViewById(R.id.order_name);
             products_in_order_recycler = itemView.findViewById(R.id.products_in_order_recycler);
             show_more_info_order_btn = itemView.findViewById(R.id.show_more_info_order_btn);
+            show_more_info_order_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                }
+            });
         }
     }
 
