@@ -163,12 +163,18 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
 
         if (selectionMetadata != null) {
             try {
-                mapView.getMap().selectGeoObject(selectionMetadata.getId(), selectionMetadata.getLayerId());
-                address = getAdress(geoObjectTapEvent);
-                String[] parts = makeAddressSplit();
-                Bundle bundle = new Bundle();
-                bundle.putStringArray("parts", parts);
-                Navigation.findNavController(getView()).navigate(R.id.addressBottomSheetFragment, bundle);
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mapView.getMap().selectGeoObject(selectionMetadata.getId(), selectionMetadata.getLayerId());
+                        address = getAdress(geoObjectTapEvent);
+                        String[] parts = makeAddressSplit();
+                        Bundle bundle = new Bundle();
+                        bundle.putStringArray("parts", parts);
+                        Navigation.findNavController(getView()).navigate(R.id.addressBottomSheetFragment, bundle);
+                    }
+                });
+                thread.run();
             }
             catch (Exception e) {
                 Toast.makeText(getContext(), "Плохое соединение с интернетом", Toast.LENGTH_SHORT).show();

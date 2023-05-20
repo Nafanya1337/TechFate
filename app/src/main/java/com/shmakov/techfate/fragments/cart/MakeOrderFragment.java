@@ -32,20 +32,22 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MakeOrderFragment extends Fragment implements MiniProductInCardAdapter.showProductInfo {
 
+
+    boolean isAlreadyMade = false;
     RecyclerView products_in_cart_recycler;
 
-    String Address, DeliveryMethod, PaymentMethod, PromocodeName;
+    String Address = "", DeliveryMethod = "", PaymentMethod = "", PromocodeName = "";
 
     MiniProductInCardAdapter miniProductInCardAdapter;
     Card card;
 
-    Cart cart;
+    Cart cart = null;
 
     int total_cost = 0;
 
     int delivery_cost = 0;
 
-    float PromocodeRate;
+    float PromocodeRate = 0f;
 
     TextView make_order_delivery_cost, make_order_total_cost, make_order_promocode, make_order_promocode_name;
 
@@ -61,9 +63,19 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
             DeliveryMethod = getArguments().getString("DeliveryMethod");
             PaymentMethod = getArguments().getString("PaymentMethod");
             card = getArguments().getParcelable("Card");
-            PromocodeName = PaymentActivity.PromocodeName;
-            PromocodeRate = PaymentActivity.PromocodeRate;
-            cart = PaymentActivity.cart;
+            isAlreadyMade = getArguments().getBoolean("IsAlreadyMade");
+            if (!isAlreadyMade) {
+                PromocodeName = PaymentActivity.PromocodeName;
+                PromocodeRate = PaymentActivity.PromocodeRate;
+                cart = PaymentActivity.cart;
+            }
+            else {
+                PromocodeName = getArguments().getParcelable("PromocodeName");
+                PromocodeRate = getArguments().getFloat("PromocodeRate");
+                cart = getArguments().getParcelable("Cart");
+                delivery_cost = getArguments().getInt("DeliveryCost");
+            }
+
         }
     }
 
@@ -107,26 +119,52 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
         }
         else
             make_order_promocode.setText("-");
-        int delivery_cost = Integer.parseInt(parts[1].replaceAll(" ", "").replace("₽", ""));
+        int delivery_cost;
+        if (!isAlreadyMade) {
+            delivery_cost = Integer.parseInt(parts[1].replaceAll(" ", "").replace("₽", ""));
+            this.delivery_cost = delivery_cost;
+            cart.addSum(delivery_cost);
+        }
+            else {
+            delivery_cost = this.delivery_cost;
+        }
         make_order_delivery_cost.setText(delivery_cost + " ₽");
-        cart.addSum(delivery_cost);
         make_order_total_cost.setText(cart.getTotal_cost() + " ₽");
 
-        makeOrderBtnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Random random_num = new Random();
-                StringBuilder order_name = new StringBuilder();
-                order_name.append((char) (random_num.nextInt(26) + 65));
-                order_name.append((char) (random_num.nextInt(26) + 65));
-                order_name.append("#");
-                order_name.append(String.valueOf(random_num.nextInt(8999) + 1000));
-                Order order = new Order(order_name.toString(), cart, address.getText().toString(), delivery.getText().toString(), cart.getTotal_cost());
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("Order", order);
-                Navigation.findNavController(view).navigate(R.id.action_makeOrderFragment_to_orderInfoFragment, bundle);
-            }
-        });
+        if (!isAlreadyMade) {
+
+            makeOrderBtnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Random random_num = new Random();
+                    StringBuilder order_name = new StringBuilder();
+                    order_name.append((char) (random_num.nextInt(26) + 65));
+                    order_name.append((char) (random_num.nextInt(26) + 65));
+                    order_name.append("#");
+                    order_name.append(String.valueOf(random_num.nextInt(8999) + 1000));
+                    String promoName = "";
+                    Float promoRate = 0f;
+                    if (!make_order_promocode_name.getText().toString().equals("Промокод")) {
+                        promoName = make_order_promocode_name.getText().toString().replaceAll("Промокод ", "");
+                        promoRate = Float.valueOf(make_order_promocode.getText().toString().replaceAll("-", "").replaceAll("%", ""));
+                    }
+                    Order order = new Order(order_name.toString(), cart, address.getText().toString(), delivery.getText().toString(), payment.getText().toString(), cart.getTotal_cost(), delivery_cost, promoName, promoRate);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("Order", order);
+                    Navigation.findNavController(view).navigate(R.id.action_makeOrderFragment_to_orderInfoFragment, bundle);
+                }
+            });
+        }
+        else {
+            makeOrderBtnNext.setText("Закрыть");
+            makeOrderBtnNext.setCompoundDrawables(null,null,null,null);
+            makeOrderBtnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(view).popBackStack();
+                }
+            });
+        }
     }
 
     @Override

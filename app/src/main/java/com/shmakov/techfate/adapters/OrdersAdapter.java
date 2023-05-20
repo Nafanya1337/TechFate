@@ -27,6 +27,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderView>
     public OrdersAdapter (OrdersFragment ordersFragment, ArrayList<Order> orders) {
         this.ordersFragment = ordersFragment;
         this.orders = orders;
+        showFullOrderInfo = (ShowFullOrderInfo) ordersFragment;
     }
 
     @NonNull
@@ -42,6 +43,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderView>
         holder.order_name.setText(order.getName());
         holder.miniProductInCardAdapter = new MiniProductInCardAdapter(ordersFragment, order.getCart().getProducts().toArray(new ProductInCart[0]));
         holder.products_in_order_recycler.setAdapter(holder.miniProductInCardAdapter);
+        holder.show_more_info_order_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFullOrderInfo.ShowFullOrderInfo(position);
+            }
+        });
     }
 
     @Override
@@ -62,14 +69,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderView>
             order_name = itemView.findViewById(R.id.order_name);
             products_in_order_recycler = itemView.findViewById(R.id.products_in_order_recycler);
             show_more_info_order_btn = itemView.findViewById(R.id.show_more_info_order_btn);
-            show_more_info_order_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
     }
+
+    public interface ShowFullOrderInfo{
+        public void ShowFullOrderInfo(int position);
+    }
+
+    ShowFullOrderInfo showFullOrderInfo;
 
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;

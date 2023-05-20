@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -17,11 +19,12 @@ import com.shmakov.techfate.adapters.MiniProductInCardAdapter;
 import com.shmakov.techfate.adapters.OrdersAdapter;
 import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.fragments.account.AccountFragment;
+import com.shmakov.techfate.fragments.cart.MakeOrderFragment;
 
 import java.util.ArrayList;
 
 
-public class OrdersFragment extends Fragment implements MiniProductInCardAdapter.showProductInfo {
+public class OrdersFragment extends Fragment implements MiniProductInCardAdapter.showProductInfo, OrdersAdapter.ShowFullOrderInfo {
 
     ArrayList<Order> orders;
 
@@ -29,6 +32,8 @@ public class OrdersFragment extends Fragment implements MiniProductInCardAdapter
 
     OrdersAdapter ordersAdapter;
     RecyclerView orders_recycler;
+
+    FullOrderInfoFragment fullOrderInfoFragment;
 
     int current_order = -1;
 
@@ -69,5 +74,22 @@ public class OrdersFragment extends Fragment implements MiniProductInCardAdapter
             ProductCardDialog productCardDialog = new ProductCardDialog(orders.get(current_order).getCart().getProducts().get(position));
             productCardDialog.show(getParentFragmentManager(), "ProductInfo");
         }
+    }
+
+    @Override
+    public void ShowFullOrderInfo(int position) {
+        Bundle bundle = new Bundle();
+        Order order = orders.get(position);
+        bundle.putString("Address", order.getAddress());
+        bundle.putString("DeliveryMethod", order.getDeliveryMethod());
+        bundle.putString("PaymentMethod", order.getPaymentMethod());
+        bundle.putBoolean("IsAlreadyMade", true);
+        bundle.putParcelable("Cart", order.getCart());
+        bundle.putInt("DeliveryCost", order.getDelivery_cost());
+        bundle.putString("PromocodeNmae", order.getPromocodeName());
+        bundle.putFloat("PromocodeRate", order.getPromocodeRate());
+        View view = getView();
+        Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_makeOrderFragment2, bundle);
+
     }
 }

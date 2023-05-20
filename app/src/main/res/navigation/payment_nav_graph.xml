@@ -119,6 +119,10 @@
             app:enterAnim="@anim/slide_right_to_left_in"
             app:exitAnim="@android:anim/fade_out"
             app:popExitAnim="@anim/slide_left_to_right_out" />
+        <argument
+            android:name="IsAlreadyMade"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/orderInfoFragment"

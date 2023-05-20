@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_corners"
     tools:context=".FullOrderInfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/orderInfoHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Заказ №"
@@ -17,4 +20,6 @@
         android:fontFamily="@font/dmsans_medium"
         android:textStyle="bold"/>
 
-</FrameLayout>
+
+
+</LinearLayout>
