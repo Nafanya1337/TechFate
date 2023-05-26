@@ -56,7 +56,9 @@ public class Category {
     public static ArrayList<Product> getAllProducts() {
         ArrayList<Product> all = new ArrayList<>();
         for (int i=0; i<Categories_names.length; i++) {
-            all.addAll(categories.get(Categories_names[i]));
+            ArrayList<Product> temp = categories.get(Categories_names[i]);
+            if (temp != null)
+                all.addAll(temp);
         }
         return all;
     }

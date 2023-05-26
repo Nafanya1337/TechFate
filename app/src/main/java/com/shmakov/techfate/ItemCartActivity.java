@@ -9,9 +9,11 @@ import static com.shmakov.techfate.fragments.globals.MiniReviewsFragment.REVIEWS
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,6 +23,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
@@ -95,6 +98,11 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         makeAllReviews();
         makeStarsReviews();
         checkForAdding(-1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.white));
+        }
     }
 
     @Override
@@ -111,7 +119,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
             addToCartButton.setVisibility(View.GONE);
             return;
         }
-        if ((current_product.getAmount() != null && current_product.getAmount()[pos] <= 0) | (configurationFragment != null && current_product.getCurrentConfigurationAmount(configurationFragment.getConfiguration())[pos] <= 0)) {
+        if ((current_product.getAmount() != null && current_product.getAmount()[pos] <= 0)) {
             if (addToCartButton.getVisibility() == View.VISIBLE) {
                 addToCartButton.setClickable(false);
                 Animation go_down = AnimationUtils.loadAnimation(this, R.anim.slide_down);
@@ -221,17 +229,14 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         arr.putStringArray(COLORS_ARRAY_TAG, a);
         String[] conf = current_product.getConfigurations();
         int[] amount;
-        if (conf != null)
-            amount = current_product.getCurrentConfigurationAmount(conf[0]);
-        else
-            amount = current_product.getAmount();
+        amount = current_product.getAmount();
         colorsFragment = new ColorsFragment(amount);
         colorsFragment.setArguments(arr);
         ft.replace(colors_item_container.getId(), colorsFragment).commit();
     }
 
     private void makeConfigurations() {
-        if (current_product.getConfigurations() != null) {
+        if (current_product.getConfigurations().length != 0) {
             FragmentTransaction ft = fragmentManager.beginTransaction();
             configurationFragment = new ConfigurationFragment();
             String[] b = current_product.getConfigurations();
@@ -257,7 +262,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
 
     @Override
     public void updateColors(String conf) {
-        colorsFragment.updateColorsAvailable(current_product.getCurrentConfigurationAmount(conf), colorsFragment.selectedColor());
-        checkForAdding(colorsFragment.selectedColor());
+//        colorsFragment.updateColorsAvailable(current_product.getCurrentConfigurationAmount(conf), colorsFragment.selectedColor());
+//        checkForAdding(colorsFragment.selectedColor());
     }
 }

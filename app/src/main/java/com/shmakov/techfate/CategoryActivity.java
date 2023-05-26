@@ -12,13 +12,16 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -117,6 +120,12 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         String category_available_str = getResources().getQuantityString(R.plurals.avaliable, amount);
         category_available.setText(category_available_str);
         all = Category.categories.get(tittle);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.white));
+        }
     }
 
     @Override
@@ -218,12 +227,7 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
                     if (Arrays.asList(product.getColors()).contains(color))
                         position_of_color = Arrays.asList(product.getColors()).indexOf(color);
                     if (product.getConfigurations() != null && position_of_color != -1) {
-                        String[] conf = product.getConfigurations();
-                        for (String current_conf : conf) {
-                            if (product.getCurrentConfigurationAmount(current_conf)[position_of_color] > 0) {
-                                return true;
-                            }
-                        }
+                        return true;
                     } else if (position_of_color != -1 && product.getAmount()[position_of_color] > 0) {
 
                         return true;

@@ -1,5 +1,6 @@
 package com.shmakov.techfate.entities.inner;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,14 +8,14 @@ import androidx.annotation.NonNull;
 
 import com.shmakov.techfate.entities.Review;
 
-import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
 
 public class Product implements Parcelable {
-    public static int global_id = 0;
+    public static int global_id = 1;
     protected int id;
     protected String categoryProduct;
     protected String mark;
@@ -24,7 +25,8 @@ public class Product implements Parcelable {
     protected int[] images = new int[1];
     protected int[] amount = null;
     protected String[] colors;
-    protected HashMap<String, int[]> configuration_colors = null;
+
+    protected String[] configurations;
     protected int amountOfWatches;
     protected ArrayList<Review> reviews = new ArrayList<>();
 
@@ -32,22 +34,11 @@ public class Product implements Parcelable {
         return reviews;
     }
 
-    public Product(String categoryProduct, String mark, String name, int cost,
-                   int img, int[] imgs, String colors[], HashMap<String, int[]> configuration_colors,
-                   ArrayList<Review> reviews) {
-        this(categoryProduct,
-                mark,
-                name,
-                cost,
-                img,
-                imgs,
-                colors,
-                configuration_colors);
-        this.reviews = reviews;
-    }
+    protected Context context;
 
-    public Product(String categoryProduct, String mark, String name, int cost,
-                   int img, int[] imgs, String colors[], HashMap<String, int[]> configuration_colors) {
+    public Product(Context context, String categoryProduct, String mark, String name, int cost,
+                   int img, int[] imgs, String colors[], int[] amount, String[] configurations) {
+        this.context = context;
         this.id = global_id;
         this.categoryProduct = new Category(categoryProduct).getCategory();
         this.mark = mark;
@@ -59,15 +50,16 @@ public class Product implements Parcelable {
         else
             this.images[0] = img;
         this.colors = colors;
-        this.configuration_colors = configuration_colors;
+        this.configurations = configurations;
         Random random = new Random();
         this.amountOfWatches = random.nextInt(3000) + 1;
         Category.addToArrayList(categoryProduct, this);
         global_id++;
     }
 
-    public Product(String categoryProduct, String mark, String name, int cost,
+    public Product(Context context, String categoryProduct, String mark, String name, int cost,
                    int img, int[] imgs, String colors[], int[] amount) {
+        this.context = context;
         this.id = global_id;
         this.categoryProduct = new Category(categoryProduct).getCategory();
         this.mark = mark;
@@ -99,7 +91,7 @@ public class Product implements Parcelable {
         this.colors = product.colors;
         this.amountOfWatches = product.amountOfWatches;
         this.reviews = product.reviews;
-        this.configuration_colors = product.configuration_colors;
+        this.configurations = product.configurations;
     }
 
     protected Product(Parcel in) {
@@ -114,7 +106,7 @@ public class Product implements Parcelable {
         colors = in.createStringArray();
         amountOfWatches = in.readInt();
         reviews = in.createTypedArrayList(Review.CREATOR);
-        configuration_colors = in.readHashMap(HashMap.class.getClassLoader());
+        configurations = in.createStringArray();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -147,6 +139,65 @@ public class Product implements Parcelable {
 
     public void addReview(Review review) {
         reviews.add(review);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAmount(int[] amount) {
+        this.amount = amount;
+    }
+
+    public void setConfigurations(String[] configurations) {
+        this.configurations = configurations;
+    }
+
+    public void setAmountOfWatches(int amountOfWatches) {
+        this.amountOfWatches = amountOfWatches;
+    }
+
+    public void setCategoryProduct(String categoryProduct) {
+        this.categoryProduct = categoryProduct;
+    }
+
+    public void setColors(String[] colors) {
+        this.colors = colors;
+    }
+
+    public void setConfiguration_colors(HashMap<String, int[]> configuration_colors) {
+        this.configurations = configurations;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public static void setGlobal_id(int global_id) {
+        Product.global_id = global_id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setImages(String[] images) {
+        this.images = new int[images.length];
+        for (int i =0; i < images.length; i++) {
+            this.images[i] = context.getResources().getIdentifier(images[i], "drawable", context.getPackageName());
+        }
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
+    public void setReviews(ArrayList<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public int getCost() {
@@ -186,13 +237,9 @@ public class Product implements Parcelable {
     }
 
     public String[] getConfigurations() {
-        if (configuration_colors == null)
+        if (configurations == null)
             return null;
-        return configuration_colors.keySet().toArray(new String[0]);
-    }
-
-    public int[] getCurrentConfigurationAmount(String conf) {
-        return configuration_colors.get(conf);
+        return configurations;
     }
 
     public int[] getAmount() {
@@ -217,7 +264,7 @@ public class Product implements Parcelable {
         dest.writeStringArray(colors);
         dest.writeInt(amountOfWatches);
         dest.writeTypedList(reviews);
-        dest.writeMap(configuration_colors);
+        dest.writeStringArray(configurations);
     }
 
     public void addWatch() {

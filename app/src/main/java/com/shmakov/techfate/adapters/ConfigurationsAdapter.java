@@ -52,7 +52,7 @@ public class ConfigurationsAdapter extends RecyclerView.Adapter<ConfigurationsAd
                     notifyItemChanged(selected);
                     notifyItemChanged(position);
                     selected = position;
-                    chooseConf.updateColors(configurations[position]);
+                    //chooseConf.updateColors(configurations[position]);
                 }
             }
         });

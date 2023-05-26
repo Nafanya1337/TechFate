@@ -25,6 +25,12 @@ public class Cart implements Parcelable {
 
     public Cart(){}
 
+    public Cart(ArrayList<ProductInCart> products, int total_cost, float rate){
+        this.products = products;
+        this.total_cost = total_cost;
+        this.rate = rate;
+    }
+
     public void clear(){
         this.products.clear();
         this.total_cost = 0;

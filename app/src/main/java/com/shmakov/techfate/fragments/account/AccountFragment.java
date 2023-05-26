@@ -2,11 +2,15 @@ package com.shmakov.techfate.fragments.account;
 
 import static android.view.Gravity.CENTER;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,6 +19,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +45,8 @@ public class AccountFragment extends Fragment {
 
     OrdersFragment ordersFragment;
 
+    TextView accountFragment_user_name, AccountEmailText;
+
     ImageView accountFragment_user_img;
 
     ArrayList<Order> orders;
@@ -57,6 +65,8 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         accountFragment_user_img = view.findViewById(R.id.accountFragment_user_img);
         orders_container = view.findViewById(R.id.orders_container);
+        accountFragment_user_name = view.findViewById(R.id.accountFragment_user_name);
+        AccountEmailText = view.findViewById(R.id.AccountEmailText);
         return view;
     }
 
@@ -80,6 +90,52 @@ public class AccountFragment extends Fragment {
             params.setMargins(50,350,50,0);
             text.setLayoutParams(params);
             orders_container.addView(text);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            final Window window = getActivity().getWindow();
+            final int colorFrom = ContextCompat.getColor(getContext(), R.color.white);
+            final int colorTo = ContextCompat.getColor(getContext(), R.color.yellow);
+
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            colorAnimation.setDuration(150); // Длительность анимации в миллисекундах
+
+            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animator) {
+                    int animatedValue = (int) animator.getAnimatedValue();
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(animatedValue);
+                }
+            });
+
+            colorAnimation.start();
+        }
+
+        accountFragment_user_name.setText(user.getName());
+        AccountEmailText.setText(user.getEmailAdress());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            final Window window = getActivity().getWindow();
+            final int colorFrom = ContextCompat.getColor(getContext(), R.color.yellow);
+            final int colorTo = ContextCompat.getColor(getContext(), R.color.white);
+
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            colorAnimation.setDuration(150); // Длительность анимации в миллисекундах
+
+            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animator) {
+                    int animatedValue = (int) animator.getAnimatedValue();
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(animatedValue);
+                }
+            });
+
+            colorAnimation.start();
         }
     }
 

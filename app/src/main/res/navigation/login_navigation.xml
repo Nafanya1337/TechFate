@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.shmakov.techfate.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_right_to_left_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@anim/slide_left_to_right_out" />
+        <action
+            android:id="@+id/action_loginFragment_to_remindPasswordFragment"
+            app:destination="@id/remindPasswordFragment"
+            app:enterAnim="@anim/slide_right_to_left_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@anim/slide_left_to_right_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.shmakov.techfate.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_left_to_right_out"
+            app:exitAnim="@android:anim/fade_out"
+            app:popExitAnim="@anim/slide_right_to_left_in" />
+        <action
+            android:id="@+id/action_signUpFragment_to_userAgreementFragment"
+            app:destination="@id/userAgreementFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/userAgreementFragment"
+        android:name="com.shmakov.techfate.UserAgreementFragment"
+        android:label="fragment_user_agreement"
+        tools:layout="@layout/fragment_user_agreement" />
+    <fragment
+        android:id="@+id/remindPasswordFragment"
+        android:name="com.shmakov.techfate.RemindPasswordFragment"
+        android:label="fragment_remind_password"
+        tools:layout="@layout/fragment_remind_password" >
+        <action
+            android:id="@+id/action_remindPasswordFragment_to_remindPasswordCodeFragment"
+            app:destination="@id/remindPasswordCodeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/remindPasswordCodeFragment"
+        android:name="com.shmakov.techfate.RemindPasswordCodeFragment"
+        android:label="fragment_remind_password_code"
+        tools:layout="@layout/fragment_remind_password_code" />
+</navigation>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/DefaultStatusBarTheme"
     tools:context=".fragments.cart.CartFragment">
 
     <TextView
@@ -145,6 +146,7 @@
         android:layout_height="50dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/yellow"
         android:drawableRight="@drawable/ic_arrow_right"
         android:shadowRadius="0"
         android:text="Перейти к оформлению"

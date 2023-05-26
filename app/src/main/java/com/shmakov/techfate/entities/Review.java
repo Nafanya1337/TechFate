@@ -8,12 +8,12 @@ import androidx.annotation.NonNull;
 import com.shmakov.techfate.entities.User;
 
 public class Review  implements Parcelable {
-    private User user;
+    private String user;
     private String text;
     private String date;
     private Float rating;
 
-    public Review(User user, String text, String date, Float rating) {
+    public Review(String user, String text, String date, Float rating) {
         this.user = user;
         this.text = text;
         this.date = date;
@@ -21,7 +21,7 @@ public class Review  implements Parcelable {
     }
 
     protected Review(Parcel in) {
-        user = in.readParcelable(User.class.getClassLoader());
+        user = in.readString();
         text = in.readString();
         date = in.readString();
         if (in.readByte() == 0) {
@@ -59,7 +59,7 @@ public class Review  implements Parcelable {
         return text;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
@@ -71,7 +71,7 @@ public class Review  implements Parcelable {
         this.text = text;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
@@ -82,7 +82,7 @@ public class Review  implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeParcelable(user, flags);
+        dest.writeString(user);
         dest.writeString(text);
         dest.writeString(date);
         if (rating == null) {

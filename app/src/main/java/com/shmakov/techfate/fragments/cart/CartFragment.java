@@ -54,7 +54,7 @@ public class CartFragment extends Fragment implements CartAdapter.updateAmount {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cart = MainActivity.cart;
+        cart = MainActivity.user.getCart();
     }
 
     public interface makePayment{

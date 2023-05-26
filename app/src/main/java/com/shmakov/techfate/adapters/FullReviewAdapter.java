@@ -50,9 +50,9 @@ public class FullReviewAdapter extends RecyclerView.Adapter<FullReviewAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Review review = reviews.get(position);
-        User user = review.getUser();
-        holder.avatar.setImageResource(user.getImg());
-        holder.reviewer_name.setText(user.getName());
+        String user = review.getUser();
+        holder.avatar.setImageResource(R.drawable.simple_avatar);
+        holder.reviewer_name.setText(user);
         holder.date.setText(review.getDate());
         String txt = review.getText();
         if (txt.length() > 200) {

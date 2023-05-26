@@ -41,15 +41,12 @@
     </style>
 
 
-    <style name="BottomSheetStyle"
-        parent="Theme.Material3.DayNight.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
-        <item name="colorAccent">@color/yellow</item>
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
     </style>
 
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/bottom_sheet_corners</item>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="FullScreenDialog" parent="Theme.AppCompat.Light.Dialog">
@@ -59,5 +56,19 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+    <style name="accountPageTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:statusBarColor">@color/yellow</item>
+        <item name="android:windowBackground">@color/yellow</item>
+
+    </style>
+
+    <style name="DefaultStatusBarTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+
     </style>
 </resources>
