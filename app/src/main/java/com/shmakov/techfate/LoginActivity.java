@@ -73,11 +73,8 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.lo
 
             // Permission is not granted
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.POST_NOTIFICATIONS)) {
-                // Explain why we need the permission and then ask for the permission again
-            } else {
-                // No explanation needed, we can request the permission
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
                         MY_PERMISSION_REQUEST);
