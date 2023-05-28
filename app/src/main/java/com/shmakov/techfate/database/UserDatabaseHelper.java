@@ -219,6 +219,24 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return exist;
     }
 
+    public void addProductToCart(ProductInCart product, User user) {
+        ContentValues values = new ContentValues();
+        values.put("ProductId", product.getId());
+        values.put("SelectedColor", product.getSelected_color());
+        values.put("SelectedConfiguration", product.getSelected_configuration());
+        values.put("UserId", user.getId());
+        sqLiteDatabase.insert(PRODUCTS_IN_USER_CART_TABLE, null, values);
+
+        values = new ContentValues();
+        values.put("TotalCost", user.getCart().getTotal_cost());
+        values.put("Rate", user.getCart().getRate());
+
+        String whereClause = "UserId=?";
+        String[] whereArgs = {String.valueOf(user.getId())};
+
+        int rowsAffected = sqLiteDatabase.update(USER_CART_TABLE, values, whereClause, whereArgs);
+    }
+
     public void logout(int id){
         String selection = "id = ?";
         Cursor userCursor = sqLiteDatabase.query(USER_TABLE, null, selection, new String[]{String.valueOf(id)}, null, null, null);
@@ -254,6 +272,14 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         values.put("Rate", 1.0);
         values.put("UserId", (int)new_row);
         sqLiteDatabase.insert(USER_CART_TABLE, null, values);
+    }
+
+    public void changePassword(String Email, String Password) {
+        ContentValues values = new ContentValues();
+        values.put("Password", Password);
+        String whereClause = "Email=?";
+        String[] whereArgs = {Email};
+        sqLiteDatabase.update(USER_TABLE, values, whereClause, whereArgs);
     }
 
     @Override

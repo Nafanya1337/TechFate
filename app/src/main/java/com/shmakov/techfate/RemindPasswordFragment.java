@@ -85,7 +85,10 @@ public class RemindPasswordFragment extends Fragment {
                 String Email = remindPasswordEmailText.getText().toString();
                 if (remindPasswordInterface.remindPasswordInterface(Email)) {
                     remindPasswordInterface.makeNotification(code);
-                    Navigation.findNavController(getView()).navigate(R.id.action_remindPasswordFragment_to_remindPasswordCodeFragment);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Email", Email);
+                    bundle.putString("Code", String.valueOf(code));
+                    Navigation.findNavController(getView()).navigate(R.id.action_remindPasswordFragment_to_remindPasswordCodeFragment, bundle);
                 } else {
                     Toast.makeText(getContext(), "Пользователь под данной электронной почтой не зарегистрирован", Toast.LENGTH_LONG).show();
                 }
