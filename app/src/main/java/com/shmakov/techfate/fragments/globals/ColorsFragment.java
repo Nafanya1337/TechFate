@@ -75,6 +75,9 @@ public class ColorsFragment extends Fragment {
     }
 
     public int selectedColor(){
-        return colorAdapter.getPicked();}
+        if (colorAdapter != null)
+            return colorAdapter.getPicked();
+        return 0;
+    }
 
 }

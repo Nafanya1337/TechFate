@@ -32,14 +32,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.shmakov.techfate.adapters.ColorAdapter;
 import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 import com.shmakov.techfate.adapters.ImageAdapter;
+import com.shmakov.techfate.database.UserDatabaseHelper;
+import com.shmakov.techfate.entities.ProductInCart;
+import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ColorsFragment;
 import com.shmakov.techfate.fragments.globals.ConfigurationFragment;
 import com.shmakov.techfate.fragments.globals.MiniReviewsFragment;
 import com.shmakov.techfate.mytools.StringWorker;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
@@ -53,6 +58,8 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     private Button addToCartButton;
 
     private com.shmakov.techfate.ReviewsFragment reviewsFragment;
+
+    private ArrayList<ProductInCart> userCart;
 
     private ConfigurationFragment configurationFragment;
     private Product current_product;
@@ -68,10 +75,22 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
 
     private String current_conf;
 
+    UserDatabaseHelper userDatabaseHelper;
+
+    User user;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
+        userDatabaseHelper = new UserDatabaseHelper(this);
+        try {
+            userDatabaseHelper.createDataBase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        user = MainActivity.user;
         setContentView(R.layout.activity_item_cart);
         Bundle arguments = getIntent().getExtras();
         imageSwitcher = findViewById(R.id.product_images);
@@ -84,6 +103,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         all_reviews_container = findViewById(R.id.all_reviews_container);
         if (arguments != null) {
             current_product = arguments.getParcelable(PRODUCT_TAG);
+            userCart = arguments.getParcelableArrayList("UserCart");
             makeInfoProduct();
         }
         colors_item_container = findViewById(R.id.colors_item_container);
@@ -97,7 +117,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         makeReviews();
         makeAllReviews();
         makeStarsReviews();
-        checkForAdding(-1);
+        checkForAdding();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -111,30 +131,25 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     }
 
 
-    public void checkForAdding(int pos){
-        if (pos == -1) {
-            Animation go_down = AnimationUtils.loadAnimation(this, R.anim.slide_down);
-            addToCartButton.setClickable(false);
-            addToCartButton.setAnimation(go_down);
-            addToCartButton.setVisibility(View.GONE);
-            return;
+    public void checkForAdding(){
+        String color = current_product.getColors()[colorsFragment.selectedColor()];
+        String configuration = "";
+        if (configurationFragment != null)
+            configuration = configurationFragment.getConfiguration();
+        ProductInCart product = new ProductInCart(current_product, color, configuration);
+        if (userCart.stream()
+                .filter(product1 ->
+                        product.getProduct().getName().equals(product1.getProduct().getName()) &&
+                                product.getSelected_configuration().equals(product1.getSelected_configuration()) &&
+                                product.getSelected_color().equals(product1.getSelected_color()))
+                .findFirst()
+                .isPresent()) {
+            addToCartButton.setText("Удалить из корзины");
+            addToCartButton.setBackgroundColor(Color.parseColor("#ff4d4d"));
         }
-        if ((current_product.getAmount() != null && current_product.getAmount()[pos] <= 0)) {
-            if (addToCartButton.getVisibility() == View.VISIBLE) {
-                addToCartButton.setClickable(false);
-                Animation go_down = AnimationUtils.loadAnimation(this, R.anim.slide_down);
-                addToCartButton.setAnimation(go_down);
-                addToCartButton.setVisibility(View.GONE);
-            }
-        } else {
-            if (addToCartButton.getVisibility() == View.GONE | addToCartButton.getText() != "Добавить в корзину") {
-                addToCartButton.setClickable(true);
-                addToCartButton.setBackgroundColor(Color.parseColor("#FFDB47"));
-                addToCartButton.setText("Добавить в корзину");
-                Animation go_up = AnimationUtils.loadAnimation(this, R.anim.slide_up);
-                addToCartButton.setAnimation(go_up);
-                addToCartButton.setVisibility(View.VISIBLE);
-            }
+        else {
+            addToCartButton.setText("Добавить в корзину");
+            addToCartButton.setBackgroundColor(Color.parseColor("#FFDB47"));
         }
     }
 
@@ -171,28 +186,30 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     public ArrayList<Product> products = new ArrayList<>();
     public void addToCart(View view) {
         Button btn = ((Button)view);
+        String color =  current_product.getColors()[colorsFragment.selectedColor()];
+        String configuration = "";
+        if (configurationFragment != null)
+            configuration = configurationFragment.getConfiguration();
+        ProductInCart product = new ProductInCart(current_product, color, configuration);
         if (btn.getText().equals("Добавить в корзину")) {
-            Bundle bundle = new Bundle();
-            products.add(current_product);
-            bundle.putParcelable(PRODUCT_TAG, current_product);
-            String color =  current_product.getColors()[colorsFragment.selectedColor()];
-            bundle.putString(COLOR_TAG, color);
-            if (configurationFragment != null)
-                bundle.putString(CONFIGURATION_TAG, configurationFragment.getConfiguration());
-            else
-                bundle.putString(CONFIGURATION_TAG, "");
-            main_data.putExtras(bundle);
-            main_data.putExtra("requestCode", getIntent().getIntExtra("requestCode", 0));
-            setResult(RESULT_OK, main_data);
+            user.getCart().addProductToCart(product);
+            userDatabaseHelper.openDataBase();
+            userDatabaseHelper.addProduct(user, product);
+            userDatabaseHelper.close();
             btn.setText("Удалить из корзины");
             btn.setBackgroundColor(Color.parseColor("#ff4d4d"));
         }
         else {
-            setResult(RESULT_CANCELED, main_data);
+            user.getCart().deleteProductInCart(product);
+            userDatabaseHelper.openDataBase();
+            userDatabaseHelper.deleteProduct(user, product);
+            userDatabaseHelper.close();
             btn.setText("Добавить в корзину");
             btn.setBackgroundColor(Color.parseColor("#FFDB47"));
         }
-
+        main_data.putParcelableArrayListExtra("UserCart", user.getCart().getProducts());
+        main_data.putExtra("requestCode", getIntent().getIntExtra("requestCode", 0));
+        setResult(RESULT_OK, main_data);
     }
 
     public void makeReviews() {
@@ -257,12 +274,11 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
 
     @Override
     public void pickAColor(int position) {
-        checkForAdding(position);
+        checkForAdding();
     }
 
     @Override
     public void updateColors(String conf) {
-//        colorsFragment.updateColorsAvailable(current_product.getCurrentConfigurationAmount(conf), colorsFragment.selectedColor());
-//        checkForAdding(colorsFragment.selectedColor());
+        checkForAdding();
     }
 }

@@ -306,7 +306,6 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                             Intent data = result.getData();
                             ArrayList<ProductInCart> products = data.getParcelableArrayListExtra(PRODUCT_ARRAY_TAG);
                             cart.addProducts(products);
-                            user.getCart().addProducts(products);
                         }
                         else {
                         }
@@ -316,7 +315,6 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                             Order order = data.getParcelableExtra("Order");
                             user.addOrder(order);
                             cart.clear();
-                            user.getCart().clear();
                         }
                     } else if (requestCode == ITEM_ACTIVITY_REQUEST_CODE) {
                         if (resultCode == RESULT_OK) {
@@ -327,10 +325,6 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                                 String color = bundle.getString(COLOR_TAG);
                                 String configuration = bundle.getString(CONFIGURATION_TAG);
                                 cart.addProductToCart(product, color, configuration);
-                                userDatabaseHelper.openDataBase();
-                                user.getCart().addProductToCart(product, color, configuration);
-                                userDatabaseHelper.addProductToCart(new ProductInCart(product, color, configuration), user);
-                                userDatabaseHelper.close();
                             }
                         }
                     }

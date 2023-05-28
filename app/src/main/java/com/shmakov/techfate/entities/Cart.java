@@ -90,11 +90,26 @@ public class Cart implements Parcelable {
         this.products.addAll(products);
     }
 
-    public void addProductToCart(Product product, String selected_color, String selected_conf) {
-        ProductInCart temp = new ProductInCart(product, selected_color, selected_conf);
-        products.add(temp);
-        total_cost += temp.product.getCost() * rate;
+    public void addProductToCart(ProductInCart product) {
+        products.add(product);
+        total_cost += product.product.getCost() * rate;
     }
+
+    public void deleteProductInCart(ProductInCart product) {
+        ProductInCart deleted = this.products.stream().filter(product1 ->
+                product.getProduct().getName().equals(product1.getProduct().getName())
+                        && product.getSelected_color().equals(product1.getSelected_color())
+                        && product.getSelected_configuration().equals(product1.getSelected_configuration())).findFirst().get();
+
+        this.products.remove(deleted);
+        resetCost();
+    }
+
+    public void setProducts(ArrayList<ProductInCart> products) {
+        this.products = products;
+        resetCost();
+    }
+
 
     @Override
     public int describeContents() {

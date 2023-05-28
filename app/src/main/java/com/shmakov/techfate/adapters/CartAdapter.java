@@ -29,7 +29,11 @@ import java.util.Objects;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
 
+    public interface openItemFromCart {
+        public void openItemFromCart(ProductInCart product);
+    }
 
+    openItemFromCart openItemFromCart;
     ArrayList<ProductInCart> productsInCart;
     Context context;
 
@@ -43,6 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         this.context = fragment.getContext();
         this.productsInCart = productsInCart;
         updateAmount = (updateAmount) fragment;
+        openItemFromCart = (openItemFromCart) context;
     }
 
     public void setProductsInCart(ArrayList<ProductInCart> productsInCart) {
@@ -64,6 +69,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
         holder.amount_product.setText(String.valueOf(productsInCart.get(position).getAmount()));
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openItemFromCart.openItemFromCart(productsInCart.get(position));
+            }
+        });
         holder.add_amount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
