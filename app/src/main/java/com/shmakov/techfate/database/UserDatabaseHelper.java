@@ -100,6 +100,14 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
+    public void changePassword(String Email, String Password) {
+        ContentValues values = new ContentValues();
+        values.put("Password", Password);
+        String whereClause = "Email=?";
+        String[] whereArgs = {Email};
+        sqLiteDatabase.update(USER_TABLE, values, whereClause, whereArgs);
+    }
+
     @Override
     public synchronized void close() {
         if (sqLiteDatabase != null)

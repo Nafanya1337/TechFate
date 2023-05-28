@@ -22,7 +22,7 @@ import com.shmakov.techfate.database.UserDatabaseHelper;
 
 import java.io.IOException;
 
-public class LoginActivity extends AppCompatActivity implements LoginFragment.loginInterface, SignUpFragment.SignUpInterface, RemindPasswordFragment.remindPasswordInterface {
+public class LoginActivity extends AppCompatActivity implements LoginFragment.loginInterface, SignUpFragment.SignUpInterface, RemindPasswordFragment.remindPasswordInterface, NewPasswordFragment.changePassword {
 
     UserDatabaseHelper userDatabaseHelper;
 
@@ -150,5 +150,13 @@ public class LoginActivity extends AppCompatActivity implements LoginFragment.lo
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
         managerCompat.notify(1, builder.build());
+    }
+
+    @Override
+    public void changePassword(String Email, String password) {
+        userDatabaseHelper.openDataBase();
+        userDatabaseHelper.changePassword(Email, password);
+        userDatabaseHelper.close();
+        Toast.makeText(this, "Пароль успешно изменён", Toast.LENGTH_SHORT).show();
     }
 }
