@@ -60,7 +60,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct, makePayment {
+public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct, makePayment, CartAdapter.openItemFromCart {
 
     private static final int ITEM_ACTIVITY_REQUEST_CODE = 1;
     private static final int CATERGORY_ACTIVITY_REQUEST_CODE = 2;
@@ -289,6 +289,18 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
         product.addWatch();
         Bundle bundle = new Bundle();
         bundle.putParcelable(PRODUCT_TAG, product);
+        bundle.putParcelableArrayList("UserCart", user.getCart().getProducts());
+        intent.putExtras(bundle);
+        intent.putExtra("requestCode", ITEM_ACTIVITY_REQUEST_CODE);
+        activityResultLauncher.launch(intent);
+    }
+
+    public void onClickProduct(Product product) {
+        Intent intent = new Intent(this, ItemCartActivity.class);
+        product.addWatch();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PRODUCT_TAG, product);
+        bundle.putParcelableArrayList("UserCart", user.getCart().getProducts());
         intent.putExtras(bundle);
         intent.putExtra("requestCode", ITEM_ACTIVITY_REQUEST_CODE);
         activityResultLauncher.launch(intent);
@@ -320,11 +332,8 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                         if (resultCode == RESULT_OK) {
                             Intent data = result.getData();
                             if (data != null) {
-                                Bundle bundle = data.getExtras();
-                                Product product = bundle.getParcelable(PRODUCT_TAG);
-                                String color = bundle.getString(COLOR_TAG);
-                                String configuration = bundle.getString(CONFIGURATION_TAG);
-                                cart.addProductToCart(product, color, configuration);
+                                ArrayList<ProductInCart> userCart = data.getParcelableArrayListExtra("UserCart");
+                                user.getCart().setProducts(userCart);
                             }
                         }
                     }
@@ -352,5 +361,10 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void openItemFromCart(ProductInCart product) {
+        onClickProduct(product.getProduct());
     }
 }

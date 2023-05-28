@@ -256,6 +256,38 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(USER_CART_TABLE, null, values);
     }
 
+    public void addProduct(User user, ProductInCart product) {
+        ContentValues values = new ContentValues();
+        values.put("ProductId", product.getProduct().getId());
+        values.put("SelectedColor", product.getSelected_color());
+        values.put("SelectedConfiguration", product.getSelected_configuration());
+        values.put("UserId", user.getId());
+        sqLiteDatabase.insert(PRODUCTS_IN_USER_CART_TABLE, null, values);
+        values = new ContentValues();
+        values.put("TotalCost", user.getCart().getTotal_cost());
+        String whereClause = "UserId=?";
+        String[] whereArgs = {String.valueOf(user.getId())};
+        sqLiteDatabase.update(USER_CART_TABLE, values, whereClause, whereArgs);
+    }
+
+    public void deleteProduct(User user, ProductInCart product) {
+        String selection =
+                "ProductId = ? AND SelectedColor = ? AND SelectedConfiguration = ? AND UserId = ?";
+        String[] selectionArgs = {
+                String.valueOf(product.getProduct().getId()),
+                product.getSelected_color(),
+                product.getSelected_configuration(),
+                String.valueOf(user.getId())
+        };
+        sqLiteDatabase.delete(PRODUCTS_IN_USER_CART_TABLE, selection, selectionArgs);
+
+        ContentValues values = new ContentValues();
+        values.put("TotalCost", user.getCart().getTotal_cost());
+        String whereClause = "UserId=?";
+        String[] whereArgs = {String.valueOf(user.getId())};
+        sqLiteDatabase.update(USER_CART_TABLE, values, whereClause, whereArgs);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 

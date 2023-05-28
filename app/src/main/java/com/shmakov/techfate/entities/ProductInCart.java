@@ -22,6 +22,10 @@ public class ProductInCart implements Parcelable {
         this.selected_configuration = selected_configuration;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
     protected ProductInCart(Parcel in) {
         product = in.readParcelable(Product.class.getClassLoader());
         amount = in.readInt();
