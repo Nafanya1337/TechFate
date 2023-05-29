@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_corners"
     tools:context=".fragments.cart.AddressBottomSheetFragment">
 
     <ImageView
@@ -118,7 +119,8 @@
         android:layout_gravity="bottom|center"
         android:layout_marginTop="25dp"
         android:textColor="@color/black"
-        android:background="@color/yellow"
-        android:text="Сохранить адрес" />
+        android:backgroundTint="@color/yellow"
+        android:text="Сохранить адрес"
+        android:layout_marginBottom="25dp"/>
 
 </LinearLayout>

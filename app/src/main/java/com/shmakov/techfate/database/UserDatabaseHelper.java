@@ -108,6 +108,24 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.update(USER_TABLE, values, whereClause, whereArgs);
     }
 
+    public void saveAddress(String address, int user_id) {
+        ContentValues values = new ContentValues();
+        values.put("Address", address);
+        values.put("UserId", user_id);
+        sqLiteDatabase.insert(ADDRESSES_TABLE, null, values);
+    }
+
+    public void saveCard(Card card, int user_id) {
+        ContentValues values = new ContentValues();
+        values.put("CardNum", card.getCardNum());
+        values.put("CardHolder", card.getCardHolder());
+        values.put("CardDate", card.getCardDate());
+        values.put("CardType", card.getCardType());
+        values.put("CVC", card.getCVC());
+        values.put("UserId", user_id);
+        sqLiteDatabase.insert(CARDS_TABLE, null, values);
+    }
+
     @Override
     public synchronized void close() {
         if (sqLiteDatabase != null)
@@ -145,7 +163,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
             ArrayList<Card> cards = new ArrayList<>();
             Cursor CardCursor = sqLiteDatabase.query(CARDS_TABLE, null, "UserId = ?", new String[]{String.valueOf(user_id)}, null, null, null);
             while (CardCursor.moveToNext()) {
-                Card card = new Card(CardCursor.getString(0), CardCursor.getString(1),
+                Card card = new Card(CardCursor.getString(1), CardCursor.getString(0),
                         CardCursor.getString(2), CardCursor.getString(3),
                         CardCursor.getString(4));
                 cards.add(card);
@@ -187,6 +205,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
 
             user = new User(
                     user_id,
+                    context.getResources().getIdentifier(userCursor.getString(6), "drawable", context.getPackageName()),
                     userCursor.getString(1),
                     userCursor.getString(2),
                     userCursor.getString(3),
@@ -199,6 +218,47 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         }
         userCursor.close();
         return user;
+    }
+
+    public void saveOrder(Order order, int user_id) {
+        ContentValues values = new ContentValues();
+        values.put("Name", order.getName());
+        values.put("Cost", order.getFinal_cost());
+        values.put("Address", order.getAddress());
+        values.put("DeliveryMethod", order.getDeliveryMethod());
+        values.put("DeliveryCost", order.getDelivery_cost());
+        values.put("PromoRate", order.getPromocodeRate());
+        values.put("PromoName", order.getPromocodeName());
+        values.put("PaymentMethod", order.getPaymentMethod());
+        values.put("UserId", user_id);
+        long id = sqLiteDatabase.insert(ORDER_TABLE, null, values);
+        String whereClause = "UserId = ?";
+        String[] whereArgs = { String.valueOf(user_id) };
+        sqLiteDatabase.delete(PRODUCTS_IN_USER_CART_TABLE, whereClause, whereArgs);
+        values = new ContentValues();
+        values.put("TotalCost", 0);
+        sqLiteDatabase.update(USER_CART_TABLE, values, whereClause, whereArgs);
+        ArrayList<ProductInCart> products = order.getCart().getProducts();
+        for (ProductInCart product : products) {
+            values = new ContentValues();
+            values.put("ProductId", product.product.getId());
+            values.put("SelectedColor", product.getSelected_color());
+            values.put("SelectedConfiguration", product.getSelected_configuration());
+            values.put("OrderId", id);
+            sqLiteDatabase.insert(PRODUCTS_IN_ORDER_TABLE, null, values);
+        }
+    }
+
+
+    public void updateProfileInfo(User user) {
+        String selection = "id = ? ";
+        String[] args = {String.valueOf(user.getId())};
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Name", user.getName());
+        contentValues.put("Email", user.getEmailAdress());
+        contentValues.put("Password", user.getPassword());
+        contentValues.put("Img", user.getImg());
+        sqLiteDatabase.update(USER_TABLE, contentValues, selection, args);
     }
 
     public boolean login(String email, String password){

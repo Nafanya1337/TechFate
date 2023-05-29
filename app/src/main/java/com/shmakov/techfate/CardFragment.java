@@ -24,9 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shmakov.techfate.adapters.SavedCardsAdapter;
+import com.shmakov.techfate.database.UserDatabaseHelper;
 import com.shmakov.techfate.entities.Card;
 import com.shmakov.techfate.fragments.cart.AddingCardFragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CardFragment extends Fragment implements SavedCardsAdapter.openCard {
@@ -38,12 +40,25 @@ public class CardFragment extends Fragment implements SavedCardsAdapter.openCard
     Button cardFragmentAddingCardBtn;
     Context context;
     ArrayList<Card> cards;
-
+    UserDatabaseHelper userDatabaseHelper;
     CardSwiperFragment cardSwiperFragment;
+
+
 
     public CardFragment(Context context, ArrayList<Card> cards) {
         this.context = context;
         this.cards = cards;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        userDatabaseHelper = new UserDatabaseHelper(getContext());
+        try {
+            userDatabaseHelper.createDataBase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -70,13 +85,17 @@ public class CardFragment extends Fragment implements SavedCardsAdapter.openCard
             }
         });
 
-        getParentFragmentManager().setFragmentResultListener("AddingCard", this, new FragmentResultListener() {
+        fm.setFragmentResultListener("AddingCard", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 if (requestKey.equals("AddingCard")) {
                     if (result.containsKey("Card")) {
                         Card card = result.getParcelable("Card");
-                        cards.add(card);
+                        MainActivity.user.getCards().add(card);
+                        cards = MainActivity.user.getCards();
+                        userDatabaseHelper.openDataBase();
+                        userDatabaseHelper.saveCard(card, MainActivity.user.getId());
+                        userDatabaseHelper.close();
                         cardSwiperFragment.setCards(cards);
                     }
                 }

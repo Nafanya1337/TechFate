@@ -213,7 +213,9 @@ public class Product implements Parcelable {
     }
 
     public int[] getImages() {
-        return images;
+        if (images.length != 0)
+            return images;
+        return new int[]{img};
     }
 
     public String getCategoryProduct() {

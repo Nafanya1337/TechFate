@@ -82,9 +82,11 @@ public class CategoryHeaderFragment extends Fragment {
         });
         categoryTittle.setText(this.categoryTittleName);
         categoryBackground.setImageResource(this.categoryBackgroundImage);
-    }
-
-    public void onClickFilters(View view) {
-        openFilters.openFilters(view);
+        categoryOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFilters.openFilters(v);
+            }
+        });
     }
 }

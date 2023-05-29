@@ -12,6 +12,8 @@ public class Category {
 
     public static HashMap<String, ArrayList<Product>> categories = new HashMap<>();
 
+    public static ArrayList<Product> all = new ArrayList<>();
+
     public static final String SMARTPHONE_NAME_CATEGORY = "Смартфоны";
     public static final String WATCHES_NAME_CATEGORY = "Часы";
     public static final String TABLETS_NAME_CATEGORY = "Планшеты";
@@ -50,16 +52,11 @@ public class Category {
     public static void addToArrayList(String category, Product product) {
         ArrayList<Product> currentArray = categories.get(category);
         currentArray.add(product);
+        all.add(product);
     }
 
 
     public static ArrayList<Product> getAllProducts() {
-        ArrayList<Product> all = new ArrayList<>();
-        for (int i=0; i<Categories_names.length; i++) {
-            ArrayList<Product> temp = categories.get(Categories_names[i]);
-            if (temp != null)
-                all.addAll(temp);
-        }
         return all;
     }
 

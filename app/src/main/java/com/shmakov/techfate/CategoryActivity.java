@@ -36,6 +36,7 @@ import com.shmakov.techfate.adapters.ColorPickerAdapter;
 import com.shmakov.techfate.adapters.ProductAdapter;
 import com.shmakov.techfate.entities.Cart;
 import com.shmakov.techfate.entities.ProductInCart;
+import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
@@ -68,6 +69,8 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     private ArrayList<Product> products;
     private ArrayList<Product> all;
 
+    User user;
+
     private int min_cost = -1, max_cost = -1;
 
     public static ArrayList<String> selected_colors = new ArrayList<>();
@@ -80,6 +83,8 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         fragmentManager = getSupportFragmentManager();
+
+        user = MainActivity.user;
 
         tittle = getIntent().getExtras().getString(CATEGORY_TAG);
 
@@ -124,7 +129,8 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.white));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.transparent));
+
         }
     }
 
@@ -149,7 +155,11 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     public void onClickProduct(View view, Product product) {
         Intent intent = new Intent(this, ItemCartActivity.class);
         product.addWatch();
-        intent.putExtra(PRODUCT_TAG, product);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PRODUCT_TAG, product);
+        bundle.putParcelableArrayList("UserCart", user.getCart().getProducts());
+        intent.putExtras(bundle);
+        intent.putExtra("requestCode", "");
         activityResultLauncher.launch(intent);
     }
 
@@ -163,10 +173,8 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
                     if (result.getResultCode() == RESULT_OK) {
                         Intent data = result.getData();
                         if (data != null) {
-                            Bundle bundle = data.getExtras();
-                            Product product = new Product(bundle.getParcelable(PRODUCT_TAG));
-                            ProductInCart productInCart = new ProductInCart(product, bundle.getString(COLOR_TAG), bundle.getString(CONFIGURATION_TAG));
-                            products_in_cart.add(productInCart);
+                            ArrayList<ProductInCart> userCart = data.getParcelableArrayListExtra("UserCart");
+                            user.getCart().setProducts(userCart);
                         }
                     }
                 }
@@ -177,7 +185,7 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         Intent main_data = new Intent();
         main_data.putExtra("requestCode", getIntent().getIntExtra("requestCode", 0));
         if (products_in_cart.size() > 0) {
-            main_data.putParcelableArrayListExtra(PRODUCT_ARRAY_TAG, products_in_cart);
+            main_data.putParcelableArrayListExtra("UserCart", user.getCart().getProducts());
             setResult(RESULT_OK, main_data);
         }
         else
@@ -190,8 +198,10 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     private HashMap<String, ArrayList<String>> filters = new HashMap<>();
 
     private void createDialog() {
-        if (all.size() > 0)
-            new FilterFragment(this, all, filters).show(getSupportFragmentManager(), "tag");
+        if (all.size() > 0) {
+            FilterFragment ff = new FilterFragment(this, all, filters);
+            ff.show(getSupportFragmentManager(), "filters");
+        }
     }
 
     @Override

@@ -41,7 +41,7 @@ public class AddressBottomSheetFragment extends BottomSheetDialogFragment {
 
     @Override
     public int getTheme() {
-        return R.style.BottomSheetStyle;
+        return R.style.BottomSheetDialogTheme;
     }
 
     @Nullable
@@ -54,7 +54,6 @@ public class AddressBottomSheetFragment extends BottomSheetDialogFragment {
         adressFragment_houseNum = view.findViewById(R.id.adressFragment_houseNum);
         adressFragment_apartamentsNum = view.findViewById(R.id.adressFragment_apartamentsNum);
         adressFragment_mailIndex = view.findViewById(R.id.adressFragment_mailIndex);
-
         if (getArguments() != null) {
             String[] parts = getArguments().getStringArray("parts");
             try {

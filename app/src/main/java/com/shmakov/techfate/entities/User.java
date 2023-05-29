@@ -12,8 +12,10 @@ import java.util.ArrayList;
 public class User implements Parcelable {
     private String name;
     private int id;
+
+    String img_name;
     private String password;
-    private int img = R.drawable.simple_avatar;
+    private int img = R.drawable.ava1;
     private String EmailAdress;
     private String phoneNumber;
     private Cart cart = new Cart();
@@ -28,6 +30,18 @@ public class User implements Parcelable {
         EmailAdress = "name@mail.ru";
     }
 
+    public ArrayList<String> getAddresses() {
+        return addresses;
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
+    public void addAddress(String address) {
+        this.addresses.add(address);
+    }
+
     protected User(Parcel in) {
         id = in.readInt();
         name = in.readString();
@@ -39,6 +53,7 @@ public class User implements Parcelable {
         orders = in.createTypedArrayList(Order.CREATOR);
         addresses = in.createStringArrayList();
         cards = in.createTypedArrayList(Card.CREATOR);
+        img_name = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -69,11 +84,24 @@ public class User implements Parcelable {
         this.cart = cart;
     }
 
+    public String getImg_name() {
+        return img_name;
+    }
+
+    public void setImg_name(String img_name) {
+        this.img_name = img_name;
+    }
+
+
+    public User(int id, int img, String name, String EmailAdress, String phone, String password, Cart cart, ArrayList<Order> orders, ArrayList<String> addresses, ArrayList<Card> cards) {
+        this(id, name, EmailAdress, phone, password, cart, orders, addresses, cards);
+        this.img = img;
+    }
+
     public User(int id, String name, String EmailAdress, String phone, String password, Cart cart, ArrayList<Order> orders, ArrayList<String> addresses,  ArrayList<Card> cards) {
         this.id = id;
         this.name = name;
         this.EmailAdress = EmailAdress;
-        this.img = img;
         this.phoneNumber = phone;
         this.password = password;
         this.cart = cart;
@@ -165,5 +193,6 @@ public class User implements Parcelable {
         dest.writeTypedList(orders);
         dest.writeStringList(addresses);
         dest.writeTypedList(cards);
+        dest.writeString(img_name);
     }
 }

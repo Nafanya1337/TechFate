@@ -193,6 +193,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         ProductInCart product = new ProductInCart(current_product, color, configuration);
         if (btn.getText().equals("Добавить в корзину")) {
             user.getCart().addProductToCart(product);
+            userCart.add(product);
             userDatabaseHelper.openDataBase();
             userDatabaseHelper.addProduct(user, product);
             userDatabaseHelper.close();
@@ -201,6 +202,12 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         }
         else {
             user.getCart().deleteProductInCart(product);
+            ProductInCart deleted = this.userCart.stream().filter(product1 ->
+                    product.getProduct().getName().equals(product1.getProduct().getName())
+                            && product.getSelected_color().equals(product1.getSelected_color())
+                            && product.getSelected_configuration().equals(product1.getSelected_configuration())).findFirst().get();
+
+            this.userCart.remove(deleted);
             userDatabaseHelper.openDataBase();
             userDatabaseHelper.deleteProduct(user, product);
             userDatabaseHelper.close();

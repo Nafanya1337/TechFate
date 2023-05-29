@@ -58,6 +58,11 @@
         <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
 
+    <style name="Theme.YourTransparentStatusBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
     <style name="accountPageTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="android:statusBarColor">@color/yellow</item>
