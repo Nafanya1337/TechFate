@@ -19,6 +19,8 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.shmakov.techfate.CardFragment;
+import com.shmakov.techfate.MainActivity;
+import com.shmakov.techfate.PaymentActivity;
 import com.shmakov.techfate.ProductCardDialog;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.PaymentMethodAdapter;
@@ -33,7 +35,7 @@ public class CardPaymentFragment extends Fragment {
     FrameLayout cardPaymentFragmentContainerCard;
     RecyclerView payment_methods_listView;
 
-    ArrayList<Card> cards = new ArrayList<>();
+    ArrayList<Card> cards = PaymentActivity.user.getCards();
 
     CardFragment cardFragment;
 
@@ -71,6 +73,7 @@ public class CardPaymentFragment extends Fragment {
 
         FragmentManager fm = getParentFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+        cards = MainActivity.user.getCards();
         cardFragment = new CardFragment(getContext(), cards);
         ft.replace(cardPaymentFragmentContainerCard.getId(), cardFragment).commit();
         cardPaymentFragmentNextBtn.setOnClickListener(new View.OnClickListener() {

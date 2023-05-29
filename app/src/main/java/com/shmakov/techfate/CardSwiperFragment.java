@@ -55,7 +55,7 @@ public class CardSwiperFragment extends Fragment {
 
     public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
-        if (swiper_zero_cards_text.getVisibility() == View.VISIBLE) {
+        if (swiper_zero_cards_text != null && swiper_zero_cards_text.getVisibility() == View.VISIBLE) {
             swiper_zero_cards_text.setVisibility(View.GONE);
         }
         if (savedCardsAdapter != null)
@@ -82,10 +82,12 @@ public class CardSwiperFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         savedCardsAdapter = new SavedCardsAdapter(context, cards, cardFragment);
         cardSwiperRecycler.setAdapter(savedCardsAdapter);
-        if (cards.isEmpty())
+        if (cards.isEmpty()) {
             swiper_zero_cards_text.setVisibility(View.VISIBLE);
-        if (!cards.isEmpty() && swiper_zero_cards_text.getVisibility() == View.VISIBLE) {
-            swiper_zero_cards_text.setVisibility(View.GONE);
+        }
+        else {
+            if (swiper_zero_cards_text != null && swiper_zero_cards_text.getVisibility() == View.VISIBLE)
+                swiper_zero_cards_text.setVisibility(View.GONE);
             card_position = 0;
         }
 

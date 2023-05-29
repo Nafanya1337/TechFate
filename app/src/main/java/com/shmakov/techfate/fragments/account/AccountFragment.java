@@ -5,6 +5,7 @@ import static android.view.Gravity.CENTER;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,9 +112,9 @@ public class AccountFragment extends Fragment {
 
             colorAnimation.start();
         }
-
         accountFragment_user_name.setText(user.getName());
         AccountEmailText.setText(user.getEmailAdress());
+        accountFragment_user_img.setImageResource(user.getImg());
     }
 
     @Override
@@ -145,6 +147,15 @@ public class AccountFragment extends Fragment {
         if (user.getOrders().size() != orders.size()) {
             ordersFragment.setOrders(user.getOrders());
             orders = user.getOrders();
+        }
+        accountFragment_user_name.setText(user.getName());
+        AccountEmailText.setText(user.getEmailAdress());
+        accountFragment_user_img.setImageResource(user.getImg());
+        accountFragment_user_img.setClipToOutline(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getActivity().getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.yellow));
         }
     }
 }

@@ -84,10 +84,10 @@ public class FilterFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_filter, container, false);
-        CostRangeSlider = view.findViewById(R.id.CostRangeSlider);
-        min = view.findViewById(R.id.editTextMin);
-        max = view.findViewById(R.id.editTextMax);
-        makeFilters = (makeFilters) context;
+//        CostRangeSlider = view.findViewById(R.id.CostRangeSlider);
+//        min = view.findViewById(R.id.editTextMin);
+//        max = view.findViewById(R.id.editTextMax);
+//        makeFilters = (makeFilters) context;
 
 
 //        FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -102,51 +102,17 @@ public class FilterFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        makeSlider();
-        CostRangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-                if (fromUser) {
-                    //Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        //v.vibrate(VibrationEffect.createOneShot(1, VibrationEffect.DEFAULT_AMPLITUDE));
-                    }
-                    List<Float> val = slider.getValues();
-                    min_val = Math.round(val.get(0));
-                    max_val = Math.round(val.get(val.size() - 1));
-                    min.setText(String.valueOf(min_val));
-                    max.setText(String.valueOf(max_val));
-                }
-            }
-        });
-//        min.addTextChangedListener(new TextWatcher() {
+//        makeSlider();
+//        CostRangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
 //            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                CostRangeSlider.setValueFrom(Float.valueOf(s.toString()));
-//            }
-//        });
-//        max.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                CostRangeSlider.setValueTo(Float.valueOf(s.toString()));
+//            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+//                if (fromUser) {
+//                    List<Float> val = slider.getValues();
+//                    min_val = Math.round(val.get(0));
+//                    max_val = Math.round(val.get(val.size() - 1));
+//                    min.setText(String.valueOf(min_val));
+//                    max.setText(String.valueOf(max_val));
+//                }
 //            }
 //        });
     }

@@ -1,9 +1,13 @@
 package com.shmakov.techfate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.shmakov.techfate.adapters.ImageAdapter;
 
@@ -32,6 +36,12 @@ public class FullScreenImageActivity extends AppCompatActivity {
                 full_image_container.setCurrentItem(img);
             }
         }, 100);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.white));
+        }
     }
 
     @Override

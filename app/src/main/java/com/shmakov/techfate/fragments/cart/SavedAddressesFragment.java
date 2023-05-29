@@ -66,7 +66,8 @@ public class SavedAddressesFragment extends Fragment {
 
     public void setAddresses(ArrayList<String> addresses) {
         this.addresses = addresses;
-        noAddressesMessage.setVisibility(View.GONE);
+        if (noAddressesMessage != null)
+            noAddressesMessage.setVisibility(View.GONE);
         savedAddresses_listView.setVisibility(View.VISIBLE);
         if (savedAdressesAdapter == null) {
             savedAdressesAdapter = new SavedAdressesAdapter(context, addresses);

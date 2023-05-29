@@ -41,7 +41,7 @@
             android:layout_gravity="center"
             android:scaleType="centerCrop"
             android:cropToPadding="true"
-            android:src="@drawable/default_user_img"/>
+            android:src="@drawable/ava1"/>
 
         <TextView
             android:id="@+id/accountFragment_user_name"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:gravity="center"
-            android:text="Шмаков Фёдор Михайлович"
+            android:text="ФИО"
             android:fontFamily="@font/dmsans_medium"
             android:textStyle="bold"
             android:layout_marginHorizontal="25dp"
@@ -64,7 +64,7 @@
             android:layout_marginTop="15dp"
             android:fontFamily="@font/dmsans_medium"
             android:gravity="center"
-            android:text="justemail@mail.com"
+            android:text="Email"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="normal"
@@ -89,6 +89,7 @@
             android:orientation="vertical"
             android:layout_height="wrap_content">
             <Button
+                android:onClick="onClickChangeAccount"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:backgroundTint="@color/white"

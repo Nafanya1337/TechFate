@@ -1,5 +1,6 @@
 package com.shmakov.techfate.fragments.cart;
 
+import android.content.Context;
 import android.content.DialogInterface;
 
 import android.location.Address;
@@ -23,8 +24,12 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.shmakov.techfate.MainActivity;
+import com.shmakov.techfate.PaymentActivity;
 import com.shmakov.techfate.R;
 
+import com.shmakov.techfate.database.UserDatabaseHelper;
+import com.shmakov.techfate.entities.User;
 import com.yandex.mapkit.MapKitFactory;
 
 import com.yandex.mapkit.geometry.Point;
@@ -58,9 +63,19 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
 
     PlacemarkMapObject placemark = null;
 
+    UserDatabaseHelper userDatabaseHelper;
+
+    User user;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userDatabaseHelper = new UserDatabaseHelper(getContext());
+        try {
+            userDatabaseHelper.createDataBase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -87,6 +102,8 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
         mapView.getMap().addInputListener(this);
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
+        user = PaymentActivity.user;
+        addresses = user.getAddresses();
         savedAddressesFragment = new SavedAddressesFragment(getContext(), addresses);
         ft.replace(adressFragmentFrameLayout.getId(), savedAddressesFragment).commit();
 
@@ -96,7 +113,11 @@ public class AdressFragment extends Fragment implements GeoObjectTapListener, In
                 if (requestKey.equals("requestKey")) {
                     if (result.containsKey("Address")) {
                         String address = result.getString("Address");
-                        addresses.add(address);
+                        MainActivity.user.addAddress(address);
+                        userDatabaseHelper.openDataBase();
+                        userDatabaseHelper.saveAddress(address, user.getId());
+                        userDatabaseHelper.close();
+                        addresses = MainActivity.user.getAddresses();
                         savedAddressesFragment.setAddresses(addresses);
                     }
                 }
