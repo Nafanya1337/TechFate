@@ -235,6 +235,16 @@
 
     </TableLayout>
 
+    <Button
+        android:id="@+id/addReviewBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:text="Оставить отзыв"
+        android:layout_marginVertical="15dp"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@color/black"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviews_recycler"

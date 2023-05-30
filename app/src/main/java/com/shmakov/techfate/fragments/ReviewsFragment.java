@@ -1,5 +1,6 @@
 package com.shmakov.techfate;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,9 +27,20 @@ import com.shmakov.techfate.mytools.ProgressBarAnimation;
 import java.util.ArrayList;
 
 
-public class ReviewsFragment extends Fragment {
+public class ReviewsFragment extends Fragment implements ReviewAddingFragment.makeReview {
 
     private int last_index = 3;
+
+    @Override
+    public void makeReview(Review review) {
+        addReview(review);
+    }
+
+    public interface addReview{
+        public void addReview(Review review);
+    }
+
+    addReview addReview;
 
     public static final String REVIEWS_TAG = "REVIEWS";
 
@@ -36,7 +48,7 @@ public class ReviewsFragment extends Fragment {
     private ArrayList<Review> reviews;
     private RecyclerView reviews_recycler;
 
-    private Button btn_showMore;
+    private Button btn_showMore, addReviewBtn;
 
     private ProgressBar progress_1, progress_2, progress_3, progress_4, progress_5;
 
@@ -60,6 +72,13 @@ public class ReviewsFragment extends Fragment {
             reviews_recycler.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         }
+    }
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        addReview = (addReview) context;
     }
 
     @Override
@@ -88,6 +107,8 @@ public class ReviewsFragment extends Fragment {
         percent_3 = view.findViewById(R.id.percent_3);
         percent_4 = view.findViewById(R.id.percent_4);
         percent_5 = view.findViewById(R.id.percent_5);
+
+        addReviewBtn = view.findViewById(R.id.addReviewBtn);
 
         registerForContextMenu(progress_1);
         registerForContextMenu(progress_2);
@@ -130,6 +151,18 @@ public class ReviewsFragment extends Fragment {
                 sum ++;
         }
         return Math.round((((float)sum / reviews.size()) * 100));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        addReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReviewAddingFragment reviewAddingFragment = new ReviewAddingFragment();
+                reviewAddingFragment.show(getChildFragmentManager(), "addFragment");
+            }
+        });
     }
 
     @Override

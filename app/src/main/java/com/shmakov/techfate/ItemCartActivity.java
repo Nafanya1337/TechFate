@@ -34,6 +34,7 @@ import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 import com.shmakov.techfate.adapters.ImageAdapter;
 import com.shmakov.techfate.database.UserDatabaseHelper;
 import com.shmakov.techfate.entities.ProductInCart;
+import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ColorsFragment;
@@ -49,7 +50,7 @@ import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
 
-public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.pickAColor, ConfigurationsAdapter.ChooseConf {
+public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.pickAColor, ConfigurationsAdapter.ChooseConf, com.shmakov.techfate.ReviewsFragment.addReview {
 
     public static final String PRODUCT_TAG = "PRODUCT";
     public static final String CONFIGURATION_TAG = "CONFIGURATION_TAG";
@@ -287,5 +288,10 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     @Override
     public void updateColors(String conf) {
         checkForAdding();
+    }
+
+    @Override
+    public void addReview(Review review) {
+
     }
 }

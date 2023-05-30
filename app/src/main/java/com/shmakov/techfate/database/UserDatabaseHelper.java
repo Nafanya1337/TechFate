@@ -316,6 +316,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         values.put("Email", Email);
         values.put("Password", Password);
         values.put("isLogged", 0);
+        values.put("Img", "ava1");
         long new_row = sqLiteDatabase.insert(USER_TABLE, null, values);
         values = new ContentValues();
         values.put("TotalCost", 0);
