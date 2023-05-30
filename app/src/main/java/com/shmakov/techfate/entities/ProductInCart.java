@@ -12,12 +12,20 @@ import java.util.HashMap;
 
 public class ProductInCart implements Parcelable {
     public Product product;
+
+    int id;
+
     int amount = 1;
     String selected_color;
     String selected_configuration;
 
+    public int getId() {
+        return id;
+    }
+
     public ProductInCart (Product product, String selected_color, String selected_configuration) {
         this.product = product;
+        this.id = product.getId();
         this.selected_color = selected_color;
         this.selected_configuration = selected_configuration;
     }
