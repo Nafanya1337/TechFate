@@ -32,6 +32,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.shmakov.techfate.adapters.ColorAdapter;
 import com.shmakov.techfate.adapters.ConfigurationsAdapter;
 import com.shmakov.techfate.adapters.ImageAdapter;
+import com.shmakov.techfate.database.ProductDatabaseHelper;
 import com.shmakov.techfate.database.UserDatabaseHelper;
 import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.entities.Review;
@@ -57,6 +58,8 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
     public static final String COLOR_TAG = "COLOR_TAG";
 
     private Button addToCartButton;
+
+    ProductDatabaseHelper productDatabaseHelper;
 
     private com.shmakov.techfate.ReviewsFragment reviewsFragment;
 
@@ -86,7 +89,9 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
         userDatabaseHelper = new UserDatabaseHelper(this);
+        productDatabaseHelper = new ProductDatabaseHelper(this);
         try {
+            productDatabaseHelper.createDataBase();
             userDatabaseHelper.createDataBase();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -125,6 +130,7 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.white));
         }
     }
+
 
     @Override
     protected void onStart() {
@@ -174,6 +180,9 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         main_data = new Intent();
         main_data.putExtra("requestCode", getIntent().getIntExtra("requestCode", 0));
         setResult(RESULT_CANCELED, main_data);
+        productDatabaseHelper.openDataBase();
+        current_product.setReviews(productDatabaseHelper.getReviews(current_product.getId()));
+        productDatabaseHelper.close();
     }
 
     public void closeItem(View view) {
@@ -290,8 +299,11 @@ public class ItemCartActivity extends AppCompatActivity implements ColorAdapter.
         checkForAdding();
     }
 
+
     @Override
     public void addReview(Review review) {
-
+        productDatabaseHelper.openDataBase();
+        productDatabaseHelper.addReview(review.getUser(), review.getText(), review.getRating(), review.getDate(), current_product.getId());
+        productDatabaseHelper.close();
     }
 }

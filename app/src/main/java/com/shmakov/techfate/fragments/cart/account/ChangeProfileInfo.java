@@ -1,4 +1,4 @@
-package com.shmakov.techfate;
+package com.shmakov.techfate.fragments.cart.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.shmakov.techfate.MainActivity;
+import com.shmakov.techfate.ProfilePhotosFragment;
+import com.shmakov.techfate.R;
 import com.shmakov.techfate.database.UserDatabaseHelper;
 import com.shmakov.techfate.entities.User;
 

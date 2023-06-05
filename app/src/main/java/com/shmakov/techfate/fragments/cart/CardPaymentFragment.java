@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,10 +17,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.shmakov.techfate.CardFragment;
 import com.shmakov.techfate.MainActivity;
 import com.shmakov.techfate.PaymentActivity;
-import com.shmakov.techfate.ProductCardDialog;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.PaymentMethodAdapter;
 import com.shmakov.techfate.entities.Card;

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -40,7 +41,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String ORDER_CART_TABLE = "`OrderCart`"; // таблица корзины в заказе
 
-    public static final String ORDER_TABLE = "`Order`"; // таблица заказов
+    public static final String ORDER_TABLE = "'Order'"; // таблица заказов
 
     public static final String ADDRESSES_TABLE = "`Addresses`"; // таблица адресов
 
@@ -199,6 +200,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                         orderCursor.getString(7),
                         orderCursor.getFloat(6)
                 );
+                order.setStatus(orderCursor.getString(10));
                 orders.add(order);
             }
             orderCursor.close();
@@ -231,7 +233,12 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         values.put("PromoName", order.getPromocodeName());
         values.put("PaymentMethod", order.getPaymentMethod());
         values.put("UserId", user_id);
+        values.put("Status", order.getStatus());
         long id = sqLiteDatabase.insert(ORDER_TABLE, null, values);
+        if (id == -1) {
+            Toast.makeText(context, "Не удалось совершить заказ", Toast.LENGTH_LONG).show();
+            return;
+        }
         String whereClause = "UserId = ?";
         String[] whereArgs = { String.valueOf(user_id) };
         sqLiteDatabase.delete(PRODUCTS_IN_USER_CART_TABLE, whereClause, whereArgs);
@@ -249,6 +256,47 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public ArrayList<Order> getAllOrders(){
+        ArrayList<Order> orders = new ArrayList<>();
+        Cursor orderCursor = sqLiteDatabase.query("`Order`", null, null, null, null, null, null);
+        while (orderCursor.moveToNext()) {
+            int order_id = orderCursor.getInt(0);
+            ArrayList<ProductInCart> products_in_order = new ArrayList<>();
+            Cursor ProductsOrdersCursor = sqLiteDatabase.query(PRODUCTS_IN_ORDER_TABLE, null, "OrderId = ?", new String[]{String.valueOf(order_id)}, null, null, null);
+            while (ProductsOrdersCursor.moveToNext()) {
+                Product product = Category.getAllProducts().get(ProductsOrdersCursor.getInt(0) - 1);
+                ProductInCart temp = new ProductInCart(product, ProductsOrdersCursor.getString(1),
+                        ProductsOrdersCursor.getString(2));
+                products_in_order.add(temp);
+            }
+            ProductsOrdersCursor.close();
+
+            Cart cart = new Cart(products_in_order, orderCursor.getInt(2), orderCursor.getFloat(6));
+
+            Order order = new Order(
+                    orderCursor.getInt(0),
+                    orderCursor.getString(1),
+                    cart,
+                    orderCursor.getString(3),
+                    orderCursor.getString(4),
+                    orderCursor.getString(8),
+                    orderCursor.getInt(2),
+                    orderCursor.getInt(5),
+                    orderCursor.getString(7),
+                    orderCursor.getFloat(6)
+            );
+            order.setStatus(orderCursor.getString(10));
+            orders.add(order);
+        }
+        orderCursor.close();
+        return orders;
+    }
+
+    public void updateOrderInfo(Order order, String status) {
+        ContentValues values = new ContentValues();
+        values.put("Status", status);
+        sqLiteDatabase.update(ORDER_TABLE, values, "OrderId=?", new String[]{String.valueOf(order.getId())});
+    }
 
     public void updateProfileInfo(User user) {
         String selection = "id = ? ";
@@ -324,6 +372,39 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         values.put("UserId", (int)new_row);
         sqLiteDatabase.insert(USER_CART_TABLE, null, values);
     }
+
+    public void addProduct(User user, ProductInCart product) {
+        ContentValues values = new ContentValues();
+        values.put("ProductId", product.getProduct().getId());
+        values.put("SelectedColor", product.getSelected_color());
+        values.put("SelectedConfiguration", product.getSelected_configuration());
+        values.put("UserId", user.getId());
+        sqLiteDatabase.insert(PRODUCTS_IN_USER_CART_TABLE, null, values);
+        values = new ContentValues();
+        values.put("TotalCost", user.getCart().getTotal_cost());
+        String whereClause = "UserId=?";
+        String[] whereArgs = {String.valueOf(user.getId())};
+        sqLiteDatabase.update(USER_CART_TABLE, values, whereClause, whereArgs);
+    }
+
+    public void deleteProduct(User user, ProductInCart product) {
+        String selection =
+                "ProductId = ? AND SelectedColor = ? AND SelectedConfiguration = ? AND UserId = ?";
+        String[] selectionArgs = {
+                String.valueOf(product.getProduct().getId()),
+                product.getSelected_color(),
+                product.getSelected_configuration(),
+                String.valueOf(user.getId())
+        };
+        sqLiteDatabase.delete(PRODUCTS_IN_USER_CART_TABLE, selection, selectionArgs);
+
+        ContentValues values = new ContentValues();
+        values.put("TotalCost", user.getCart().getTotal_cost());
+        String whereClause = "UserId=?";
+        String[] whereArgs = {String.valueOf(user.getId())};
+        sqLiteDatabase.update(USER_CART_TABLE, values, whereClause, whereArgs);
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

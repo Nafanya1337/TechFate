@@ -33,7 +33,9 @@ public class ReviewsFragment extends Fragment implements ReviewAddingFragment.ma
 
     @Override
     public void makeReview(Review review) {
-        addReview(review);
+        addReview.addReview(review);
+        reviews.add(review);
+        fullReviewAdapter.setReviews(reviews);
     }
 
     public interface addReview{
@@ -156,10 +158,11 @@ public class ReviewsFragment extends Fragment implements ReviewAddingFragment.ma
     @Override
     public void onResume() {
         super.onResume();
+        ReviewsFragment fragment = this;
         addReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReviewAddingFragment reviewAddingFragment = new ReviewAddingFragment();
+                ReviewAddingFragment reviewAddingFragment = new ReviewAddingFragment(fragment);
                 reviewAddingFragment.show(getChildFragmentManager(), "addFragment");
             }
         });

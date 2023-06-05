@@ -2,34 +2,20 @@ package com.shmakov.techfate;
 
 
 
-import static com.shmakov.techfate.CategoryActivity.PRODUCT_ARRAY_TAG;
-import static com.shmakov.techfate.ItemCartActivity.COLOR_TAG;
-import static com.shmakov.techfate.ItemCartActivity.CONFIGURATION_TAG;
 import static com.shmakov.techfate.ItemCartActivity.PRODUCT_TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.FragmentNavigator;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -45,22 +31,17 @@ import com.shmakov.techfate.database.UserDatabaseHelper;
 import com.shmakov.techfate.entities.Cart;
 import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.entities.ProductInCart;
-import com.shmakov.techfate.entities.Review;
 import com.shmakov.techfate.entities.User;
-import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Product;
-import com.shmakov.techfate.fragments.cart.CartFragment;
+import com.shmakov.techfate.fragments.cart.account.ChangeProfileInfo;
+import com.shmakov.techfate.fragments.cart.account.ShowOrdersActivity;
 import com.shmakov.techfate.fragments.cart.CartFragment.makePayment;
-import com.shmakov.techfate.fragments.home.HomeFragment;
-import com.shmakov.techfate.mytools.ColorManager;
 import com.yandex.mapkit.MapKitFactory;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct, makePayment {
+public class MainActivity extends AppCompatActivity implements CategoryAdapter.openCategory, ProductAdapter.onClickProduct, makePayment, CartAdapter.openItemFromCart {
 
     private static final int ITEM_ACTIVITY_REQUEST_CODE = 1;
     private static final int CATERGORY_ACTIVITY_REQUEST_CODE = 2;
@@ -161,6 +142,18 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
         product.addWatch();
         Bundle bundle = new Bundle();
         bundle.putParcelable(PRODUCT_TAG, product);
+        bundle.putParcelableArrayList("UserCart", user.getCart().getProducts());
+        intent.putExtras(bundle);
+        intent.putExtra("requestCode", ITEM_ACTIVITY_REQUEST_CODE);
+        activityResultLauncher.launch(intent);
+    }
+
+    public void onClickProduct(Product product) {
+        Intent intent = new Intent(this, ItemCartActivity.class);
+        product.addWatch();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PRODUCT_TAG, product);
+        bundle.putParcelableArrayList("UserCart", user.getCart().getProducts());
         intent.putExtras(bundle);
         intent.putExtra("requestCode", ITEM_ACTIVITY_REQUEST_CODE);
         activityResultLauncher.launch(intent);
@@ -191,11 +184,8 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
                         if (resultCode == RESULT_OK) {
                             Intent data = result.getData();
                             if (data != null) {
-                                Bundle bundle = data.getExtras();
-                                Product product = bundle.getParcelable(PRODUCT_TAG);
-                                String color = bundle.getString(COLOR_TAG);
-                                String configuration = bundle.getString(CONFIGURATION_TAG);
-                                cart.addProductToCart(product, color, configuration);
+                                ArrayList<ProductInCart> userCart = data.getParcelableArrayListExtra("UserCart");
+                                user.getCart().setProducts(userCart);
                             }
                         }
                     }
@@ -225,9 +215,13 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
         startActivity(intent);
     }
 
-
     public void onClickChangeAccount(View view) {
         Intent intent = new Intent(this, ChangeProfileInfo.class);
+        startActivity(intent);
+    }
+
+    public void onClickShowOrders(View view) {
+        Intent intent = new Intent(this, ShowOrdersActivity.class);
         startActivity(intent);
     }
 
@@ -235,5 +229,4 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
     public void openItemFromCart(ProductInCart product) {
         onClickProduct(product.getProduct());
     }
-
 }

@@ -126,12 +126,12 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         category_available.setText(category_available_str);
         all = Category.categories.get(tittle);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.transparent));
-
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Window window = getWindow();
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            window.setStatusBarColor(ContextCompat.getColor(this, R.color.transparent));
+//
+//        }
     }
 
     @Override

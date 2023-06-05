@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -55,6 +56,8 @@ public class FilterFragment extends BottomSheetDialogFragment {
 
     private float step = 500f;
 
+    LayoutInflater inflater;
+
     public FilterFragment(Context context, ArrayList<Product> products, HashMap<String, ArrayList<String>> filters) {
         this.context = context;
         this.products = products;
@@ -67,6 +70,7 @@ public class FilterFragment extends BottomSheetDialogFragment {
         if (filters.containsKey(COLORS_KEY)) {
             addedColors = filters.get(COLORS_KEY);
         }
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -83,18 +87,10 @@ public class FilterFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_filter, container, false);
-//        CostRangeSlider = view.findViewById(R.id.CostRangeSlider);
-//        min = view.findViewById(R.id.editTextMin);
-//        max = view.findViewById(R.id.editTextMax);
-//        makeFilters = (makeFilters) context;
-
-
-//        FragmentTransaction ft = fragmentManager.beginTransaction();
-//        ArrayList<String> tremp = new ArrayList<String>();
-//        tremp.add("black");
-//        ColorCheckboxFragment colorCheckboxFragment = new ColorCheckboxFragment(context, tremp);
-//        ft.replace(colors_picker_container.getId(), colorCheckboxFragment).commit();
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_filter, container, false);
+        min = view.findViewById(R.id.editTextMin);
+        max = view.findViewById(R.id.editTextMax);
+        makeFilters = (makeFilters) context;
         return view;
     }
 
@@ -102,19 +98,7 @@ public class FilterFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        makeSlider();
-//        CostRangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-//            @Override
-//            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-//                if (fromUser) {
-//                    List<Float> val = slider.getValues();
-//                    min_val = Math.round(val.get(0));
-//                    max_val = Math.round(val.get(val.size() - 1));
-//                    min.setText(String.valueOf(min_val));
-//                    max.setText(String.valueOf(max_val));
-//                }
-//            }
-//        });
+        makeSlider();
     }
 
     private void makeSlider() {
@@ -131,10 +115,6 @@ public class FilterFragment extends BottomSheetDialogFragment {
             min_val = 0;
         min.setText(String.valueOf(min_val));
         max.setText(String.valueOf(max_val));
-        CostRangeSlider.setStepSize(step);
-        CostRangeSlider.setValueTo(Float.valueOf(valueTo));
-        CostRangeSlider.setValueFrom(Float.valueOf(valueFrom));
-        CostRangeSlider.setValues(Float.valueOf(min_val), Float.valueOf(max_val));
     }
 
     @Override

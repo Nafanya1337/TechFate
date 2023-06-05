@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_corners"
+    tools:context=".fragments.cart.account.setOrderStatusFragment">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/round_horizontal_rule_24"
+        android:layout_gravity="top|center"/>
+
+    <LinearLayout
+        android:id="@+id/orderStatusLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="СТАТУС ДОСТАВКИ"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/dmsans_medium"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="#A1A1A1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginVertical="10dp"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/setStatus1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:button="@color/transparent"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/delivery_status_radio"/>
+
+            <TextView
+                android:id="@+id/status1Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="В ОБРАБОТКЕ"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/dmsans_medium"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/setStatus2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="25dp"
+                android:button="@color/transparent"
+                android:background="@drawable/delivery_status_radio"/>
+
+            <TextView
+                android:id="@+id/status2Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="В СБОРКЕ"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/dmsans_medium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/setStatus3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/delivery_status_radio"
+                android:button="@color/transparent"
+                android:layout_marginLeft="25dp"/>
+
+
+            <TextView
+                android:id="@+id/status3Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="В ДОСТАВКЕ"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/dmsans_medium"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/setStatus4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/delivery_status_radio"
+                android:button="@color/transparent"
+                android:layout_marginLeft="25dp"/>
+
+            <TextView
+                android:id="@+id/status4Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="ЗАКАЗ ДОСТАВЛЕН"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/dmsans_medium"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

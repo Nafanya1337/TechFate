@@ -1,5 +1,9 @@
 package com.shmakov.techfate.fragments.cart;
 
+import static com.yandex.runtime.Runtime.getApplicationContext;
+
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,10 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.shmakov.techfate.OrdersFragment;
 import com.shmakov.techfate.PaymentActivity;
 import com.shmakov.techfate.ProductCardDialog;
 import com.shmakov.techfate.R;
@@ -36,7 +45,7 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
     boolean isAlreadyMade = false;
     RecyclerView products_in_cart_recycler;
 
-    String Address = "", DeliveryMethod = "", PaymentMethod = "", PromocodeName = "";
+    String Address = "", DeliveryMethod = "", PaymentMethod = "", PromocodeName = "", Status = "";
 
     MiniProductInCardAdapter miniProductInCardAdapter;
     Card card;
@@ -49,11 +58,15 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
 
     float PromocodeRate = 0f;
 
-    TextView make_order_delivery_cost, make_order_total_cost, make_order_promocode, make_order_promocode_name;
+    TextView make_order_delivery_cost, make_order_total_cost, make_order_promocode, make_order_promocode_name, status1Text, status2Text, status3Text, status4Text;
 
     View selectedAddress, selectedDelivery, selectedPaymentMethod;
 
     Button makeOrderBtnNext;
+
+    LinearLayout orderStatusLayout;
+
+    RadioButton status1, status2, status3, status4;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +87,7 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
                 PromocodeRate = getArguments().getFloat("PromocodeRate");
                 cart = getArguments().getParcelable("Cart");
                 delivery_cost = getArguments().getInt("DeliveryCost");
+                Status = getArguments().getString("Status");
             }
 
         }
@@ -94,7 +108,68 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
         miniProductInCardAdapter = new MiniProductInCardAdapter(this, cart.getProducts().toArray(new ProductInCart[0]));
         products_in_cart_recycler.setAdapter(miniProductInCardAdapter);
         makeOrderBtnNext = view.findViewById(R.id.makeOrderBtnNext);
+        orderStatusLayout = view.findViewById(R.id.orderStatusLayout);
+        status1 = view.findViewById(R.id.status1);
+        status2 = view.findViewById(R.id.status2);
+        status3 = view.findViewById(R.id.status3);
+        status4 = view.findViewById(R.id.status4);
+        status1Text = view.findViewById(R.id.status1Text);
+        status2Text = view.findViewById(R.id.status2Text);
+        status3Text = view.findViewById(R.id.status3Text);
+        status4Text = view.findViewById(R.id.status4Text);
+        if (isAlreadyMade)
+            makeStatus();
         return view;
+    }
+
+    public void makeStatus(){
+        String temp = status1Text.getText().toString();
+        Animation blinkAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
+
+
+        if (Status.equals(temp)) {
+            status1.startAnimation(blinkAnimation);
+            status1Text.setTextColor(Color.parseColor("#02C596"));
+            status1.setChecked(true);
+        }
+
+        temp = status2Text.getText().toString();
+        if (Status.equals(temp)) {
+            status1Text.setTextColor(Color.parseColor("#02C596"));
+            status1.setChecked(true);
+
+            status2.startAnimation(blinkAnimation);
+            status2Text.setTextColor(Color.parseColor("#02C596"));
+            status2.setChecked(true);
+        }
+
+        temp = status3Text.getText().toString();
+        if (Status.equals(temp)) {
+            status1Text.setTextColor(Color.parseColor("#02C596"));
+            status1.setChecked(true);
+
+            status2Text.setTextColor(Color.parseColor("#02C596"));
+            status2.setChecked(true);
+
+            status3.startAnimation(blinkAnimation);
+            status3Text.setTextColor(Color.parseColor("#02C596"));
+            status3.setChecked(true);
+        }
+
+        temp = status4Text.getText().toString();
+        if (Status.equals(temp)) {
+            status1Text.setTextColor(Color.parseColor("#02C596"));
+            status1.setChecked(true);
+
+            status2Text.setTextColor(Color.parseColor("#02C596"));
+            status2.setChecked(true);
+
+            status3Text.setTextColor(Color.parseColor("#02C596"));
+            status3.setChecked(true);
+
+            status4.setChecked(true);
+            status4Text.setTextColor(Color.parseColor("#02C596"));
+        }
     }
 
     @Override
@@ -132,7 +207,7 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
         make_order_total_cost.setText(cart.getTotal_cost() + " ₽");
 
         if (!isAlreadyMade) {
-
+            orderStatusLayout.setVisibility(View.GONE);
             makeOrderBtnNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -150,6 +225,7 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
                     }
                     Order order = new Order(order_name.toString(), cart, address.getText().toString(), delivery.getText().toString(), payment.getText().toString(), cart.getTotal_cost(), delivery_cost, promoName, promoRate);
                     Bundle bundle = new Bundle();
+                    order.setStatus("В ОБРАБОТКЕ");
                     bundle.putParcelable("Order", order);
                     Navigation.findNavController(view).navigate(R.id.action_makeOrderFragment_to_orderInfoFragment, bundle);
                 }

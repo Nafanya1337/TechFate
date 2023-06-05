@@ -1,7 +1,6 @@
 package com.shmakov.techfate.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.shmakov.techfate.CardFragment;
-import com.shmakov.techfate.CardSwiperFragment;
+import com.shmakov.techfate.fragments.cart.CardFragment;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.Card;
 

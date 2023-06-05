@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:scrollbars="none"
     android:theme="@style/accountPageTheme"
-    tools:context=".fragments.account.AccountFragment">
+    tools:context=".fragments.cart.account.AccountFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,6 +88,16 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
+
+            <Button
+                android:onClick="onClickShowOrders"
+                android:id="@+id/showOrdersBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/white"
+                android:text="Просмотреть заказы"/>
+
             <Button
                 android:onClick="onClickChangeAccount"
                 android:layout_width="match_parent"

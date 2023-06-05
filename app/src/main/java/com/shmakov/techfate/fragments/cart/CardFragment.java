@@ -1,7 +1,6 @@
-package com.shmakov.techfate;
+package com.shmakov.techfate.fragments.cart;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,22 +10,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.shmakov.techfate.MainActivity;
+import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.SavedCardsAdapter;
 import com.shmakov.techfate.database.UserDatabaseHelper;
 import com.shmakov.techfate.entities.Card;
-import com.shmakov.techfate.fragments.cart.AddingCardFragment;
 
 import java.io.IOException;
 import java.util.ArrayList;

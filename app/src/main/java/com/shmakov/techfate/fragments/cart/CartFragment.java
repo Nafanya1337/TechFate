@@ -146,6 +146,10 @@ public class CartFragment extends Fragment implements CartAdapter.updateAmount {
                     Toast.makeText(getContext(), "Корзина пуста", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (MainActivity.user.getId() == 1) {
+                    Toast.makeText(getContext(), "Аккаунт администратора не может оформлять заказы!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (promocode_active.getVisibility() == View.VISIBLE && promocode_active.getText().toString().charAt(0) == '-') {
                     String promo_name = promocodeEditText.getText().toString();
                     String promo_val_str = promocode_active.getText().toString().replace("-","").replace("%", "");

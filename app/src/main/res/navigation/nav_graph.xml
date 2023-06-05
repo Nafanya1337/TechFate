@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.shmakov.techfate.fragments.account.AccountFragment"
+        android:name="com.shmakov.techfate.fragments.cart.account.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" >
         <action
@@ -90,6 +90,11 @@
         <argument
             android:name="DeliveryCost"
             app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="Status"
+            app:argType="string"
+            app:nullable="true"
             android:defaultValue="0" />
     </fragment>
 </navigation>

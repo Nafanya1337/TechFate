@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="25dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textViewOrderID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/dmsans_medium"
+        android:text="1"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewOrderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/dmsans_medium"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textViewOrderID"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonOrderInfo"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/yellow"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_order_RecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOrderName" />
+
+    <TextView
+        android:id="@+id/item_order_Status"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:text="В ОБРАБОТКЕ"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewOrderName"
+        app:layout_constraintStart_toEndOf="@+id/textViewOrderName"
+        app:layout_constraintTop_toTopOf="@+id/textViewOrderName" />
+
+    <TextView
+        android:id="@+id/item_order_DeliveryMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/dmsans_medium"
+        android:text="Метод доставки"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_order_RecyclerView" />
+
+    <TextView
+        android:id="@+id/item_order_Address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="@font/dmsans_medium"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:text="Адрес доставки"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_order_DeliveryMethod" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_order_Address"
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/line" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,14 +42,6 @@
             style="@style/regular_text"
             android:layout_marginLeft="25dp"/>
 
-        <com.google.android.material.slider.RangeSlider
-            android:id="@+id/CostRangeSlider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            style="@style/Widget.MaterialComponents.Slider"
-
-            />
 
         <LinearLayout
             android:layout_width="match_parent"

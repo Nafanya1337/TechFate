@@ -11,6 +11,12 @@ public class Order implements Parcelable {
 
     private final Cart cart;
 
+    public static int global_id = 1;
+
+    int id;
+
+    private String status = "В ОБРАБОТКЕ";
+
     private final int delivery_cost;
 
     private final String address;
@@ -30,6 +36,20 @@ public class Order implements Parcelable {
         return name;
     }
 
+    public Order(int id, String name, Cart cart, String address, String deliveryMethod, String paymentMethod, int final_cost, int delivery_cost, String promocodeName, Float promocodeRate) {
+        this.name = name;
+        this.cart = cart;
+        this.address = address;
+        this.deliveryMethod = deliveryMethod;
+        this.paymentMethod = paymentMethod;
+        this.final_cost = final_cost;
+        this.delivery_cost = delivery_cost;
+        this.promocodeName = promocodeName;
+        this.promocodeRate = promocodeRate;
+        this.id = id;
+
+    }
+
     public Order(String name, Cart cart, String address, String deliveryMethod, String paymentMethod, int final_cost, int delivery_cost, String promocodeName, Float promocodeRate) {
         this.name = name;
         this.cart = cart;
@@ -40,6 +60,16 @@ public class Order implements Parcelable {
         this.delivery_cost = delivery_cost;
         this.promocodeName = promocodeName;
         this.promocodeRate = promocodeRate;
+        id = global_id;
+        global_id++;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public String getPaymentMethod() {
@@ -56,6 +86,12 @@ public class Order implements Parcelable {
         delivery_cost = in.readInt();
         promocodeName = in.readString();
         promocodeRate = in.readFloat();
+        status = in.readString();
+        id = in.readInt();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public static final Creator<Order> CREATOR = new Creator<Order>() {
@@ -114,5 +150,7 @@ public class Order implements Parcelable {
         dest.writeInt(delivery_cost);
         dest.writeString(promocodeName);
         dest.writeFloat(promocodeRate);
+        dest.writeString(status);
+        dest.writeInt(id);
     }
 }

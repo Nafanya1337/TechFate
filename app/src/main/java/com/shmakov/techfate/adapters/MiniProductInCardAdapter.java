@@ -1,6 +1,5 @@
 package com.shmakov.techfate.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shmakov.techfate.OrdersFragment;
 import com.shmakov.techfate.R;
+import com.shmakov.techfate.fragments.cart.account.ShowOrdersActivity;
 import com.shmakov.techfate.entities.ProductInCart;
-import com.shmakov.techfate.fragments.account.AccountFragment;
 import com.shmakov.techfate.fragments.cart.MakeOrderFragment;
 
 public class MiniProductInCardAdapter extends RecyclerView.Adapter<MiniProductInCardAdapter.ViewProductInCart> {
@@ -23,6 +22,17 @@ public class MiniProductInCardAdapter extends RecyclerView.Adapter<MiniProductIn
 
     public interface showProductInfo{
         public void showProductInfo(int position);
+    }
+
+    public interface showProduct{
+        public void showProduct(ProductInCart product);
+    }
+
+    showProduct showProduct;
+
+    public MiniProductInCardAdapter(ShowOrdersActivity context, ProductInCart[] products) {
+        showProduct = (showProduct) context;
+        this.products = products;
     }
 
     public MiniProductInCardAdapter(MakeOrderFragment context, ProductInCart[] products) {
@@ -48,7 +58,10 @@ public class MiniProductInCardAdapter extends RecyclerView.Adapter<MiniProductIn
         holder.item_mini_product_in_cart_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showProductInfo.showProductInfo(position);
+                if (showProductInfo != null)
+                    showProductInfo.showProductInfo(position);
+                else
+                    showProduct.showProduct(products[position]);
             }
         });
     }

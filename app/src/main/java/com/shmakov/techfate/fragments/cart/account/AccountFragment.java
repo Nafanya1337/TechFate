@@ -1,4 +1,4 @@
-package com.shmakov.techfate.fragments.account;
+package com.shmakov.techfate.fragments.cart.account;
 
 import static android.view.Gravity.CENTER;
 
@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,6 +56,8 @@ public class AccountFragment extends Fragment {
 
     User user;
 
+    Button showOrdersBtn;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,9 @@ public class AccountFragment extends Fragment {
         orders_container = view.findViewById(R.id.orders_container);
         accountFragment_user_name = view.findViewById(R.id.accountFragment_user_name);
         AccountEmailText = view.findViewById(R.id.AccountEmailText);
+        showOrdersBtn = view.findViewById(R.id.showOrdersBtn);
+        if (user.getId() != 1)
+            showOrdersBtn.setVisibility(View.GONE);
         return view;
     }
 

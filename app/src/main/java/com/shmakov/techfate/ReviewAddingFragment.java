@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,9 @@ import android.widget.RatingBar;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.shmakov.techfate.entities.Review;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class ReviewAddingFragment extends BottomSheetDialogFragment {
@@ -56,7 +60,11 @@ public class ReviewAddingFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addingReviewRatingBar = view.findViewById(R.id.addingReviewRatingBar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            addingReviewRatingBar.setMin(1);
+        }
         addingReviewNameEditText = view.findViewById(R.id.addingReviewNameEditText);
+        addingReviewNameEditText.setText(MainActivity.user.getName());
         addingReviewTextEditText = view.findViewById(R.id.addingReviewTextEditText);
         saveReviewBtn = view.findViewById(R.id.saveReviewBtn);
         LayerDrawable stars = (LayerDrawable) addingReviewRatingBar.getProgressDrawable();
@@ -71,7 +79,13 @@ public class ReviewAddingFragment extends BottomSheetDialogFragment {
         saveReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String user = addingReviewNameEditText.getText().toString();
+                String text = addingReviewTextEditText.getText().toString();
+                Date currentDate = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                String date = dateFormat.format(currentDate);
+                Float rating = addingReviewRatingBar.getRating();
+                makeReview.makeReview(new Review(user, text, date, rating));
             }
         });
     }

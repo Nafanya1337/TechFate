@@ -1,6 +1,5 @@
 package com.shmakov.techfate.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import com.shmakov.techfate.OrdersFragment;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.entities.ProductInCart;
-import com.shmakov.techfate.fragments.account.AccountFragment;
 
 import java.util.ArrayList;
 
@@ -49,6 +47,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderView>
                 showFullOrderInfo.ShowFullOrderInfo(position);
             }
         });
+
+        holder.order_status.setText("•  " +order.getStatus());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderView>
 
     class OrderView extends RecyclerView.ViewHolder{
 
-        TextView order_name;
+        TextView order_name, order_status;
         RecyclerView products_in_order_recycler;
 
         Button show_more_info_order_btn;
@@ -69,6 +69,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderView>
             order_name = itemView.findViewById(R.id.order_name);
             products_in_order_recycler = itemView.findViewById(R.id.products_in_order_recycler);
             show_more_info_order_btn = itemView.findViewById(R.id.show_more_info_order_btn);
+            order_status = itemView.findViewById(R.id.order_status);
         }
     }
 

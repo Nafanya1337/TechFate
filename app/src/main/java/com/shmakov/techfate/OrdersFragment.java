@@ -1,12 +1,10 @@
 package com.shmakov.techfate;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +16,7 @@ import com.shmakov.techfate.Helpers.SwipeHelper;
 import com.shmakov.techfate.adapters.MiniProductInCardAdapter;
 import com.shmakov.techfate.adapters.OrdersAdapter;
 import com.shmakov.techfate.entities.Order;
-import com.shmakov.techfate.fragments.account.AccountFragment;
-import com.shmakov.techfate.fragments.cart.MakeOrderFragment;
+import com.shmakov.techfate.fragments.cart.account.AccountFragment;
 
 import java.util.ArrayList;
 
@@ -88,6 +85,7 @@ public class OrdersFragment extends Fragment implements MiniProductInCardAdapter
         bundle.putInt("DeliveryCost", order.getDelivery_cost());
         bundle.putString("PromocodeNmae", order.getPromocodeName());
         bundle.putFloat("PromocodeRate", order.getPromocodeRate());
+        bundle.putString("Status", order.getStatus());
         View view = getView();
         Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_makeOrderFragment2, bundle);
 

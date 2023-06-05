@@ -1,5 +1,6 @@
 package com.shmakov.techfate.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -103,6 +104,18 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         super.close();
     }
 
+    public ArrayList<Review> getReviews(int id){
+        ArrayList<Review> reviews = new ArrayList<>();
+        Cursor cursorReviews = sqLiteDatabase.query(TABLE_REVIEWS, null, "REVIEWS_TABLE_COLUMN_PARENT_ID = ?",
+                new String[] {String.valueOf(id)}, null, null, null);
+        while (cursorReviews.moveToNext()) {
+            Review review = new Review(cursorReviews.getString(0), cursorReviews.getString(1),
+                    cursorReviews.getString(3), cursorReviews.getFloat(2));
+            reviews.add(review);
+        }
+        return reviews;
+    }
+
     public void getAllProducts(){
         Product product = null;
         Cursor cursor = sqLiteDatabase.query(ProductDatabaseHelper.TABLE, null, null, null, null, null, null);
@@ -160,6 +173,17 @@ public class ProductDatabaseHelper extends SQLiteOpenHelper {
         if (product == null) return;
         cursor.close();
     }
+
+    public void addReview(String name, String text, Float rating, String date, int productId) {
+        ContentValues values = new ContentValues();
+        values.put("REVIEWS_TABLE_COLUMN_AUTHOR", name);
+        values.put("REVIEWS_TABLE_COLUMN_TEXT", text);
+        values.put("REVIEWS_TABLE_COLUMN_RATING", rating);
+        values.put("REVIEWS_TABLE_COLUMN_DATE", date);
+        values.put("REVIEWS_TABLE_COLUMN_PARENT_ID", productId);
+        sqLiteDatabase.insert(TABLE_REVIEWS, null, values);
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

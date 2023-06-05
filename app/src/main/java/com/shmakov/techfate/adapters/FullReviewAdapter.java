@@ -38,6 +38,7 @@ public class FullReviewAdapter extends RecyclerView.Adapter<FullReviewAdapter.My
 
     public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
+        notifyDataSetChanged();
     }
 
     @NonNull

@@ -8,25 +8,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.shmakov.techfate.MainActivity;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.adapters.CategoryAdapter;
-import com.shmakov.techfate.entities.Review;
-import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Category;
-import com.shmakov.techfate.entities.inner.Headphones;
 import com.shmakov.techfate.entities.inner.Product;
-import com.shmakov.techfate.entities.inner.SmartPhone;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
-import com.shmakov.techfate.mytools.ColorManager;
-
-import java.util.HashMap;
 
 
 public class HomeFragment extends Fragment {
