@@ -83,7 +83,7 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
                 cart = PaymentActivity.cart;
             }
             else {
-                PromocodeName = getArguments().getParcelable("PromocodeName");
+                PromocodeName = getArguments().getString("PromocodeName");
                 PromocodeRate = getArguments().getFloat("PromocodeRate");
                 cart = getArguments().getParcelable("Cart");
                 delivery_cost = getArguments().getInt("DeliveryCost");
@@ -188,7 +188,7 @@ public class MakeOrderFragment extends Fragment implements MiniProductInCardAdap
         if (card != null)
             payment.append(" " + card.getCardNum().substring(15, 19));
         payment_img.setImageResource(ImageManager.findPaymentIMG(PaymentMethod));
-        if (!Objects.equals(PromocodeName, "")) {
+        if (PromocodeName != null && !Objects.equals(PromocodeName, "")) {
             make_order_promocode_name.setText("Промокод " + PromocodeName);
             make_order_promocode.setText("-" + (int)PromocodeRate + "%");
         }

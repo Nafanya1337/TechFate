@@ -1,4 +1,4 @@
-package com.shmakov.techfate.fragments.cart.account;
+package com.shmakov.techfate.fragments.account;
 
 import static com.yandex.runtime.Runtime.getApplicationContext;
 

@@ -1,4 +1,4 @@
-package com.shmakov.techfate.fragments.cart.account;
+package com.shmakov.techfate.fragments.account;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

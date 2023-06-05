@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shmakov.techfate.OrdersFragment;
 import com.shmakov.techfate.R;
-import com.shmakov.techfate.fragments.cart.account.ShowOrdersActivity;
+import com.shmakov.techfate.fragments.account.ShowOrdersActivity;
 import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.fragments.cart.MakeOrderFragment;
 

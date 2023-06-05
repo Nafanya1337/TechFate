@@ -83,6 +83,8 @@ public class ImageManager {
             case "ЮMoney":
                 return R.drawable.umoney;
         }
+        if (name.contains("Картой"))
+            return R.drawable.baseline_credit_card_24;
         return 0;
     }
 }

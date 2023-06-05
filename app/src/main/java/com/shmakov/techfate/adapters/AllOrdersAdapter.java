@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shmakov.techfate.R;
-import com.shmakov.techfate.fragments.cart.account.ShowOrdersActivity;
+import com.shmakov.techfate.fragments.account.ShowOrdersActivity;
 import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.entities.ProductInCart;
 

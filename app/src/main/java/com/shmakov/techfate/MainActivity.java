@@ -33,8 +33,8 @@ import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Product;
-import com.shmakov.techfate.fragments.cart.account.ChangeProfileInfo;
-import com.shmakov.techfate.fragments.cart.account.ShowOrdersActivity;
+import com.shmakov.techfate.fragments.account.ChangeProfileInfo;
+import com.shmakov.techfate.fragments.account.ShowOrdersActivity;
 import com.shmakov.techfate.fragments.cart.CartFragment.makePayment;
 import com.yandex.mapkit.MapKitFactory;
 

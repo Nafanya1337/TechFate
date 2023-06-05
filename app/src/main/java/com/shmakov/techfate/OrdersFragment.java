@@ -16,7 +16,7 @@ import com.shmakov.techfate.Helpers.SwipeHelper;
 import com.shmakov.techfate.adapters.MiniProductInCardAdapter;
 import com.shmakov.techfate.adapters.OrdersAdapter;
 import com.shmakov.techfate.entities.Order;
-import com.shmakov.techfate.fragments.cart.account.AccountFragment;
+import com.shmakov.techfate.fragments.account.AccountFragment;
 
 import java.util.ArrayList;
 
@@ -83,7 +83,7 @@ public class OrdersFragment extends Fragment implements MiniProductInCardAdapter
         bundle.putBoolean("IsAlreadyMade", true);
         bundle.putParcelable("Cart", order.getCart());
         bundle.putInt("DeliveryCost", order.getDelivery_cost());
-        bundle.putString("PromocodeNmae", order.getPromocodeName());
+        bundle.putString("PromocodeName", order.getPromocodeName());
         bundle.putFloat("PromocodeRate", order.getPromocodeRate());
         bundle.putString("Status", order.getStatus());
         View view = getView();
