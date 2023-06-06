@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".FilterFragment"
+    tools:context=".fragments.itemactivity_fragments.FilterFragment"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_corners">
 
@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/frag1"
-            android:name="com.shmakov.techfate.ColorCheckboxFragment"
+            android:name="com.shmakov.techfate.fragments.itemactivity_fragments.ColorCheckboxFragment"
             tools:layout="@layout/fragment_color_checkbox"
             android:layout_marginHorizontal="25dp"
             android:layout_gravity="center"

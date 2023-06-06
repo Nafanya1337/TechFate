@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".ProductCardDialog">
+    tools:context=".fragments.globals.ProductCardDialog">
 
 
     <TextView

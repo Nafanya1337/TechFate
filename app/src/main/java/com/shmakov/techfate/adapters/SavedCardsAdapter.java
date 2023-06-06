@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.shmakov.techfate.fragments.cart.CardFragment;
+import com.shmakov.techfate.fragments.paymentactivity_fragments.CardFragment;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.Card;
 

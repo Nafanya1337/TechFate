@@ -19,6 +19,10 @@ import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 
 import com.shmakov.techfate.database.UserDatabaseHelper;
+import com.shmakov.techfate.fragments.signin_fragments.LoginFragment;
+import com.shmakov.techfate.fragments.signin_fragments.NewPasswordFragment;
+import com.shmakov.techfate.fragments.signin_fragments.RemindPasswordFragment;
+import com.shmakov.techfate.fragments.signin_fragments.SignUpFragment;
 
 import java.io.IOException;
 

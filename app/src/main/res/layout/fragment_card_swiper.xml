@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="165dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.cart.CardSwiperFragment">
+    tools:context=".fragments.paymentactivity_fragments.CardSwiperFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView

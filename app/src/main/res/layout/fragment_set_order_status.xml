@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_corners"
-    tools:context=".fragments.account.setOrderStatusFragment">
+    tools:context=".fragments.main_activity_fragments.account.setOrderStatusFragment">
 
     <ImageView
         android:layout_width="80dp"

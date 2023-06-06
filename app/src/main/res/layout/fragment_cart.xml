@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/DefaultStatusBarTheme"
-    tools:context=".fragments.cart.CartFragment">
+    tools:context=".fragments.main_activity_fragments.cart.CartFragment">
 
     <TextView
         android:id="@+id/textView"

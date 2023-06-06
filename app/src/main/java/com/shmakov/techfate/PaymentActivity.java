@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -15,8 +14,7 @@ import com.shmakov.techfate.database.UserDatabaseHelper;
 import com.shmakov.techfate.entities.Cart;
 import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.entities.User;
-import com.shmakov.techfate.fragments.cart.OrderInfoFragment;
-import com.yandex.mapkit.MapKitFactory;
+import com.shmakov.techfate.fragments.paymentactivity_fragments.OrderInfoFragment;
 
 import java.io.IOException;
 

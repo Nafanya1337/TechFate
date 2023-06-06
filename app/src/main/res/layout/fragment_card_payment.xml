@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".fragments.cart.CardPaymentFragment">
+    tools:context=".fragments.paymentactivity_fragments.CardPaymentFragment">
 
     <TextView
         android:layout_width="wrap_content"

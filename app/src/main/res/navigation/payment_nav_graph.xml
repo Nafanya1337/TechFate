@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/adressFragment"
-        android:name="com.shmakov.techfate.fragments.cart.AdressFragment"
+        android:name="com.shmakov.techfate.fragments.paymentactivity_fragments.AddressFragment"
         android:label="fragment_adress"
         tools:layout="@layout/fragment_adress" >
         <argument
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/deliveryFragment"
-        android:name="com.shmakov.techfate.fragments.cart.DeliveryFragment"
+        android:name="com.shmakov.techfate.fragments.paymentactivity_fragments.DeliveryFragment"
         android:label="fragment_delivery"
         tools:layout="@layout/fragment_delivery" >
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardPaymentFragment"
-        android:name="com.shmakov.techfate.fragments.cart.CardPaymentFragment"
+        android:name="com.shmakov.techfate.fragments.paymentactivity_fragments.CardPaymentFragment"
         android:label="fragment_card_payment"
         tools:layout="@layout/fragment_card_payment" >
         <action
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/addingCardFragment"
-        android:name="com.shmakov.techfate.fragments.cart.AddingCardFragment"
+        android:name="com.shmakov.techfate.fragments.paymentactivity_fragments.AddingCardFragment"
         android:label="fragment_adding_card"
         tools:layout="@layout/fragment_adding_card" >
         <action
@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/makeOrderFragment"
-        android:name="com.shmakov.techfate.fragments.cart.MakeOrderFragment"
+        android:name="com.shmakov.techfate.fragments.paymentactivity_fragments.MakeOrderFragment"
         android:label="fragment_make_order"
         tools:layout="@layout/fragment_make_order" >
         <argument
@@ -126,7 +126,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderInfoFragment"
-        android:name="com.shmakov.techfate.fragments.cart.OrderInfoFragment"
+        android:name="com.shmakov.techfate.fragments.paymentactivity_fragments.OrderInfoFragment"
         android:label="fragment_order_info"
         tools:layout="@layout/fragment_order_info" >
         <argument
@@ -137,7 +137,7 @@
     </fragment>
     <dialog
         android:id="@+id/addressBottomSheetFragment"
-        android:name="com.shmakov.techfate.fragments.cart.AddressBottomSheetFragment"
+        android:name="com.shmakov.techfate.fragments.paymentactivity_fragments.AddressBottomSheetFragment"
         android:label="fragment_address_bottom_sheet"
         tools:layout="@layout/fragment_address_bottom_sheet" >
         <argument

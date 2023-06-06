@@ -5,7 +5,7 @@
     android:layout_height="400dp"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_corners"
-    tools:context=".FullOrderInfoFragment">
+    tools:context=".fragments.profile_editting_fragments.FullOrderInfoFragment">
 
 
     <TextView

@@ -33,9 +33,7 @@ import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Product;
-import com.shmakov.techfate.fragments.account.ChangeProfileInfo;
-import com.shmakov.techfate.fragments.account.ShowOrdersActivity;
-import com.shmakov.techfate.fragments.cart.CartFragment.makePayment;
+import com.shmakov.techfate.fragments.main_activity_fragments.cart.CartFragment.makePayment;
 import com.yandex.mapkit.MapKitFactory;
 
 import java.io.IOException;
@@ -216,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements CategoryAdapter.o
     }
 
     public void onClickChangeAccount(View view) {
-        Intent intent = new Intent(this, ChangeProfileInfo.class);
+        Intent intent = new Intent(this, ChangeProfileInfoActivity.class);
         startActivity(intent);
     }
 

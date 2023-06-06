@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -16,10 +15,10 @@
         android:theme="@style/Theme.TechFate"
         tools:targetApi="31">
         <activity
-            android:name=".fragments.account.ShowOrdersActivity"
+            android:name=".ShowOrdersActivity"
             android:exported="false" />
         <activity
-            android:name=".fragments.account.ChangeProfileInfo"
+            android:name=".ChangeProfileInfoActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

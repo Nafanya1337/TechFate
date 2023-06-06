@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.shmakov.techfate.OrdersFragment;
+import com.shmakov.techfate.fragments.profile_editting_fragments.OrdersFragment;
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.Order;
 import com.shmakov.techfate.entities.ProductInCart;

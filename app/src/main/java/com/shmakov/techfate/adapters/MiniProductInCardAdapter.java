@@ -8,11 +8,11 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.shmakov.techfate.OrdersFragment;
+import com.shmakov.techfate.fragments.profile_editting_fragments.OrdersFragment;
 import com.shmakov.techfate.R;
-import com.shmakov.techfate.fragments.account.ShowOrdersActivity;
+import com.shmakov.techfate.ShowOrdersActivity;
 import com.shmakov.techfate.entities.ProductInCart;
-import com.shmakov.techfate.fragments.cart.MakeOrderFragment;
+import com.shmakov.techfate.fragments.paymentactivity_fragments.MakeOrderFragment;
 
 public class MiniProductInCardAdapter extends RecyclerView.Adapter<MiniProductInCardAdapter.ViewProductInCart> {
 

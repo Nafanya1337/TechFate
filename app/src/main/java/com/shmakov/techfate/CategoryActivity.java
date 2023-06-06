@@ -1,10 +1,5 @@
 package com.shmakov.techfate;
 
-import static com.shmakov.techfate.FilterFragment.AVAILABLE;
-import static com.shmakov.techfate.FilterFragment.COLORS_KEY;
-import static com.shmakov.techfate.FilterFragment.MIN_MAX_COST_KEY;
-import static com.shmakov.techfate.ItemCartActivity.COLOR_TAG;
-import static com.shmakov.techfate.ItemCartActivity.CONFIGURATION_TAG;
 import static com.shmakov.techfate.ItemCartActivity.PRODUCT_TAG;
 
 import androidx.activity.result.ActivityResult;
@@ -12,47 +7,35 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.shmakov.techfate.adapters.ColorPickerAdapter;
 import com.shmakov.techfate.adapters.ProductAdapter;
-import com.shmakov.techfate.entities.Cart;
 import com.shmakov.techfate.entities.ProductInCart;
 import com.shmakov.techfate.entities.User;
 import com.shmakov.techfate.entities.inner.Category;
 import com.shmakov.techfate.entities.inner.Product;
 import com.shmakov.techfate.fragments.globals.ItemsFragment;
-import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment;
-import com.shmakov.techfate.fragments.home.category.CategoryHeaderFragment.goBack;
+import com.shmakov.techfate.fragments.main_activity_fragments.home.category.CategoryHeaderFragment;
+import com.shmakov.techfate.fragments.main_activity_fragments.home.category.CategoryHeaderFragment.goBack;
 import com.shmakov.techfate.mytools.ColorManager;
 import com.shmakov.techfate.mytools.FragmentAdapterUpdater;
 import com.shmakov.techfate.mytools.ImageManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
-public class CategoryActivity extends AppCompatActivity implements goBack, ProductAdapter.onClickProduct, CategoryHeaderFragment.openFilters, FilterFragment.makeFilters, ColorPickerAdapter.checkboxColor {
+public class CategoryActivity extends AppCompatActivity implements goBack, ProductAdapter.onClickProduct, ColorPickerAdapter.checkboxColor {
 
     private FrameLayout container, product_container;
     private FragmentManager fragmentManager;
@@ -125,13 +108,6 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
         String category_available_str = getResources().getQuantityString(R.plurals.avaliable, amount);
         category_available.setText(category_available_str);
         all = Category.categories.get(tittle);
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            Window window = getWindow();
-//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//            window.setStatusBarColor(ContextCompat.getColor(this, R.color.transparent));
-//
-//        }
     }
 
     @Override
@@ -196,59 +172,6 @@ public class CategoryActivity extends AppCompatActivity implements goBack, Produ
     public static final String PRODUCT_ARRAY_TAG = "ARRAY_OF_PRODUCTS";
 
     private HashMap<String, ArrayList<String>> filters = new HashMap<>();
-
-    private void createDialog() {
-        if (all.size() > 0) {
-            FilterFragment ff = new FilterFragment(this, all, filters);
-            ff.show(getSupportFragmentManager(), "filters");
-        }
-    }
-
-    @Override
-    public void openFilters(View view) {
-        createDialog();
-    }
-
-    @Override
-    public void makeFilters(int minCost, int maxCost, Integer valueFrom, Integer valueTo) {
-        all = Category.categories.get(tittle);
-        products = new ArrayList<Product>(Arrays.asList(all.stream().filter(product -> acceptFilters(product, minCost, maxCost)).toArray(Product[]::new)));
-        if (!products.isEmpty()) {
-            itemsFragment.setAll(products.toArray(new Product[0]));
-            itemsFragment.setSortType(spinner.getSelectedItemPosition());
-            this.min_cost = minCost;
-            this.max_cost = maxCost;
-            ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(new String[]{String.valueOf(minCost), String.valueOf(maxCost), String.valueOf(valueFrom), String.valueOf(valueTo)}));
-            filters.put(MIN_MAX_COST_KEY, arrayList);
-            filters.put(COLORS_KEY, selected_colors);
-            header.setOptionsAreCheckable(minCost != valueFrom | maxCost != valueTo | !selected_colors.containsAll(ColorManager.all_available_colors));
-        }
-        else {
-            header.setOptionsAreCheckable(false);
-        }
-    }
-
-    private boolean acceptFilters(Product product, int minCost, int maxCost) {
-        if ((product.getCost() >= minCost) && (product.getCost() <= maxCost)) {
-            if (Arrays.stream(product.getColors()).anyMatch(color -> selected_colors.contains(color))) {
-                int position_of_color = -1;
-                for (String color : selected_colors) {
-                    position_of_color = -1;
-                    if (Arrays.asList(product.getColors()).contains(color))
-                        position_of_color = Arrays.asList(product.getColors()).indexOf(color);
-                    if (product.getConfigurations() != null && position_of_color != -1) {
-                        return true;
-                    } else if (position_of_color != -1 && product.getAmount()[position_of_color] > 0) {
-
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        return false;
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

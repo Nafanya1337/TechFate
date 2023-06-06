@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="25dp"
-    tools:context=".fragments.cart.CardFragment">
+    tools:context=".fragments.paymentactivity_fragments.CardFragment">
 
     <Button
         android:id="@+id/cardFragmentAddingCardBtn"

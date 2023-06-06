@@ -7,7 +7,7 @@
     android:padding="15dp"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_corners"
-    tools:context=".ReviewAddingFragment">
+    tools:context=".fragments.itemactivity_fragments.ReviewAddingFragment">
 
     <ImageView
         android:layout_width="80dp"

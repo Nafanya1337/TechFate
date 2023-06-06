@@ -5,21 +5,16 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shmakov.techfate.R;
 import com.shmakov.techfate.entities.ProductInCart;
-import com.shmakov.techfate.entities.inner.Product;
-import com.shmakov.techfate.fragments.cart.CartFragment;
+import com.shmakov.techfate.fragments.main_activity_fragments.cart.CartFragment;
 import com.shmakov.techfate.mytools.ColorManager;
 import com.shmakov.techfate.mytools.StringWorker;
 

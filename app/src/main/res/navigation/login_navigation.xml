@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.shmakov.techfate.LoginFragment"
+        android:name="com.shmakov.techfate.fragments.signin_fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.shmakov.techfate.SignUpFragment"
+        android:name="com.shmakov.techfate.fragments.signin_fragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -40,12 +40,12 @@
     </fragment>
     <dialog
         android:id="@+id/userAgreementFragment"
-        android:name="com.shmakov.techfate.UserAgreementFragment"
+        android:name="com.shmakov.techfate.fragments.signin_fragments.UserAgreementFragment"
         android:label="fragment_user_agreement"
         tools:layout="@layout/fragment_user_agreement" />
     <fragment
         android:id="@+id/remindPasswordFragment"
-        android:name="com.shmakov.techfate.RemindPasswordFragment"
+        android:name="com.shmakov.techfate.fragments.signin_fragments.RemindPasswordFragment"
         android:label="fragment_remind_password"
         tools:layout="@layout/fragment_remind_password" >
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/remindPasswordCodeFragment"
-        android:name="com.shmakov.techfate.RemindPasswordCodeFragment"
+        android:name="com.shmakov.techfate.fragments.signin_fragments.RemindPasswordCodeFragment"
         android:label="fragment_remind_password_code"
         tools:layout="@layout/fragment_remind_password_code" >
         <action
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/newPasswordFragment"
-        android:name="com.shmakov.techfate.NewPasswordFragment"
+        android:name="com.shmakov.techfate.fragments.signin_fragments.NewPasswordFragment"
         android:label="fragment_new_password"
         tools:layout="@layout/fragment_new_password" >
         <argument

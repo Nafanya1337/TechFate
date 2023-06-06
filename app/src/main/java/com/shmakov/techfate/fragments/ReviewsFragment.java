@@ -6,10 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +19,7 @@ import android.widget.TextView;
 
 import com.shmakov.techfate.adapters.FullReviewAdapter;
 import com.shmakov.techfate.entities.Review;
-import com.shmakov.techfate.entities.inner.Product;
+import com.shmakov.techfate.fragments.itemactivity_fragments.ReviewAddingFragment;
 import com.shmakov.techfate.mytools.ProgressBarAnimation;
 
 import java.util.ArrayList;

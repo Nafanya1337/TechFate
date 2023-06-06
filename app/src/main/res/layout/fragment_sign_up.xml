@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".SignUpFragment">
+    tools:context=".fragments.signin_fragments.SignUpFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_weight="1"

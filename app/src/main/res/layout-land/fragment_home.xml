@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="horizontal"
     android:fillViewport="true"
-    tools:context="com.shmakov.techfate.fragments.home.HomeFragment">
+    tools:context="com.shmakov.techfate.fragments.main_activity_fragments.home.HomeFragment">
 
 
     <LinearLayout
