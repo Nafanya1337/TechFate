@@ -14,6 +14,11 @@ import com.shmakov.techfate.R;
 public class UserAgreementFragment extends BottomSheetDialogFragment {
 
     @Override
+    public int getTheme() {
+        return R.style.BottomSheetDialogTheme;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
